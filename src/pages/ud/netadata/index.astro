@@ -1,0 +1,341 @@
+---
+// UNLIMITED DARK ネタバレ名簿（全24名の詳細データ）
+import Layout from '@/layouts/Layout.astro';
+
+// 男子生徒データ（m1〜m12）
+const males = [
+  {
+    num: 1,
+    name: '上原　忠明（うえはら・ただあき）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '',
+  },
+  {
+    num: 2,
+    name: '大村　真（おおむら・まこと）',
+    supply: 'プロテクターセット',
+    holding: 'プロテクターセット',
+    killer: '？？？',
+    cause: '？？？',
+    note: '眼鏡をかけたいかにも文化系の男子。非常に成績が良く特に理系が得意。小等部から来ておりこの学校のことは知り尽くしている。中等部では<span class="m">小畑裕司（男子3番）</span>と親友に。プログラムではスタート直後に小畑のグループに合流し、脱出を目指す。',
+  },
+  {
+    num: 3,
+    name: '小畑　裕司（おばた・ゆうじ）',
+    supply: 'スタングレネード5個',
+    holding: 'コルト AR6450カービン、スタングレネード2個',
+    killer: '？？？',
+    cause: '？？？',
+    note: '関西追手陵中学校3年8組の中心人物の一人。プログラム脱出を主導し、<span class="m">大村真（男子2番）</span>・<span class="f">荒井里佳（女子2番）</span>・<span class="f">愛沢七海（女子1番）</span>・<span class="f">伊吹彩花（女子4番）</span>らと共に行動。<span class="f">荒井里佳</span>からカービン銃を受け取り、スタングレネードを渡す。<span class="m">北康太郎（男子5番）</span>の襲撃を撃退するも逃走する。',
+  },
+  {
+    num: 4,
+    name: '川上　寛志（かわかみ・ひろし）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'プログラム序盤にパニックを起こし、銃を乱射。<span class="m">小畑裕司（男子3番）</span>のグループに危険を及ぼす。',
+  },
+  {
+    num: 5,
+    name: '北　康太郎（きた・こうたろう）',
+    supply: '超巨大ハサミ',
+    holding: '超巨大ハサミ',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'プログラムで成績優秀者（10人殺傷）を目指している。<span class="m">小畑裕司（男子3番）</span>のグループを超巨大ハサミで襲撃するが、スタングレネードで撃退される。',
+  },
+  {
+    num: 6,
+    name: '栗田　佳彦（くりた・よしひこ）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '',
+  },
+  {
+    num: 7,
+    name: '後藤　大輝（ごとう・だいき）',
+    supply: 'MBA ジャイロジェットピストル',
+    holding: 'MBA ジャイロジェットピストル',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'ネットでは「510（ゴトー）」の名で知られる天才。優勝候補筆頭と見られているが、本人はやる気を見せない。早くからショッピングセンターに向かい、<span class="m">冬月直樹（男子9番）</span>と出会い情報交換。その後単独行動に移る。<span class="f">一條早紀（女子3番）</span>と付き合っている。',
+  },
+  {
+    num: 8,
+    name: '佐々木　健一（ささき・けんいち）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '',
+  },
+  {
+    num: 9,
+    name: '冬月　直樹（ふゆつき・なおき）',
+    supply: 'S&W M686リボルバー',
+    holding: 'S&W M686リボルバー',
+    killer: '？？？',
+    cause: '？？？',
+    note: '今年の春に大阪へ転校してきた。「Jack」の名で知られるネットの有名人でもある。両親ともにプログラム優勝者（反政府組織メンバー）であり、幼少期から脱出訓練を受けてきた。プログラムでは脱出を目指し学校エリアを拠点に設営。<span class="f">一條早紀（女子3番）</span>と合流し<span class="m">後藤大輝（男子7番）</span>を探すことになる。',
+  },
+  {
+    num: 10,
+    name: '松本　祐太（まつもと・ゆうた）',
+    supply: '防弾ヘルメット',
+    holding: 'なし',
+    killer: '森垣英二',
+    cause: '銃撃',
+    note: '<span class="m">森垣英二（男子11番）</span>のグループの一員。プログラム序盤に<span class="m">森垣英二</span>に銃撃され死亡。第1号死者。',
+  },
+  {
+    num: 11,
+    name: '森垣　英二（もりがき・えいじ）',
+    supply: 'コルト キングコブラリボルバー',
+    holding: 'コルト キングコブラリボルバー、防弾ヘルメット',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'プログラムで成績優秀者（10人殺傷）を目指している。スタート後すぐに<span class="m">松本祐太（男子10番）</span>を銃撃し第1の殺人を犯す。その後<span class="m">吉崎和人（男子12番）</span>と鉢合わせ、肩を撃たれて市民会館へ逃走する。',
+  },
+  {
+    num: 12,
+    name: '吉崎　和人（よしざき・かずと）',
+    supply: 'ウィンチェスターM1300ブラックシャドウ・ショットガン',
+    holding: 'ウィンチェスターM1300ブラックシャドウ・ショットガン',
+    killer: '？？？',
+    cause: '？？？',
+    note: '<span class="m">森垣英二（男子11番）</span>と仲が悪く対立関係にある。<span class="m">森垣</span>が<span class="m">松本祐太（男子10番）</span>を殺した後、<span class="m">森垣</span>と銃撃戦になり、<span class="m">森垣</span>の肩を撃ち負傷させる。',
+  },
+] as const;
+
+// 女子生徒データ（f1〜f12）
+const females = [
+  {
+    num: 1,
+    name: '愛沢　七海（あいざわ・ななみ）',
+    supply: '防犯用カラーボール6個',
+    holding: '防犯用カラーボール6個',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'バスケ部所属で運動神経抜群。<span class="m">小畑裕司（男子3番）</span>とは小学1年からの大親友。<span class="f">荒井里佳（女子2番）</span>とも中1からの大親友。プログラムではスタート直後に<span class="m">大村真</span>・<span class="m">小畑裕司</span>・<span class="f">荒井里佳</span>・<span class="f">伊吹彩花（女子4番）</span>と共に脱出を目指す。',
+  },
+  {
+    num: 2,
+    name: '荒井　里佳（あらい・りか）',
+    supply: 'コルト AR6450カービン',
+    holding: 'スタングレネード2個',
+    killer: '？？？',
+    cause: '？？？',
+    note: '小畑裕司と同様、普通の入試で合格したが成績が振るわないという境遇で仲良くなった。プログラムでは<span class="m">小畑裕司（男子3番）</span>のグループと行動し、カービン銃を小畑に譲りスタングレネード2個を受け取る。',
+  },
+  {
+    num: 3,
+    name: '一條　早紀（いちじょう・さき）',
+    supply: 'H&K HK69A1グレネードランチャー',
+    holding: 'H&K HK69A1グレネードランチャー',
+    killer: '？？？',
+    cause: '？？？',
+    note: '吹奏楽部（クラリネット）所属。大人しくて礼儀正しい。<span class="m">後藤大輝（男子7番）</span>と付き合っている。プログラムでは<span class="m">小畑裕司</span>グループの誘いを断り単独で<span class="m">後藤</span>を探す。学校エリアで<span class="m">冬月直樹（男子9番）</span>と出会い、<span class="m">後藤</span>を探して共に行動することになる。',
+  },
+  {
+    num: 4,
+    name: '伊吹　彩花（いぶき・あやか）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '学年トップクラスの成績、生徒会長、美術部と才能に溢れる才媛。男女から人望が高い。一人でいるときに暗い表情を見せることがある。プログラムでは<span class="m">小畑裕司（男子3番）</span>のグループに参加し脱出を目指す。',
+  },
+  {
+    num: 5,
+    name: '大西　優子（おおにし・ゆうこ）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '吹奏楽部（ホルン）所属。気が強くて神経質で理屈っぽい性格のため、女子から内心敬遠されがち。',
+  },
+  {
+    num: 6,
+    name: '高取　舞（たかとり・まい）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '中堅財閥・高取財閥の一人娘。甘やかされて育ったため気がめちゃくちゃ強く、他人を見下す性格。ギャル系グループに属するもグループ内からも疎まれている。',
+  },
+  {
+    num: 7,
+    name: '竹下　恵（たけした・めぐみ）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '小柄で陰が薄く、いつも図書館にいる。性格は優しいが臆病。凄惨な家庭環境から逃れるため寮制のこの学校に進学した苦労人。現在も成績はかなり良い。',
+  },
+  {
+    num: 8,
+    name: '新山　未来（にいやま・みらい）',
+    supply: '防刃防弾コート',
+    holding: '防刃防弾コート',
+    killer: '？？？',
+    cause: '？？？',
+    note: '陸上部所属で明るい姉御肌。クラスのお姉さん的存在。プログラムでは<span class="f">三谷香奈子（女子9番）</span>・<span class="f">若宮尚子（女子12番）</span>を誘い、初っ端から脱出作戦の実行へと動き出す。',
+  },
+  {
+    num: 9,
+    name: '三谷　香奈子（みたに・かなこ）',
+    supply: 'FP-45リバレーター',
+    holding: 'FP-45リバレーター',
+    killer: '？？？',
+    cause: '？？？',
+    note: '明るく愛嬌があり、男女問わず妹分として可愛がられている。兄・三谷誠一が約1ヶ月前の1997年度第13号プログラムで死亡しており、それが彼女の生き方に大きく影響している。プログラムでは<span class="f">新山未来（女子8番）</span>・<span class="f">若宮尚子（女子12番）</span>と共に脱出を目指す。',
+  },
+  {
+    num: 10,
+    name: '横見　理沙（よこみ・りさ）',
+    supply: '？？？',
+    holding: '？？？',
+    killer: '？？？',
+    cause: '？？？',
+    note: '体操の選手で運動神経抜群。捉えどころのない性格で人付き合いは少ない。',
+  },
+  {
+    num: 11,
+    name: '山本　友香（やまもと・ゆか）',
+    supply: 'レミントン M40A1ライフル',
+    holding: 'レミントン M40A1ライフル',
+    killer: '？？？',
+    cause: '？？？',
+    note: '有名子役。母親が女優で小さい頃から劇団に所属し、テレビドラマにも出演。頑固な努力家で実力も折り紙つき。プログラムでは進路の絶望を感じながらも行動し、XX話にて<span class="m">冬月直樹（男子9番）</span>に狙いを定める。',
+  },
+  {
+    num: 12,
+    name: '若宮　尚子（わかみや・なおこ）',
+    supply: 'リモコン爆弾',
+    holding: 'リモコン爆弾',
+    killer: '？？？',
+    cause: '？？？',
+    note: 'クラスで一番小柄。書道部所属。引っ込み思案で友達が少なく、<span class="f">新山未来（女子8番）</span>にいつも引っついている。プログラムでは<span class="f">新山未来</span>・<span class="f">三谷香奈子（女子9番）</span>と共に脱出を目指す。',
+  },
+] as const;
+---
+
+<Layout title="ネタバレ名簿（UNLIMITED DARK）" description="UNLIMITED DARK 全登場生徒のネタバレ込み詳細データ。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">ネタバレ名簿</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">ネタバレ名簿</h1>
+      <p class="page-desc">ネタバレを含みます。本編未読の方はご注意ください。</p>
+
+      <section class="section">
+        <h2 class="section-heading">男子生徒</h2>
+        {males.map((s) => (
+          <div class="student-card" id={`m${s.num}`}>
+            <div class="card-header">
+              <span class="badge male">男子{s.num}番</span>
+              <span class="student-name" set:html={s.name} />
+            </div>
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <th>支給品</th>
+                  <td set:html={s.supply} />
+                  <th>所持品</th>
+                  <td set:html={s.holding} />
+                </tr>
+                <tr>
+                  <th>殺害者</th>
+                  <td set:html={s.killer} />
+                  <th>死因</th>
+                  <td set:html={s.cause} />
+                </tr>
+              </tbody>
+            </table>
+            {s.note && (
+              <p class="note" set:html={s.note} />
+            )}
+          </div>
+        ))}
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">女子生徒</h2>
+        {females.map((s) => (
+          <div class="student-card" id={`f${s.num}`}>
+            <div class="card-header">
+              <span class="badge female">女子{s.num}番</span>
+              <span class="student-name" set:html={s.name} />
+            </div>
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <th>支給品</th>
+                  <td set:html={s.supply} />
+                  <th>所持品</th>
+                  <td set:html={s.holding} />
+                </tr>
+                <tr>
+                  <th>殺害者</th>
+                  <td set:html={s.killer} />
+                  <th>死因</th>
+                  <td set:html={s.cause} />
+                </tr>
+              </tbody>
+            </table>
+            {s.note && (
+              <p class="note" set:html={s.note} />
+            )}
+          </div>
+        ))}
+      </section>
+
+      <nav class="back-nav">
+        <a href="/DLB/ud/" class="back-btn">← UNLIMITED DARK TOP</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 860px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--sky-deep); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--sky); color: var(--text); }
+  .page-desc { font-size: 0.84rem; color: var(--sky-deep); font-weight: 700; margin-bottom: 32px; }
+  .section { margin-bottom: 48px; }
+  .section-heading { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 16px; padding: 8px 0 8px 16px; border-left: 4px solid var(--sky-deep); }
+  .student-card { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .card-header { background: var(--sky); padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
+  .badge.male { background: #2244cc; color: #fff; }
+  .badge.female { background: #cc2222; color: #fff; }
+  .student-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  .data-table th { width: 12%; background: var(--bg); font-weight: 700; padding: 8px 10px; border: 1px solid var(--border); color: var(--sky-deep); white-space: nowrap; }
+  .data-table td { width: 38%; padding: 8px 10px; border: 1px solid var(--border); }
+  @media (max-width: 600px) { .data-table th { width: 18%; } }
+  .note { font-size: 0.84rem; line-height: 1.8; padding: 10px 16px; margin: 0; background: var(--white); border-top: 1px solid var(--border); }
+  :global(.note .m) { color: #2244cc; font-weight: 600; }
+  :global(.note .f) { color: #cc2222; font-weight: 600; }
+  .back-nav { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--sky-deep); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--sky-deep); text-decoration: none; }
+  .back-btn:hover { background: var(--sky); }
+</style>

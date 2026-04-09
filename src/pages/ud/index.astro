@@ -1,0 +1,257 @@
+---
+// UNLIMITED DARK トップページ（目次）
+import Layout from '@/layouts/Layout.astro';
+
+// 本編の各話構成
+const chapter1 = [
+  { ep: 1, title: '1話', href: '/DLB/ud/1/' },
+  { ep: 2, title: '2話', href: '/DLB/ud/2/' },
+  { ep: 3, title: '3話', href: '/DLB/ud/3/' },
+  { ep: 4, title: '4話', href: '/DLB/ud/4/' },
+  { ep: 5, title: '5話', href: '/DLB/ud/5/' },
+  { ep: 6, title: '6話', href: '/DLB/ud/6/' },
+  { ep: 7, title: '7話', href: '/DLB/ud/7/' },
+  { ep: 8, title: '8話', href: '/DLB/ud/8/' },
+  { ep: 9, title: '9話', href: '/DLB/ud/9/' },
+  { ep: 10, title: '10話', href: '/DLB/ud/10/' },
+  { ep: 11, title: '11話', href: '/DLB/ud/11/' },
+] as const;
+
+// 番外編
+const extras = [
+  { title: 'XX話（番外）', href: '/DLB/ud/xx/' },
+] as const;
+---
+
+<Layout title="UNLIMITED DARK" description="オリジナルバトルロワイアル小説「UNLIMITED DARK」。私立関西追手陵中学校3年8組・22名が挑むプログラム。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">UNLIMITED DARK</span>
+    </nav>
+
+    <main>
+      <div class="title-block">
+        <h1 class="work-title">UNLIMITED DARK</h1>
+        <p class="work-subtitle">1998年度第1号／私立関西追手陵中学校3年8組（22名）</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-heading">各種データ</h2>
+        <nav class="data-nav" aria-label="データページ一覧">
+          <a href="/DLB/ud/rule/" class="data-card">ルール</a>
+          <a href="/DLB/ud/data/" class="data-card">クラス名簿</a>
+          <a href="/DLB/ud/netadata/" class="data-card">ネタバレ名簿</a>
+          <a href="/DLB/ud/others/" class="data-card">その他の人物紹介</a>
+          <a href="/DLB/ud/map/" class="data-card">マップ</a>
+        </nav>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">本編目次</h2>
+
+        <div class="chapter-block">
+          <h3 class="chapter-title">第1章「憂鬱な昼下がり」</h3>
+          <div class="ep-grid">
+            {chapter1.map((e) => (
+              <a href={e.href} class="ep-link">{e.title}</a>
+            ))}
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <h3 class="chapter-title">番外編</h3>
+          <div class="ep-grid">
+            {extras.map((e) => (
+              <a href={e.href} class="ep-link">{e.title}</a>
+            ))}
+          </div>
+        </div>
+
+        <div class="chapter-block chapter-wip">
+          <h3 class="chapter-title">第2章「希望は夕日と共に沈んだか？」</h3>
+          <p class="wip-note">執筆中</p>
+        </div>
+
+        <div class="chapter-block chapter-wip">
+          <h3 class="chapter-title">第3章「闇夜が生んだ絶望」</h3>
+          <p class="wip-note">執筆中</p>
+        </div>
+
+        <div class="chapter-block chapter-wip">
+          <h3 class="chapter-title">第4章「銃は真夜中にひどく哭く」</h3>
+          <p class="wip-note">執筆中</p>
+        </div>
+
+        <div class="chapter-block chapter-wip">
+          <h3 class="chapter-title">第5章「夜明け前の血闘」</h3>
+          <p class="wip-note">執筆中</p>
+        </div>
+
+        <div class="chapter-block chapter-wip">
+          <h3 class="chapter-title">エピローグ「太陽はまだ昇らない」</h3>
+          <p class="wip-note">執筆中</p>
+        </div>
+      </section>
+
+      <p class="notice">
+        この作品はフィクションです。登場する団体名・人物名・地名などは現実のものと全く関係ありません。<br>
+        スペシャルサンクス: TAKE氏（「PRAGMALIB」管理人）
+      </p>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .title-block {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .work-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .work-subtitle {
+    font-size: 0.88rem;
+    color: var(--sky-deep);
+    font-weight: 700;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--sky-deep);
+  }
+
+  .data-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .data-card {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .data-card:hover {
+    background: var(--sky);
+  }
+
+  .chapter-block {
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .chapter-block.chapter-wip {
+    opacity: 0.6;
+  }
+
+  .chapter-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    background: var(--sky);
+    color: var(--sky-deep);
+    border-radius: 4px;
+  }
+
+  .ep-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .ep-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--white);
+    border: 1px solid var(--sky-deep);
+    border-radius: 4px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .ep-link:hover {
+    background: var(--sky);
+  }
+
+  .wip-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 4px 0;
+  }
+
+  .notice {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+</style>

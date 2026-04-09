@@ -1,0 +1,167 @@
+---
+// UNLIMITED DARK クラス名簿ページ
+import Layout from '@/layouts/Layout.astro';
+
+type Student = {
+  readonly num: number;
+  readonly male: string;
+  readonly female: string;
+};
+
+const students: readonly Student[] = [
+  { num: 1, male: '上原　忠明（うえはら・ただあき）', female: '愛沢　七海（あいざわ・ななみ）' },
+  { num: 2, male: '大村　真（おおむら・まこと）', female: '荒井　里佳（あらい・りか）' },
+  { num: 3, male: '小畑　裕司（おばた・ゆうじ）', female: '一條　早紀（いちじょう・さき）' },
+  { num: 4, male: '川上　寛志（かわかみ・ひろし）', female: '伊吹　彩花（いぶき・あやか）' },
+  { num: 5, male: '北　康太郎（きた・こうたろう）', female: '大西　優子（おおにし・ゆうこ）' },
+  { num: 6, male: '栗田　佳彦（くりた・よしひこ）', female: '高取　舞（たかとり・まい）' },
+  { num: 7, male: '後藤　大輝（ごとう・だいき）', female: '竹下　恵（たけした・めぐみ）' },
+  { num: 8, male: '佐々木　健一（ささき・けんいち）', female: '新山　未来（にいやま・みらい）' },
+  { num: 9, male: '冬月　直樹（ふゆつき・なおき）', female: '三谷　香奈子（みたに・かなこ）' },
+  { num: 10, male: '松本　祐太（まつもと・ゆうた）', female: '横見　理沙（よこみ・りさ）' },
+  { num: 11, male: '森垣　英二（もりがき・えいじ）', female: '山本　友香（やまもと・ゆか）' },
+  { num: 12, male: '吉崎　和人（よしざき・かずと）', female: '若宮　尚子（わかみや・なおこ）' },
+] as const;
+---
+
+<Layout title="クラス名簿（UNLIMITED DARK）" description="UNLIMITED DARK 私立関西追手陵中学校3年8組 22名のクラス名簿。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">クラス名簿</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">クラス名簿</h1>
+      <p class="subtitle">私立関西追手陵中学校3年8組（22名）</p>
+
+      <table class="roster-table">
+        <thead>
+          <tr>
+            <th class="col-male">男子</th>
+            <th class="col-num">生徒番号</th>
+            <th class="col-female">女子</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((s) => (
+            <tr>
+              <td class="col-male">{s.male}</td>
+              <td class="col-num">{s.num}番</td>
+              <td class="col-female">{s.female}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--sky-deep);
+    margin-bottom: 24px;
+  }
+
+  /* 名簿テーブル（データ用途のため<table>を維持） */
+  .roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .roster-table th,
+  .roster-table td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+
+  .roster-table thead th {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .col-male {
+    width: 40%;
+    text-align: right;
+    background: color-mix(in srgb, var(--sky) 20%, var(--white));
+  }
+
+  .col-num {
+    width: 20%;
+    text-align: center;
+    background: var(--sky);
+    color: var(--sky-deep);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .col-female {
+    width: 40%;
+    background: color-mix(in srgb, var(--lavender) 20%, var(--white));
+  }
+
+  thead .col-male {
+    color: var(--sky-deep);
+  }
+
+  thead .col-female {
+    color: var(--lavender-deep);
+  }
+
+  @media (max-width: 600px) {
+    .roster-table {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+</style>

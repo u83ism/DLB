@@ -1,0 +1,135 @@
+---
+// UNLIMITED DARK ルールページ
+import Layout from '@/layouts/Layout.astro';
+
+const commonRules = [
+  '対象となったクラスの生徒全員でお互いに殺し合う。',
+  '水や食料、殺し合いのための武器などが入ったデイパックを支給する。',
+  '生徒はプログラムを円滑に実行するための首輪を装着する。',
+  '最後まで生き残った1名が優勝者となる。',
+  '優勝者には生涯の生活保障と、総統陛下直筆の色紙が与えられる。',
+  '会場は電流金網に囲まれている。',
+  '電流金網に触れた者は確実に死亡するが、もし金網を越えた場合は首輪を爆破する。',
+  '脱出や政府への反抗を試みる者は首輪を爆破する。',
+  '徐々に増加していく"禁止エリア"に滞在していた場合、首輪を爆破する。',
+  '電気や水道、ガスは通っているが携帯電話の使用は不可能である。',
+  'プログラム中ではあらゆる犯罪行為が許可される。',
+] as const;
+
+const uniqueRules = [
+  '殺害した人数が10人に達した者は成績優秀者として途中で離脱する権利を得る。',
+  '成績優秀者は優勝者と同じ扱いとする。またその人数に制限は無い。',
+  '成績優秀者が出ても、そうでない生徒の中で最後の1人になれば優勝者となる。',
+  '24時間経っても死亡者が増加しなかった場合および禁止エリアが全て発動した後で6時間が経過した場合は、時間切れとなり殺害人数が1番多い生徒が優勝となり、その他の生徒の首輪は爆破される。',
+  '会場を4つのエリアとその他の地域に区切っている。',
+  '4つのエリアは生徒の生存人数に応じて"禁止エリア"となる。',
+  '死亡者が出るごとに、リアルタイムで放送が流れて死亡者が発表される。',
+] as const;
+---
+
+<Layout title="ルール（UNLIMITED DARK）" description="オリジナルバトルロワイアル「UNLIMITED DARK」のプログラムルール説明。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">ルール</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">ルール</h1>
+
+      <section class="section">
+        <h2 class="section-heading">原作との共通点</h2>
+        <ul class="rule-list">
+          {commonRules.map((r) => <li>{r}</li>)}
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">原作との相違点</h2>
+        <ul class="rule-list unique">
+          {uniqueRules.map((r) => <li>{r}</li>)}
+        </ul>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .section {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 14px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--sky-deep);
+  }
+
+  .rule-list {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    padding-left: 1.4em;
+  }
+
+  .rule-list li {
+    margin-bottom: 6px;
+  }
+
+  .rule-list.unique {
+    color: var(--sky-deep);
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+// UNLIMITED DARK その他の人物紹介
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="その他の人物紹介（UNLIMITED DARK）" description="UNLIMITED DARK に登場する生徒以外の人物紹介。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">その他の人物紹介</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">その他の人物紹介</h1>
+
+      <section class="character">
+        <h2 class="char-name">冬月 和彦（ふゆつき・かずひこ）</h2>
+        <p>
+          <a href="/DLB/ud/netadata/#m9" class="char-link">冬月直樹（男子9番）</a>の父親。34歳。中3の時にプログラムに巻き込まれ8人を殺して優勝。その後、2年ほど放浪したり自暴自棄に暴れまわっていたところを、同じような経歴を辿っていた幸子と出会って改心する。今ではかなり丸くなり、その頃の面影はほとんど残っていない。現在は反政府組織が運営する会社で働いている。
+        </p>
+      </section>
+
+      <section class="character">
+        <h2 class="char-name">冬月 幸子（ふゆつき・さちこ）</h2>
+        <p>
+          <a href="/DLB/ud/netadata/#m9" class="char-link">冬月直樹（男子9番）</a>の母親。32歳。中3の時にプログラムに巻き込まれ優勝。その後転校したが、新しい学校に馴染めず、不登校になって街をいつもぶらついていた所、当時17歳だった冬月和彦と知り合いつき合う。その後直樹を生み、自らも反政府活動に従事し始める。英語が得意で、和彦と同じく反政府組織が運営する会社で働いている。
+        </p>
+      </section>
+
+      <section class="character">
+        <h2 class="char-name">羽原 一郎（はばら・いちろう）</h2>
+        <p>
+          今回のプログラム担当官。担当官の仕事は長く、いわばベテラン。しかし真面目すぎるせいで、プログラムをタネにしてトトカルチョをやるような上層部を良くは思っておらず、上層部からも実績は認められているものの堅物としてやや疎まれている部分がある。本来、彼ほどの人間ならばもっと上の役職に就いていてもおかしくはないのだが、昇進できないのもそのせいであると噂されている。
+        </p>
+      </section>
+
+      <section class="character">
+        <h2 class="char-name">佐藤 信輝（さとう・のぶてる）</h2>
+        <p>
+          羽原一郎（プログラム担当官）の上司。良くも悪くも中間管理職的な性格だが、専守防衛軍内でもかなり上の立場にある。
+        </p>
+      </section>
+
+      <section class="character">
+        <h2 class="char-name">渡部 武則（わたなべ・たけのり）</h2>
+        <p>
+          プログラム担当官の補佐役。エリートコースを歩んでいるが、生来のお調子者な部分が抜け切れない。羽原から押し付けられてトトカルチョ関係の仕事もやっている。
+        </p>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .character {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .character:last-child {
+    border-bottom: none;
+  }
+
+  .char-name {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--sky-deep);
+  }
+
+  .character p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .char-link {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .char-link:hover {
+    text-decoration: underline;
+  }
+</style>

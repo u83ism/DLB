@@ -1,0 +1,64 @@
+---
+// UNLIMITED DARK XX話（番外編）
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="XX話（UNLIMITED DARK）" description="UNLIMITED DARK 番外話XX。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">XX話</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">XX話</h1>
+      <p class="chapter-label">番外</p>
+
+      <div class="story">
+        <p>　手に持ったライフルの銃口は地面を向いていた。俯いてとぼとぼと歩く姿は儚げで、プログラムで生き抜いていくには不適切だった。もし拳銃を持っている者が殺意を抱いたなら良いカモになってしまうだろう。そのことも彼女は分かっていた。だが、銃口を上げることを躊躇っている。<br>
+　今、彼女が歩いているのは会場の中央を南北に貫く道路の北の端。電流の通った大きな柵が東西を延々と横切っているだけの場所だ。その柵と、その向こう側に立ちはだかる山を見て溜息をつく。<br>
+（脱出なんか、無理だよね……）<br>
+　改めて事実が身に染みた。1年ほど前にプログラムを脱出した中学生がいるということはニュースで知っていたが、とてもじゃないが出来っこないように思えた。電流の流れる柵も厄介だが、一番の問題は首輪だ。彼女はそっと首輪に手をやって、何かの拍子に取れないかと回したり、持ち上げて無理やり顔を通そうとするが無駄に終わった。<br>
+「どうしようかな」<br>
+　彼女は迷っていた。例え生き残って帰ったとして、物心ついてからの人生を最も費やしてきた演劇の道は絶たれてしまっているに違いない。どうしようも無い事情があるとはいえ「プログラムの優勝者」は「殺人者」とほぼ同義なのだ。表向き、華やかで清廉潔白であることを要求される業界では致命的すぎた。<br>
+　彼女が<br>
+　再び溜息をつくと、諦めて歩き出す。目的地は無く、本能の赴くままに何処かへと向かう。</p>
+
+        <p>　彼女は銃口を彼らへと向けると付属のスコープを覗く。説明書によるとスコープに付属しているリングを左右に動かすと倍率が変わるらしいので、丁度いい具合になるよう調節する。<br>
+　覗いた先には3人の男女がいた。奇妙な組み合わせだった。<span class="f">一条早紀（女子3番）</span>、<span class="f">竹下恵（女子7番）</span>の2人は分かるにしても、<span class="m">冬月直樹（男子9番）</span>がいる。おそらく偶然出会ったのだろうが、比較的大人しめの2人が気心も知れない転校生と一緒に行動しているのは意外だった。<br>
+（きっとやる気はないんだろうけど……）<br>
+　彼女は意を決して彼女――<span class="f">山本友香（女子11番）</span>――は狙いを冬月に定めた。引き金を引いてしまえば後戻りはできない。</p>
+
+        <div class="survival-badge">【残り21人】</div>
+      </div>
+
+      <nav class="ep-nav" aria-label="エピソード移動">
+        <a href="/DLB/ud/" class="ep-btn ep-prev">← UNLIMITED DARK TOP</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--sky-deep); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--sky); color: var(--text); }
+  .chapter-label { font-size: 0.82rem; color: var(--sky-deep); font-weight: 700; margin-bottom: 32px; }
+  .story { font-size: 0.92rem; line-height: 2; }
+  .story p { margin-bottom: 1.6em; }
+  :global(.m) { color: #2244cc; font-weight: 600; }
+  :global(.f) { color: #cc2222; font-weight: 600; }
+  :global(.hl) { color: #cc2222; font-weight: 700; }
+  .survival-badge { text-align: right; font-weight: 700; font-size: 0.9rem; margin-top: 2em; color: var(--text); }
+  .ep-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); gap: 12px; }
+  .ep-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--sky-deep); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--sky-deep); text-decoration: none; }
+  .ep-btn:hover { background: var(--sky); }
+</style>
