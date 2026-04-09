@@ -1,0 +1,95 @@
+---
+// 魔法使いは虚構の楽園に踊る トップページ
+import Layout from '@/layouts/Layout.astro';
+
+// データページ一覧
+const dataPages = [
+  { title: '生徒＆支給品募集', href: '/DLB/mkro/bosyu/' },
+  { title: '御挨拶', href: '/DLB/mkro/first/' },
+  { title: '世界設定', href: '/DLB/mkro/world/' },
+  { title: '仮生徒名簿', href: '/DLB/mkro/data/' },
+  { title: '特殊用語辞典', href: '/DLB/mkro/dic/' },
+] as const;
+
+// プロローグ一覧（執筆途中）
+const prologue = [
+  { title: 'プロローグ1「約束の地」', href: '/DLB/mkro/p1/' },
+  { title: 'プロローグ2「夜食」', href: '/DLB/mkro/p2/' },
+  { title: 'プロローグ3（未題）', href: '/DLB/mkro/p3/' },
+  { title: 'プロローグ4「BLADE ARTS」', href: '/DLB/mkro/p4/' },
+] as const;
+---
+
+<Layout title="魔法使いは虚構の楽園に踊る" description="100人の魔法使いによるバトルロワイアル小説「魔法使いは虚構の楽園に踊る」（魔虚楽踊）。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">魔虚楽踊</span>
+    </nav>
+
+    <main>
+      <div class="title-block">
+        <h1 class="work-title">魔法使いは虚構の楽園に踊る</h1>
+        <p class="work-subtitle">100人の魔法使いによるバトルロワイアル</p>
+        <p class="catchcopy">全ての痛みを越えろ。</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-heading">各種データ</h2>
+        <nav class="data-nav" aria-label="データページ一覧">
+          {dataPages.map((p) => (
+            <a href={p.href} class="data-card">{p.title}</a>
+          ))}
+        </nav>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">登場生徒詳細</h2>
+        <nav class="data-nav" aria-label="登場生徒詳細">
+          <a href="/DLB/mkro/ndm/" class="data-card">男子登場生徒詳細</a>
+          <a href="/DLB/mkro/ndf/" class="data-card">女子登場生徒詳細</a>
+        </nav>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">本編目次</h2>
+        <div class="chapter-block">
+          <h3 class="chapter-title">プロローグ（執筆途中）</h3>
+          <div class="ep-grid">
+            {prologue.map((p) => (
+              <a href={p.href} class="ep-link">{p.title}</a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <p class="notice">
+        この作品はフィクションです。登場する団体名・人物名・地名などは実在のものと全く関係ありません。
+      </p>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .title-block { text-align: center; margin-bottom: 40px; padding: 32px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
+  .work-title { font-size: 1.8rem; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+  .work-subtitle { font-size: 0.88rem; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+  .catchcopy { font-size: 1rem; color: var(--text); font-weight: 700; font-style: italic; }
+  .section { margin-bottom: 40px; }
+  .section-heading { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 16px; padding: 8px 0 8px 16px; border-left: 4px solid var(--accent); }
+  .data-nav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .data-card { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.88rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+  .data-card:hover { background: var(--bg); }
+  .chapter-block { margin-bottom: 20px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); }
+  .chapter-title { font-size: 0.92rem; font-weight: 800; margin-bottom: 10px; padding: 6px 12px; background: var(--bg); color: var(--accent); border-radius: 4px; }
+  .ep-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .ep-link { display: inline-block; padding: 6px 12px; background: var(--white); border: 1px solid var(--accent); border-radius: 4px; font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .ep-link:hover { background: var(--bg); }
+  .notice { font-size: 0.8rem; color: var(--text-muted); line-height: 1.8; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+</style>

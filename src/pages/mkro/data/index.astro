@@ -1,0 +1,146 @@
+---
+// 魔虚楽踊 仮生徒名簿ページ
+import Layout from '@/layouts/Layout.astro';
+
+// 男子生徒一覧（自作）
+const malesSelf = [
+  ['上村　一樹', '高畑　浩介'],
+  ['永島　良平', '岩浪　仁'],
+  ['坂本　侑弥', '広瀬　和希'],
+  ['中山　徹', '矢野　祐樹'],
+  ['瀧澤　郷史', '森﨑　拓哉'],
+  ['稲岡　雄二', '芝原　一馬'],
+  ['塚本　耕平', '笠井　憂作'],
+  ['長谷川　悟', '藤井　慎也'],
+  ['本馬　貴広', '三浦　雅浩'],
+  ['木村　裕史', '伊丹　圭司'],
+  ['大矢　佳彦', '佐原　徹雄'],
+  ['久保　将人', '西江　秀行'],
+  ['宮谷　寛幸', '芳西　健太郎'],
+  ['東郷　宗一郎', '奥村　大介'],
+  ['小山　好紀', '加藤　雄太'],
+  ['松田　淳', '多河　遼次'],
+  ['川畑　圭吾', '倉橋　徹'],
+  ['劉　貴生', '瀬戸口　無幻'],
+  ['矢口　龍之介', '矢口　虎太郎'],
+  ['大岸　翔太', ''],
+] as const;
+
+// 女子生徒一覧（自作）
+const femalesSelf = [
+  ['大塚　彩', '高橋　恵利香'],
+  ['谷田　奈緒子', '上阪　理恵'],
+  ['末包　真央', '林　美紗子'],
+  ['松井　明日香', '木本　明菜'],
+  ['木下　玲音', '篠永　晶子'],
+  ['梶田　あゆみ', '城谷　沙希'],
+  ['吉兼　悠佳里', '荒木　美里'],
+  ['山口　夏希', '宮崎　佐代子'],
+  ['伊藤　恵美', '新井　智映子'],
+  ['塩津　千裕', '関谷　みのり'],
+  ['下嶋　沙弥香', '枡家　薫'],
+  ['安達　由真', '喜多　亜梨沙'],
+  ['前田　詩織', '吉野　愛'],
+  ['滝口　麻結', '小泉　奈穂'],
+  ['渡辺　寛子', '橘　春花'],
+  ['香山　那智佳', '小野寺　由佳'],
+  ['小倉　結衣', '春日井　里桜'],
+  ['大野　佳奈枝', '野々村　杏里'],
+  ['金谷　真実', '今城　亜季'],
+  ['双葉　あかり', '里見　ほのか'],
+] as const;
+
+// 投稿生徒（水色背景）
+const malesTosho = ['霧生　楓', '五十嵐　康介', '小田原　雅樹', '橋本　裕也', '秋里　総甫', '釘宮　和'] as const;
+const femalesTosho = ['灰鳥　ミコト', '須永　麗美', '菅原　美咲', '猪野上　焔', '野宮　香奈', '烏丸　林檎'] as const;
+---
+
+<Layout title="仮生徒名簿（魔虚楽踊）" description="魔虚楽踊 登場予定の仮生徒名簿。自作生徒79名・投稿生徒12名の計91名。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">仮生徒名簿</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">仮生徒名簿</h1>
+
+      <p class="lead">以下、現在発表している生徒となります。<span class="tosho-note">水色背景の生徒は投稿された生徒です。</span></p>
+      <p class="status">
+        <strong>自作生徒：79名（男子39名/女子40名）発表<br>
+        投稿生徒：12名（男子6名/女子6名）採用決定<br>
+        【計91名決定】</strong>
+      </p>
+
+      <table class="roster">
+        <thead>
+          <tr>
+            <th colspan="2">男子</th>
+            <th colspan="2">女子</th>
+          </tr>
+        </thead>
+        <tbody>
+          {malesSelf.map((row, i) => (
+            <tr>
+              <td><a href={`/DLB/mkro/ndm/#${i * 2 + 1}`}>{row[0]}</a></td>
+              <td>{row[1] ? <a href={`/DLB/mkro/ndm/#${i * 2 + 2}`}>{row[1]}</a> : ''}</td>
+              <td><a href={`/DLB/mkro/ndf/#${i * 2 + 1}`}>{femalesSelf[i][0]}</a></td>
+              <td><a href={`/DLB/mkro/ndf/#${i * 2 + 2}`}>{femalesSelf[i][1]}</a></td>
+            </tr>
+          ))}
+          <tr>
+            <td colspan="4"></td>
+          </tr>
+          <tr class="tosho-row">
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t1">{malesTosho[0]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t2">{malesTosho[1]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t1">{femalesTosho[0]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t2">{femalesTosho[1]}</a></td>
+          </tr>
+          <tr class="tosho-row">
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t4">{malesTosho[2]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t3">{malesTosho[3]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t3">{femalesTosho[2]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t4">{femalesTosho[3]}</a></td>
+          </tr>
+          <tr class="tosho-row">
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t5">{malesTosho[4]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndm/#t6">{malesTosho[5]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t4">{femalesTosho[4]}</a></td>
+            <td class="tosho"><a href="/DLB/mkro/ndf/#t5">{femalesTosho[5]}</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav class="back-nav">
+        <a href="/DLB/mkro/" class="back-btn">← 魔虚楽踊 TOP</a>
+        <a href="/DLB/mkro/ndm/" class="back-btn">男子詳細</a>
+        <a href="/DLB/mkro/ndf/" class="back-btn">女子詳細</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .lead { font-size: 0.88rem; margin-bottom: 8px; }
+  .tosho-note { font-weight: 700; color: #0066aa; }
+  .status { font-size: 0.88rem; margin-bottom: 24px; padding: 12px 16px; background: var(--bg); border-radius: var(--radius); border: 1px solid var(--border); }
+  .roster { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .roster th { background: #ccffcc; font-weight: 700; padding: 8px 10px; border: 1px solid var(--border); text-align: center; }
+  .roster td { padding: 8px 10px; border: 1px solid var(--border); width: 25%; }
+  .roster a { color: var(--accent); text-decoration: none; }
+  .roster a:hover { text-decoration: underline; }
+  .tosho-row td.tosho { background: #ccffff; }
+  .back-nav { display: flex; gap: 10px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .back-btn:hover { background: var(--bg); }
+</style>

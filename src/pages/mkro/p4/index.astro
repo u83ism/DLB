@@ -1,0 +1,54 @@
+---
+// 魔虚楽踊 プロローグ4「BLADE ARTS」
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="プロローグ4「BLADE ARTS」（魔虚楽踊）" description="魔虚楽踊 プロローグ第4節「BLADE ARTS」（執筆途中）。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">プロローグ4</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">プロローグ4</h1>
+      <p class="chapter-label">「BLADE ARTS」</p>
+
+      <div class="story">
+        <p>　6月のある雨の日の深夜。日付もとっくの前に変わったというのに、未だ体育館の一画には明かりが灯っていた。しかしそこに残っているのはたった1人。板張りのフロアの隅で長袖・長ズボンの体育着を着た男が刀を構えている。<br>
+　常日頃から人目を惹きつけている銀色の髪が僅かに揺れるが、剣道を嗜むものであればその奇異な構えの方にこそ視線が向くであろう。剣を立てて自らの右肩のあたりまで引き、左足は半歩前に出ている。正面はがら空きであり、相手からすればどこからでも切りかかるのに不都合はない。八双の構えと呼ばれるそれは防御面に難がありすぎるため、現代の剣道から失われて久しく、精神修養や形稽古を重視する流派で時折使われる程度になっていた。<br>
+　また彼の持っている刀も実に変わっている。普段剣道において使われている木刀や竹刀などではなく、刃の無い模造刀ながら、その実、重量は同尺の真剣とほぼ変わらず、重心もまた真剣に倣って。上段から相手の頭部に向かって全力で振りおろせば撲殺することさえ十分に可能であろう。</p>
+
+        <p>　電気を落とし施錠した憂作は体育館の入口前の広々としたスペースに人がいるのに気づいた。小気味良いリズムでボールを……<br>
+「あ、終わったんだ」<br>
+「どうした？」</p>
+
+        <p class="wip-note">※ この節は執筆途中で終わっています。</p>
+      </div>
+
+      <nav class="ep-nav" aria-label="エピソード移動">
+        <a href="/DLB/mkro/p3/" class="ep-btn ep-prev">← プロローグ3</a>
+        <a href="/DLB/mkro/" class="ep-btn ep-next">魔虚楽踊 TOP →</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .chapter-label { font-size: 0.82rem; color: var(--accent); font-weight: 700; margin-bottom: 32px; }
+  .story { font-size: 0.92rem; line-height: 2; }
+  .story p { margin-bottom: 1.6em; }
+  .wip-note { color: var(--text-muted); font-style: italic; }
+  .ep-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); gap: 12px; }
+  .ep-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .ep-btn:hover { background: var(--bg); }
+</style>
