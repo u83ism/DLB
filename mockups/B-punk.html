@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B: Punk (revised)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0d0d0d;
+    --white: #f0f0f0;
+    --pink: #ff0055;
+    --yellow: #ffee00;
+    --cyan: #00ffcc;
+    --green: #39ff14;  /* ネオングリーン */
+    --purple: #cc00ff;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.4;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* ===== ヘッダー ===== */
+  header {
+    position: relative;
+    background: var(--black);
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 4px solid var(--yellow);
+  }
+
+  /* ノイズっぽいストライプ背景 */
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 8px,
+      rgba(255,238,0,0.04) 8px,
+      rgba(255,238,0,0.04) 16px
+    );
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: stretch;
+    min-height: 120px;
+  }
+
+  /* 左：サイトタイトル */
+  .header-title {
+    padding: 24px 32px;
+    background: var(--pink);
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+    padding-right: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .site-title-en {
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.6);
+  }
+  .site-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--black);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .site-title .apostrophe { color: var(--yellow); }
+
+  /* 中央：スローガン的なもの */
+  .header-center {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+  }
+  .header-slogan {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    writing-mode: horizontal-tb;
+  }
+
+  /* 右：since */
+  .header-since {
+    padding: 24px 32px;
+    background: var(--yellow);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+    padding-left: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .since-label {
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: rgba(0,0,0,0.5);
+    text-transform: uppercase;
+  }
+  .since-year {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  /* ===== ナビ ===== */
+  nav {
+    background: var(--white);
+    border-bottom: 3px solid var(--black);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  nav a {
+    display: block;
+    color: var(--black);
+    text-decoration: none;
+    padding: 14px 22px;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 2px solid var(--black);
+    position: relative;
+    transition: background 0.1s, color 0.1s;
+    white-space: nowrap;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    transition: background 0.1s;
+  }
+  nav a:hover {
+    background: var(--black);
+    color: var(--pink);
+  }
+  nav a:hover::after { background: var(--pink); }
+  nav a.active {
+    background: var(--pink);
+    color: var(--white);
+  }
+
+  /* ===== メインコンテナ ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 48px;
+  }
+
+  /* ===== セクション見出し ===== */
+  .section { margin-bottom: 56px; }
+
+  .section-heading {
+    position: relative;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-heading-bg {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    user-select: none;
+    pointer-events: none;
+  }
+  .section-heading-text {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-heading-text::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--cyan);
+  }
+
+  /* ===== コンテンツグリッド ===== */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+
+  .content-card {
+    display: block;
+    background: #141414;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    transition: background 0.15s;
+  }
+  .content-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-color, var(--pink));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s;
+  }
+  .content-card:hover::before { transform: scaleX(1); }
+  .content-card:hover { background: #1a1a1a; }
+
+  .content-card:nth-child(1) { --card-color: var(--pink); }
+  .content-card:nth-child(2) { --card-color: var(--cyan); }
+  .content-card:nth-child(3) { --card-color: var(--yellow); }
+  .content-card:nth-child(4) { --card-color: var(--green); }
+
+  .card-num {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+    position: absolute;
+    top: 12px; right: 16px;
+    user-select: none;
+  }
+  .card-tag {
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--card-color, var(--pink));
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .card-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ===== お知らせ ===== */
+  .notice {
+    border: 2px solid rgba(255,255,255,0.15);
+    background: #141414;
+    overflow: hidden;
+  }
+  .notice-label {
+    background: var(--pink);
+    color: var(--black);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .notice-body {
+    padding: 20px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+  }
+  .notice-body strong { color: var(--yellow); }
+
+  /* ===== サイドバー ===== */
+  aside {}
+
+  .widget {
+    margin-bottom: 32px;
+    border: 2px solid rgba(255,255,255,0.12);
+    background: #111;
+    overflow: hidden;
+  }
+  .widget-title {
+    background: var(--black);
+    border-bottom: 2px solid rgba(255,255,255,0.12);
+    padding: 10px 16px;
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .widget-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--widget-accent, var(--pink));
+    transform: rotate(45deg);
+  }
+  .widget:nth-child(1) { --widget-accent: var(--pink); }
+  .widget:nth-child(2) { --widget-accent: var(--cyan); }
+
+  .update-list { list-style: none; }
+  .update-list li {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.8rem;
+  }
+  .update-list li:last-child { border-bottom: none; }
+  .update-date {
+    font-size: 0.62rem;
+    font-weight: 900;
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .update-text { color: rgba(255,255,255,0.65); }
+
+  .link-list { list-style: none; }
+  .link-list li {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .link-list li:last-child { border-bottom: none; }
+  .link-list a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: background 0.1s, color 0.1s;
+  }
+  .link-list a::before {
+    content: '→';
+    color: var(--pink);
+    font-weight: 900;
+    font-size: 0.75rem;
+  }
+  .link-list a:hover {
+    background: rgba(255,0,85,0.08);
+    color: var(--white);
+  }
+
+  /* ===== 斜め区切り（ドーナドーナっぽく） ===== */
+  .slash-divider {
+    height: 48px;
+    background: var(--yellow);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+    margin: 0 0 -24px;
+  }
+
+  /* ===== フッター ===== */
+  footer {
+    background: var(--pink);
+    color: var(--black);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+
+  /* ===== 装飾：コーナーに光 ===== */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,0,85,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <div class="site-title-en">Personal Site</div>
+      <div class="site-title">DON<span class="apostrophe">'</span>T<br>LOOK BACK</div>
+    </div>
+    <div class="header-center">
+      <div class="header-slogan">YOROZU · SINCE 1999 · YUYAMI</div>
+    </div>
+    <div class="header-since">
+      <div class="since-label">Est.</div>
+      <div class="since-year">1999</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#" class="active">HOME</a>
+  <a href="#">PROFILE</a>
+  <a href="#">雑記</a>
+  <a href="#">BATTLE ROYALE</a>
+  <a href="#">ORPHEN</a>
+  <a href="#">大藪春彦</a>
+  <a href="#">HISTORY</a>
+</nav>
+
+<div class="container">
+  <main>
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-heading-bg">Contents</div>
+        <div class="section-heading-text">Contents</div>
+      </div>
+
+      <div class="content-grid">
+        <a class="content-card" href="#">
+          <div class="card-num">01</div>
+          <div class="card-tag">Battle Royale</div>
+          <div class="card-title">バトルロワイアル</div>
+          <div class="card-desc">概要・名簿・自作オリバト<br>「UNLIMITED DARK」<br>「魔法使いは虚構の楽園に踊る」</div>
+        </a>
+        <a class="content-card" href="#">
+          <div class="card-num">02</div>
+          <div class="card-tag">Game / Orphen</div>
+          <div class="card-title">魔術士オーフェン</div>
+          <div class="card-desc">PS2版ゲーム攻略。<br>ボス・戦闘指南・隠し要素。</div>
+        </a>
+        <a class="content-card" href="#">
+          <div class="card-num">03</div>
+          <div class="card-tag">Hard-Boiled</div>
+          <div class="card-title">大藪春彦作品</div>
+          <div class="card-desc">作品レビュー・生還者考察<br>（ネタバレあり）</div>
+        </a>
+        <a class="content-card" href="#">
+          <div class="card-num">04</div>
+          <div class="card-tag">About</div>
+          <div class="card-title">プロフィール</div>
+          <div class="card-desc">管理人ゆうやみについて。</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-heading-bg">Notice</div>
+        <div class="section-heading-text">Notice</div>
+      </div>
+      <div class="notice">
+        <div class="notice-label">
+          <span>Latest Update</span>
+          <span>2021.03.21</span>
+        </div>
+        <div class="notice-body">
+          さくらインターネットから <strong>GitHub Pages</strong> へ移転。掲示板・CGI系は廃止。<br>
+          連絡は <strong>X: @u83unlimited</strong> まで。
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside>
+    <div class="widget">
+      <div class="widget-title">Updates</div>
+      <ul class="update-list">
+        <li>
+          <span class="update-date">2021.03.21</span>
+          <span class="update-text">GitHub Pages移転</span>
+        </li>
+        <li>
+          <span class="update-date">2013.xx.xx</span>
+          <span class="update-text">雑記更新</span>
+        </li>
+        <li>
+          <span class="update-date">2012.xx.xx</span>
+          <span class="update-text">プロフィール更新</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Network</div>
+      <ul class="link-list">
+        <li><a href="#">ゆうやみポータル</a></li>
+        <li><a href="#">OBRN</a></li>
+        <li><a href="#">Cradle 2 Grave</a></li>
+        <li><a href="#">21世紀パワーボム</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  &copy; 1999–2026 &nbsp; ゆうやみ &nbsp;/&nbsp; DON'T LOOK BACK
+</footer>
+
+</body>
+</html>
