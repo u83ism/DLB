@@ -1,0 +1,184 @@
+---
+// バトルロワイアル BR2生徒名簿ページ
+import Layout from '@/layouts/Layout.astro';
+
+// 鹿之砦中学校3年B組 生徒名簿データ（男子19名・女子23名）
+type StudentEntry = {
+  readonly male: string | null;
+  readonly female: string;
+};
+
+const students: readonly StudentEntry[] = [
+  { male: '青井 拓馬（あおい・たくま）', female: '浅倉 なお（あさくら・なお）' },
+  { male: '卜部 秀悟（うらべ・しゅうご）', female: '池田 美希（いけだ・みき）' },
+  { male: '葛西 治虫（かさい・おさむ）', female: '筧 今日子（かけい・きょうこ）' },
+  { male: '黒澤 凌（くろさわ・りょう）', female: 'キタノ シオリ' },
+  { male: '桜井 晴哉（さくらい・はるや）', female: '久瀬 遥（くぜ・はるか）' },
+  { male: '柴木 雅実（しばき・まさみ）', female: '鷺沢 希（さぎさわ・のぞみ）' },
+  { male: '志村 鉄也（しむら・てつや）', female: '汐田 早苗（しおだ・さなえ）' },
+  { male: '城 直輝（じょう・なおき）', female: '新藤 理沙（しんどう・りさ）' },
+  { male: '田口 正勝（たぐち・まさかつ）', female: '戸塚 保奈美（とつか・ほなみ）' },
+  { male: '名波 順（ななみ・じゅん）', female: '夏川 結子（なつかわ・ゆうこ）' },
+  { male: '長谷川 達彦（はせがわ・たつひこ）', female: '新見 麗奈（にいみ・れな）' },
+  { male: '日笠 将太（ひかさ・しょうた）', female: '野坂 真帆（のさか・まほ）' },
+  { male: '保坂 康昭（ほさか・やすあき）', female: '蓮田 麻由（はすだ・まゆ）' },
+  { male: '前薗 健二（まえぞの・けんじ）', female: '波多 量子（はた・りょうこ）' },
+  { male: '槇村 慎太郎（まきむら・しんたろう）', female: '福田 和美（ふくだ・かずみ）' },
+  { male: '皆本 清（みなもと・きよし）', female: '松木 志穂（まつき・しほ）' },
+  { male: '宮台 陽介（みやだい・ようすけ）', female: '三船 夕佳（みふね・ゆうか）' },
+  { male: '向井 渉（むかい・わたる）', female: '本村 明日香（もとむら・あすか）' },
+  { male: '森島 達郎（もりしま・たつろう）', female: '八木 綾音（やぎ・あやね）' },
+  { male: null, female: '矢沢 愛（やざわ・あい）' },
+  { male: null, female: '谷野 響（やの・ひびき）' },
+  { male: null, female: '夕城 香菜（ゆうき・かな）' },
+  { male: null, female: '善山 絵里（よしやま・えり）' },
+];
+---
+
+<Layout title="生徒名簿（BR2）" description="映画「バトルロワイアル2」鹿之砦中学校3年B組42名の生徒名簿。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">映画「BR2」生徒名簿</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">映画「バトルロワイアル2」生徒名簿</h1>
+      <p class="subtitle">町立鹿之砦中学校3年B組</p>
+
+      <table class="roster-table">
+        <thead>
+          <tr>
+            <th class="col-male">男子</th>
+            <th class="col-num">番号</th>
+            <th class="col-female">女子</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((s, i) => (
+            <tr>
+              <td class="male">{s.male ?? '—'}</td>
+              <td class="num">{i + 1}番</td>
+              <td class="female">{s.female}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--mint-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--mint);
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .roster-table thead tr {
+    background: var(--mint);
+  }
+
+  .roster-table th {
+    padding: 10px 14px;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--border);
+    color: var(--mint-deep);
+  }
+
+  .col-male,
+  .col-female { width: 42%; }
+  .col-num { width: 16%; }
+
+  .roster-table td {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .roster-table tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--mint) 15%, var(--white));
+  }
+
+  .num {
+    text-align: center;
+    background: color-mix(in srgb, var(--mint) 30%, var(--white)) !important;
+    font-weight: 700;
+    color: var(--mint-deep);
+    font-size: 0.8rem;
+  }
+
+  .male {
+    text-align: right;
+    color: var(--text);
+  }
+
+  /* 男子なし行のセルはミュート表示 */
+  .male:has(+ .num) {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 500px) {
+    .roster-table td,
+    .roster-table th {
+      font-size: 0.78rem;
+      padding: 7px 8px;
+    }
+
+    td.male,
+    td.female {
+      white-space: normal;
+    }
+  }
+</style>

@@ -1,0 +1,451 @@
+---
+// 大藪春彦 生還者追跡ページ（主人公の生死調査）
+import Layout from '@/layouts/Layout.astro';
+
+type SurvivorEntry = {
+  readonly work: string;
+  readonly hero: string;
+  readonly detail: string;
+};
+
+// 生存（10人）
+const survived: readonly SurvivorEntry[] = [
+  {
+    work: '蘇える金狼',
+    hero: '朝倉哲也',
+    detail: '乗っ取り屋の鈴本を脅し、その黒幕であるY大臣の海外行きの随員となることを承諾させる。そしてその飛行機に乗り込んで日本を離れる。',
+  },
+  {
+    work: '戦士の晩歌',
+    hero: '石川克也',
+    detail: '悪徳医師達を襲撃し、凄まじい額の金をせしめた後、変装し、偽造パスポートでアメリカへ脱出。アメリカの自宅に無事辿り着く。',
+  },
+  {
+    work: '黒豹の鎮魂歌',
+    hero: '新城彰',
+    detail: '次々と復讐を成功させ、最後には利用し合う関係にあった山野組を警察を利用して壊滅させる。さらには凄まじい汚職の証拠を密告し、内閣まで解散させてしまう。新城はその合間にスイスに脱出し、そこに買った家にて、内閣が倒れたニュースをラジオで聞く。',
+  },
+  {
+    work: '餓狼の弾痕',
+    hero: '世見月明',
+    detail: '全ての仕事を無事完了し、凄まじい大金を報酬としてもらう。',
+  },
+  {
+    work: '輪殺の掟',
+    hero: '津場登・本上昇・岩下健一',
+    detail: '温泉街を巡るヤクザの抗争に潜入し、散々に利用して稼いだ後、最後に雇い主を襲い、大金庫から金を奪って、街を立ち去る。',
+  },
+  {
+    work: '青春は屍を越えて（生け贄）',
+    hero: '夏川',
+    detail: '友人と共に、ヤクザと手を結んだ汚職警官に嵌められる。死んだ友人の復讐のために、汚職警官から拳銃を奪って殺す。さらにヤクザの抗争が汚職の背景にあると聞きだし、双方のトップをも乗り込んで殺す。',
+  },
+  {
+    work: '血まみれの野獣',
+    hero: '鶴田敏夫',
+    detail: '両親の自殺に追いやった悪徳金融業者を破滅させ、四輪レースでも成功を収める。',
+  },
+  {
+    work: '女豹の掟',
+    hero: '小島恵美子',
+    detail: 'キャサリンからの依頼を完遂し、伊達邦彦と再会する。',
+  },
+] as const;
+
+// 死亡（17人）
+const dead: readonly SurvivorEntry[] = [
+  {
+    work: '長く熱い復讐',
+    hero: '鷲尾進',
+    detail: '復讐を完遂するが、直前に喰らった手榴弾のダメージ等が響き死亡。相打ちとなる。',
+  },
+  {
+    work: 'みな殺しの歌 / 凶銃ワルサーP38 続みな殺しの歌',
+    hero: '衣川恭介',
+    detail: '復讐を完遂するも、敵の撃った銃弾により死亡。相打ちとなる。',
+  },
+  {
+    work: '凶銃ルーガーP08（暗い星の下に）',
+    hero: '土井士郎',
+    detail: '復讐及び恋人を救出するため、敵の家を襲撃するが、待ち受けていたヤクザと銃撃戦を繰り広げ、死亡。',
+  },
+  {
+    work: '凶銃ルーガーP08（夜明けはこない）',
+    hero: '雪村',
+    detail: '関谷組からネコババした麻薬を陳と取引するが、陳は関谷組に密告しており、待ち受けていた組員と銃撃戦を繰り広げ、死亡。',
+  },
+  {
+    work: '凶銃ルーガーP08（はぐれ狼）',
+    hero: '石原雄三・植木光夫',
+    detail: 'デパートの売上金強奪に成功し、上手く隠れ家に逃げ込むが、ルーガーを奪う時に痛めつけた関谷組組員の部下達が跡を追って襲撃してくる。応戦するものの、相打ちとなる。',
+  },
+  {
+    work: '凶銃ルーガーP08（穢れたバッジ）',
+    hero: '真田治',
+    detail: '大金持ち達の麻雀賭博の現場に乗り込み、大金を奪うが、彼女を誘拐され、救出に向かった先で射殺される。',
+  },
+  {
+    work: '戻り道はない 続凶銃ルーガーP08（戻り道はない）',
+    hero: '中根',
+    detail: '敵対するヤクザの組員を襲撃させられ、成功するが、偶然発見した大金をネコババする。仲間内で乾杯するが、睡眠薬に引っかかってしまう。車に乗せられ、仲間に金の在り処を吐かされ、ルーガーも奪われた中根は、自暴自棄に運転手に襲い掛かる。それが原因でトラックと車が衝突し、事故死。',
+  },
+  {
+    work: '戻り道はない 続凶銃ルーガーP08（若者の墓場）',
+    hero: '米倉淳',
+    detail: 'ルーガーを隠し持つ米倉と、持っていることを疑う警察。学校で暴れまくって退学した米倉は金持ちな不良達とつるむ。その溜まり場である家を警察に囲まれ、車で脱出しようとするが、銃撃戦になってしまい死亡。',
+  },
+  {
+    work: '戻り道はない 続凶銃ルーガーP08（死を急ぐもの）',
+    hero: '佐久間哲夫',
+    detail: '作中では死なず、次話の「凶銃の最期」の冒頭で死亡する。隠れてくっ付いていた友人と自分の恋人を殺害するが、それが原因で警察と銃撃戦を繰り広げつつ逃走。島崎の家に辿り着き、死亡。',
+  },
+  {
+    work: '戻り道はない 続凶銃ルーガーP08（凶銃の最期）',
+    hero: '島崎昇',
+    detail: 'ルーレットの博打場を襲撃し、金を強奪するものの、その現場を警察に囲まれ、射殺される。',
+  },
+  {
+    work: '青春は屍を越えて（誤算）',
+    hero: '石原',
+    detail: '友人と共に工場のボーナスを運ぶ所を襲撃し、警察の包囲網も突破するが、乗り換えるために奪った車のブレーキが壊れており、事故死。',
+  },
+  {
+    work: '青春は屍を越えて（拳銃の別れ）',
+    hero: '高島・志村',
+    detail: '宝石店の売り上げ金を襲撃して奪い、意気揚々とスポンサーの所へ向かうが、横取りを狙う者が既に張り込んでいた。銃撃戦となり相討ちになる。',
+  },
+  {
+    work: '青春は屍を越えて（自爆）',
+    hero: '竹田雅也',
+    detail: '悪友に無理矢理仲間にさせられ密輸宝石を奪うが、宝石を狙っていたヤクザや密輸組織が襲ってきて、竹田以外は死んでしまう。絶望した竹田は愛車に乗って事故死する。',
+  },
+  {
+    work: '青春は屍を越えて（若き獅子の最期）',
+    hero: '岡田秀之',
+    detail: 'ヤクザの秀之は、抗争相手の組へ殴り込みをする。何とか成功させるものの、警察がやってきたので、現場から逃走するが射殺される。',
+  },
+  {
+    work: '絶望の挑戦者',
+    hero: '武田進',
+    detail: 'クリンガー社の秘密工作員時代の上司だった倉田をようやく捕まえて情報を得るものの、クリンガー社の工作員に襲撃され、射殺される。',
+  },
+] as const;
+
+// 不明（4人）
+const unknown: readonly SurvivorEntry[] = [
+  {
+    work: 'ウィンチェスターM70',
+    hero: '登川',
+    detail: '仲間の犠牲がありながらも、松本に復讐を成し遂げるが、直後、警官隊に囲まれ銃撃戦に突入。',
+  },
+  {
+    work: '青春は屍を越えて（暗い春）',
+    hero: '寺田',
+    detail: '付き合っていた女に言い寄った大企業の経理課長を脅して金を貰い、その金で高級ライフルを買う。社会に対して加害者として生きようと決意。パレード中の首相を狙撃するものの、すぐさま見つかり、ヘリに攻撃される。',
+  },
+  {
+    work: '青春は屍を越えて（俺を殺る気か）',
+    hero: '（名前不明）',
+    detail: '高級バーでアルバイトをしている「俺」は、ふとしたことから拳銃を奪い、バーが麻薬取引に使われていることを知る。マネージャーを脅し、麻薬取引の現場を襲おうとするが、罠にかけられて、殺し屋と銃撃戦に突入。',
+  },
+  {
+    work: '青春は屍を越えて（流浪の凶銃）',
+    hero: '湯川',
+    detail: '映画館の売り上げ金を奪うが、仲間割れを起こす。そこへ映画館の内通者が捕まって吐いた情報により、隠れ家を知った警察が襲ってくる。絶望的ながら銃撃戦を挑む。',
+  },
+] as const;
+---
+
+<Layout title="生還者を探せ！（大藪春彦）" description="大藪春彦作品の主人公が最後まで生き残ったかどうか追跡。生存10・死亡17・不明4。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/o-yabu/">大藪春彦</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">生還者を探せ！</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">生還者を探せ！</h1>
+
+      <section class="intro-section">
+        <p>
+          大薮作品の主人公は、世間一般でいう悪人にあたります。そして悪人の運命とも言うべきか、話の最後で死んでしまうケースが結構あります。しかし完遂し、見事に国外に脱出したりなど、生き残ったケースもあります。また明確には死ぬ描写が無く、生死不明なまま終わってしまう作品もあります。
+        </p>
+        <p>
+          このコーナーでは「主人公が最後まで生き残ったかどうか」という点について調査していきたいと思います。なお、シリーズモノはシリーズ中の最後の本にて判断しております。短編集は、主人公一人ずつカウントします。
+        </p>
+        <dl class="criteria">
+          <dt class="survive">生存</dt>
+          <dd>物語終了時に生存し、その後の死を暗示されていないこと。</dd>
+          <dt class="dead">死亡</dt>
+          <dd>物語終了時に死亡していること。</dd>
+          <dt class="unknown">不明</dt>
+          <dd>物語終了時に生存しているが、その後の死が暗示されていること。</dd>
+        </dl>
+        <p class="summary">
+          <strong class="survive">10人生存（32.3％）</strong>・
+          <strong class="dead">17人死亡（54.8％）</strong>・
+          <strong class="unknown">4人不明（12.9％）</strong>
+          ／31人中
+        </p>
+      </section>
+
+      <nav class="jump-nav" aria-label="セクション一覧">
+        <a href="#survive">生存（{survived.length}人）</a>
+        <a href="#dead">死亡（{dead.length}人）</a>
+        <a href="#unknown">不明（{unknown.length}人）</a>
+      </nav>
+
+      <section id="survive">
+        <h2 class="section-heading survive-heading">生存（{survived.length}人）</h2>
+        <table class="survivor-table">
+          <thead>
+            <tr>
+              <th class="col-work">作品名</th>
+              <th class="col-hero">主人公名</th>
+              <th>経緯</th>
+            </tr>
+          </thead>
+          <tbody>
+            {survived.map((e) => (
+              <tr>
+                <td class="col-work">{e.work}</td>
+                <td class="col-hero">{e.hero}</td>
+                <td>{e.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section id="dead">
+        <h2 class="section-heading dead-heading">死亡（{dead.length}人）</h2>
+        <table class="survivor-table">
+          <thead>
+            <tr>
+              <th class="col-work">作品名</th>
+              <th class="col-hero">主人公名</th>
+              <th>経緯</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dead.map((e) => (
+              <tr>
+                <td class="col-work">{e.work}</td>
+                <td class="col-hero">{e.hero}</td>
+                <td>{e.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section id="unknown">
+        <h2 class="section-heading unknown-heading">不明（{unknown.length}人）</h2>
+        <table class="survivor-table">
+          <thead>
+            <tr>
+              <th class="col-work">作品名</th>
+              <th class="col-hero">主人公名</th>
+              <th>経緯</th>
+            </tr>
+          </thead>
+          <tbody>
+            {unknown.map((e) => (
+              <tr>
+                <td class="col-work">{e.work}</td>
+                <td class="col-hero">{e.hero}</td>
+                <td>{e.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--lavender-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--lavender);
+    color: var(--text);
+  }
+
+  /* イントロ */
+  .intro-section {
+    margin-bottom: 32px;
+  }
+
+  .intro-section p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .criteria {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    margin: 16px 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    align-items: baseline;
+  }
+
+  .criteria dt {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .criteria dd {
+    margin: 0;
+  }
+
+  .summary {
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-top: 16px;
+  }
+
+  /* 生死カラー */
+  .survive { color: #1a6fb5; }
+  .dead { color: #c0392b; }
+  .unknown { color: #1e8449; }
+
+  /* ジャンプナビ */
+  .jump-nav {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .jump-nav a {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--lavender-deep);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid var(--lavender-deep);
+    border-radius: 20px;
+  }
+
+  .jump-nav a:hover {
+    background: var(--lavender);
+  }
+
+  /* セクション */
+  section + section {
+    margin-top: 48px;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding: 8px 0 8px 16px;
+  }
+
+  .survive-heading {
+    border-left: 4px solid #1a6fb5;
+    color: #1a6fb5;
+  }
+
+  .dead-heading {
+    border-left: 4px solid #c0392b;
+    color: #c0392b;
+  }
+
+  .unknown-heading {
+    border-left: 4px solid #1e8449;
+    color: #1e8449;
+  }
+
+  /* テーブル（データ用途のため<table>を維持） */
+  .survivor-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .survivor-table th,
+  .survivor-table td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .survivor-table thead th {
+    background: var(--lavender);
+    color: var(--lavender-deep);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .survivor-table tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--lavender) 15%, var(--white));
+  }
+
+  .col-work {
+    width: 22%;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .col-hero {
+    width: 15%;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .survivor-table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    .col-work {
+      white-space: normal;
+    }
+  }
+</style>

@@ -1,0 +1,247 @@
+---
+// サイトの歴史ページ
+import Layout from '@/layouts/Layout.astro';
+
+// サイト歴史データの定義
+type HistoryEntry = {
+  readonly period: string;
+  readonly isHighlight: boolean;
+  readonly meta?: {
+    readonly siteName: string;
+    readonly handle: string;
+    readonly genres: string;
+    readonly sub?: string;
+  };
+  readonly desc: string;
+};
+
+const historyEntries: readonly HistoryEntry[] = [
+  {
+    period: '〈第1期〉2000/1/1 ～ 2000/6/?',
+    isHighlight: true,
+    meta: {
+      siteName: 'Game&Moncolle FanCity\'2000（GMFC）',
+      handle: '荒野の旅人',
+      genres: 'WA・モンコレ・オーフェン（途中追加）',
+    },
+    desc: '前年の夏頃からちょびちょびと作ってきたサイトを、正月のおめでたムードに乗せられた父親に勧められて急に公開。取り扱いジャンル、最初はWAとモンコレでしたが、1ヶ月ほどして魔術士オーフェンが追加。サイト名とのギャップに悩む日が始まりました。ちなみにサイト名の「2000」は年ごとに数字が変わっていく予定でした。',
+  },
+  {
+    period: '2000/6/? ～ 2000/9/?',
+    isHighlight: false,
+    desc: 'サイト名と取り扱いジャンルのギャップに耐え切れず休止→改装作業。かなり長い間改装していました……が、この後好調にコンテンツの作成が出来たので、自分としては結構この充電期間は良かったと思います。',
+  },
+  {
+    period: '〈第2期〉2000/9/? ～ 2001/7/31',
+    isHighlight: true,
+    meta: {
+      siteName: 'Eternal City ～Eden of Mirage～（ECEM）',
+      handle: '荒野の旅人',
+      genres: 'WA・モンコレ・オーフェン・GV（途中追加→削除）',
+    },
+    desc: 'サイト名を多ジャンル対応用に変更しつつリニューアル。始まったばかりのガンガンヴァーサスが途中で加わりましたが、いきなりのSPカード乱発で萎えて2ヶ月程で廃止。その中でも大変アクセス数を増やすことになったのが、末期に作った「ORPHEN Remix」・「BATTLE ROYALE ETERNAL」。',
+  },
+  {
+    period: '2001/8/1 ～ 2002/3/31',
+    isHighlight: false,
+    desc: '高校受験につき休止。8ヶ月間とわりと長い間休みましたが、本館からの「ORPHEN Remix」へのリンクが効いたのか、謎なペースでアクセス数が伸びました。',
+  },
+  {
+    period: '〈第3期〉2002/4/1 ～ 2004/3/31',
+    isHighlight: true,
+    meta: {
+      siteName: 'Mirrorball Satellite（鏡球衛星）',
+      handle: '夕闇幻楼',
+      genres: 'WA・オーフェン・BR・RO（途中追加→削除）他',
+      sub: 'BRN（途中追加）→OBRN',
+    },
+    desc: '復活。サイト名＆ハンドル変更。受験中に読んで感動したバトルロワイアルが追加。2002年7月に下位サイト「BRN（現OBRN）」設立。2003年5月中旬、ROから撤退。',
+  },
+  {
+    period: '2004/4/1 ～ 2005/5/5',
+    isHighlight: false,
+    desc: '大学受験につき下位サイトも含め休止。丸々1年ですが、名目上の話なので、実質は半年程度かと思います。滑り込みにて第1志望校に合格。よかったよかった。',
+  },
+  {
+    period: '〈第4期/inetd鯖〉2005/5/6 ～ 2008/3/?',
+    isHighlight: true,
+    meta: {
+      siteName: "Don't Look Back（DLB）",
+      handle: 'ゆうやみ',
+      genres: 'オーフェン・大藪春彦作品・BR・プロレス（→独立）他',
+      sub: 'C2G・OBRN・21CPB（途中追加）',
+    },
+    desc: 'ゲーム系専門の「CRADLE 2 GRAVE」と、よろずサイトの「Don\'t Look Back」に分離して復活。受験中にWWEに目覚め、プロレス部門を追加。同年9月末に「21世紀パワーボム」（21CPB）として独立。2007年11月、「ORPHEN Remix」の運営を断念。',
+  },
+  {
+    period: '〈第4期/さくら鯖〉2008/3/? ～ 2021/3',
+    isHighlight: true,
+    meta: {
+      siteName: "Don't Look Back（DLB）",
+      handle: 'ゆうやみ',
+      genres: 'オーフェン・大藪春彦・BR',
+    },
+    desc: '諸事情により急遽inetd鯖を解約することになり、さくら鯖に移転。1週間足らずで移転完了。',
+  },
+  {
+    period: '〈第4期/GitHub Pages〉2021/3/21 ～ 現在',
+    isHighlight: true,
+    meta: {
+      siteName: "Don't Look Back（DLB）",
+      handle: 'ゆうやみ',
+      genres: 'オーフェン・大藪春彦・BR',
+    },
+    desc: 'さくらインターネットからGitHub Pagesへ移転。掲示板・CGI系は廃止。Astroでのリニューアルを進行中。',
+  },
+];
+---
+
+<Layout title="サイトの歴史" description="よろずサイト「Don't Look Back」の沿革。2000年の開設から現在まで。">
+  <div class="container">
+    <main>
+      <h1 class="page-title">サイトの歴史</h1>
+
+      <p class="lead">
+        当サイトの歴史です。実は長い間やってまして、サイトタイトル変更に管理人名変更、取り扱いジャンル変更までしたので、一度振り返ってみたいなと思って作成しました。
+      </p>
+
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th class="col-period">時期</th>
+            <th class="col-desc">概略</th>
+          </tr>
+        </thead>
+        <tbody>
+          {historyEntries.map((entry) => (
+            <tr class={entry.isHighlight ? 'highlight' : undefined}>
+              <td class="period">{entry.period}</td>
+              <td class="desc">
+                {entry.meta && (
+                  <p class="meta">
+                    サイト名：{entry.meta.siteName}<br />
+                    ハンドル：{entry.meta.handle}<br />
+                    取り扱いジャンル：{entry.meta.genres}
+                    {entry.meta.sub && (
+                      <><br />別管理/下位サイト：{entry.meta.sub}</>
+                    )}
+                  </p>
+                )}
+                <p>{entry.desc}</p>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .lead {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  /* 歴史テーブル（データ用途のため<table>を維持） */
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .history-table thead tr {
+    background: var(--sky);
+    color: var(--sky-deep);
+  }
+
+  .history-table th {
+    padding: 10px 16px;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+
+  .col-period { width: 25%; }
+  .col-desc { width: 75%; }
+
+  .history-table td {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .history-table tr.highlight td {
+    background: color-mix(in srgb, var(--sky) 20%, var(--white));
+  }
+
+  .history-table .period {
+    font-weight: 700;
+    font-size: 0.82rem;
+    white-space: pre-wrap;
+    color: var(--sky-deep);
+  }
+
+  .meta {
+    background: var(--sky);
+    color: var(--sky-deep);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    line-height: 1.8;
+  }
+
+  .desc p + p {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 500px) {
+    .history-table td,
+    .history-table th {
+      display: block;
+      width: 100%;
+    }
+
+    .history-table thead {
+      display: none;
+    }
+
+    .history-table .period {
+      background: var(--sky);
+      padding: 8px 12px;
+    }
+
+    .col-period,
+    .col-desc {
+      width: 100%;
+    }
+  }
+</style>

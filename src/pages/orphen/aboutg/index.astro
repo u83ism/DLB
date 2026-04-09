@@ -1,0 +1,149 @@
+---
+// PS2版オーフェン概要ページ
+import Layout from '@/layouts/Layout.astro';
+
+// ゲームスペックのデータ定義
+const specs = [
+  { label: 'タイトル', value: 'Sorcerous Stabber ORPHEN　魔術士オーフェン' },
+  { label: '機種', value: 'PS2' },
+  { label: 'ジャンル', value: '3DアクションRPG' },
+  { label: '発売元', value: '角川書店/ESP' },
+  { label: '開発元', value: 'SHADE' },
+  { label: '発売日', value: '2000年8月3日' },
+  { label: '製品番号', value: 'SLPS-25008' },
+  { label: '価格', value: '6800円' },
+  { label: 'ディスク枚数', value: 'DVD-ROM1枚' },
+  {
+    label: '備考',
+    value: '2002年10月26日にActivision Publishingより英語版「Scion Of Sorcery ORPHEN」発売。2003年3月7日に「KADOKAWA THE best」廉価版（約3000円）発売。',
+  },
+] as const;
+---
+
+<Layout title="PS2版オーフェン概要" description="PS2ゲーム「魔術士オーフェン」の概要・スペック・プレイ感想。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/orphen/">魔術士オーフェン</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">PS2版概要</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">PS2版オーフェン 概要</h1>
+
+      <section class="section">
+        <p>
+          魔術士オーフェンは様々なメディアミックス展開をしましたが、PS2にてゲームにもなりました。「Sorcerous Stabber ORPHEN　魔術士オーフェン」がそれです。
+        </p>
+
+        <table class="spec-table">
+          <tbody>
+            {specs.map((s) => (
+              <tr>
+                <th>{s.label}</th>
+                <td>{s.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">プレイ感想</h2>
+        <p>
+          プレイ時間は最終セーブポイント到達セーブデータによると10時間程度なものの、ボスでは大分死んだし、謎解きでだいぶ詰まったり、挙句には死んでいたり、最終ボス戦でも時間がかかったので、実際は20時間近くかかると思われます。
+        </p>
+        <p>
+          3DアクションRPGとなってますが実際は、アクション要素が非常に濃いですね。難易度は謎解き、戦闘シーン共に相当高いです。頭とテクニックどちらも要求されます。最終ボスを中心に、各種ボス戦や謎解きで詰まった・挫折したとの話もかなり見ました。
+        </p>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--sky-deep);
+  }
+
+  /* スペックテーブル（データ用途のため<table>を維持） */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 16px;
+  }
+
+  .spec-table th,
+  .spec-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .spec-table th {
+    background: var(--sky);
+    color: var(--sky-deep);
+    font-weight: 700;
+    white-space: nowrap;
+    width: 22%;
+    text-align: right;
+  }
+</style>

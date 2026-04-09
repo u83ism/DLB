@@ -1,0 +1,121 @@
+---
+// 大藪春彦コーナー インデックスページ
+import Layout from '@/layouts/Layout.astro';
+
+const navCards = [
+  { href: '/DLB/o-yabu/about/', label: '概要', desc: '大藪春彦の作品傾向・定番推薦作品' },
+  { href: '/DLB/o-yabu/review/', label: '作品レビュー', desc: 'S〜Eランクの個人的評価一覧' },
+  { href: '/DLB/o-yabu/survivor/', label: '生還者を探せ！', desc: '主人公の生死追跡（生存10・死亡17・不明4）' },
+] as const;
+---
+
+<Layout title="大藪春彦コーナー" description="ハードボイルド作家・大藪春彦の作品紹介コーナー。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">大藪春彦</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">大藪春彦コーナー</h1>
+
+      <p class="intro">
+        1960〜90年代にわたってハードボイルド小説の分野で活躍した作家・大薮春彦氏の作品について色々書いていくコーナーです。
+      </p>
+
+      <nav class="card-grid" aria-label="コーナーメニュー">
+        {navCards.map((c) => (
+          <a href={c.href} class="card">
+            <span class="card-label">{c.label}</span>
+            <span class="card-desc">{c.desc}</span>
+          </a>
+        ))}
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--lavender-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--lavender);
+    color: var(--text);
+  }
+
+  .intro {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--lavender-deep);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: box-shadow 0.15s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-label {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--lavender-deep);
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>

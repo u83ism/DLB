@@ -1,0 +1,168 @@
+---
+// バトルロワイアル 概要ページ
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title="バトルロワイアル 概要" description="バトルロワイアルの成立経緯とあらすじ。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/DLB/">HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href="/DLB/br/">バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">概要</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">バトルロワイアル 概要</h1>
+
+      <section class="section">
+        <p>
+          バトルロワイアルという作品には出版までに特殊な経緯がありました。まず1997年3月に一応完成。その後、新潮社主催の「新潮ミステリー倶楽部大賞」に応募。この時は一次予選すら通過しませんでした。さらに1998年に改稿を加えて、角川書店主催の「日本ホラー大賞」に応募しましたが、最終選考にて「非常に不愉快」「嫌な感じ」「賞のためには（入選させることは絶対にマイナス）」等、内容が反社会的であるという理由により、全面的に批判を浴びて落選。
+        </p>
+        <p>
+          しかし、この時の衝撃度と破壊力がミステリ関係者等に伝わり、水面下で噂が流れました。そして同年10月に噂を聞いた、雑誌の「クイック・ジャパン」（太田出版）の編集部が、高見広春氏にコンタクトを取り、ついに1999年4月に太田出版より「バトルロワイアル」発売。
+        </p>
+        <p>
+          発売後しばらくは水面下でじわじわと読者数を増やしていましたが、故・深作欣二監督による映画化、田口雅之氏による漫画化や、作品内容に衝撃を受けたメディアが騒いだことにより、かなりの注目を集め、一気に大ヒットしました。2002年8月に幻冬舎文庫から文庫版が発売し、映画版独自の続編である2も公開され、今もなお多くの人を惹きつけています。
+        </p>
+        <p class="note">
+          なお、映画版「バトルロワイアル」は原作小説とは色んな点で設定が違います。また「バトルロワイアル2　～鎮魂歌～」は映画版BRの続編であり、原作小説とは繋がりの無いオリジナルです。2のノベライズ版と混同されがちですが、小説版の正式な続編は出ていません。さらに補足しておくと、映画版2とノベライズ版では一部生徒の設定が違ったりします。
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">小説版「バトルロワイアル」あらすじ</h2>
+        <div class="synopsis">
+          <p>
+            西暦1997年、東洋の全体主義国家、大東亜共和国。<br />
+            この国では毎年、全国の<strong>中学3年生</strong>を対象に任意の50クラスを選び、<br />
+            国防上必要な戦闘シミュレーションと称する<strong>殺人ゲーム"プログラム"</strong>を行っていた。<br />
+            <strong>ゲーム</strong>はクラスごとに実施、生徒たちは与えられた武器でお互いに殺しあい、<br />
+            <strong>最後に残った一人</strong>だけは家に帰ることができる。
+          </p>
+          <p>
+            香川県城岩町立城岩中学校3年B組の七原秋也ら生徒42人は、<br />
+            夜のうちに修学旅行のバスごと政府に<strong>拉致</strong>され、高松市沖の小さな島に連行された。<br />
+            催眠ガスの眠りから覚めた秋也たちに、<br />
+            坂持金発と名乗る政府の役人が、<strong>"プログラム"</strong>の開始を告げる。
+          </p>
+          <p>
+            ゲームの中に投げ込まれた少年、少女たちは、さまざまに行動する。<br />
+            殺す者、殺せない者、自殺をはかる者、狂う者。<br />
+            仲間をつくる者、孤独になる者。<br />
+            信じることができない者、なお信じようとする者。<br />
+            愛する気持ちと不信の交錯、そして<strong>流血………。</strong>
+          </p>
+          <p class="catch">
+            ギリギリの状況における少年、少女たちの絶望的な青春を描いた<br />
+            問答無用、凶悪無比のデッド＆ポップな<strong>デス・ゲーム小説！</strong>
+          </p>
+          <p class="source">（以上「バトルロワイアル」（太田出版）、「BRI（バトルロワイアルインサイダー）」（同）等より）</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--mint-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--mint);
+    color: var(--text);
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section p {
+    margin-bottom: 16px;
+    line-height: 1.8;
+    font-size: 0.92rem;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--mint-deep);
+  }
+
+  .note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    line-height: 1.8;
+  }
+
+  /* あらすじボックス */
+  .synopsis {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--mint);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    line-height: 2;
+    font-size: 0.9rem;
+  }
+
+  .synopsis p {
+    margin-bottom: 16px;
+  }
+
+  .synopsis p:last-child {
+    margin-bottom: 0;
+  }
+
+  .catch {
+    font-weight: 700;
+    color: var(--mint-deep);
+    text-align: center;
+  }
+
+  .source {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+</style>
