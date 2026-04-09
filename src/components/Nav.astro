@@ -1,0 +1,80 @@
+---
+// グローバルナビゲーション
+// currentPathを受け取り、アクティブなリンクをハイライトする
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+// ナビゲーションリンクの定義
+const navLinks = [
+  { href: '/DLB/', label: 'HOME' },
+  { href: '/DLB/profile/', label: 'プロフィール' },
+  { href: '/DLB/br/', label: 'バトルロワイアル' },
+  { href: '/DLB/orphen/', label: '魔術士オーフェン' },
+  { href: '/DLB/o-yabu/', label: '大藪春彦' },
+  { href: '/DLB/history/', label: 'サイトの歴史' },
+] as const;
+
+// パスが一致するかどうかを判定する
+const isActive = (href: string): boolean => {
+  if (href === '/DLB/') return currentPath === '/DLB/' || currentPath === '/DLB';
+  return currentPath.startsWith(href);
+};
+---
+
+<nav aria-label="グローバルナビゲーション">
+  {navLinks.map(({ href, label }) => (
+    <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>
+      {label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--mint);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  nav a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 12px 18px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  nav a:hover {
+    color: var(--mint-deep);
+    border-bottom-color: var(--mint);
+  }
+
+  nav a.active {
+    color: var(--mint-deep);
+    border-bottom-color: var(--mint-deep);
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    nav {
+      padding: 0 8px;
+    }
+
+    nav a {
+      padding: 10px 12px;
+      font-size: 0.78rem;
+    }
+  }
+</style>

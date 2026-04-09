@@ -10,17 +10,18 @@
 
 ---
 
-## Phase 1: Astro環境構築
+## Phase 1: Astro環境構築 ✅ 完了
 
 ### やること
-- `npm create astro` でプロジェクト初期化
-- TypeScript設定
-- 共通レイアウト（Layout.astro）作成
-  - ヘッダー（タイトル画像）
-  - グローバルナビゲーション
-  - フッター
-- CSSリセット・ベーススタイル（Flexbox/Gridベース、レスポンシブ対応）
-- GitHub Actions でのビルド・GitHub Pagesデプロイ設定
+- `npm create astro` でプロジェクト初期化 ✅
+- TypeScript設定 ✅
+- 共通レイアウト（Layout.astro）作成 ✅
+  - ヘッダー（タイトル画像）✅
+  - グローバルナビゲーション ✅
+  - フッター ✅
+- CSSリセット・ベーススタイル（Flexbox/Gridベース、レスポンシブ対応）✅
+- GitHub Actions でのビルド・GitHub Pagesデプロイ設定 ✅
+- トップページ（index.astro）作成 ✅
 
 ### 廃止する要素
 - リンク集（撤廃）

@@ -1,0 +1,344 @@
+---
+// トップページ
+import Layout from '@/layouts/Layout.astro';
+
+// コンテンツカードの定義
+const cards = [
+  {
+    badge: 'Battle Royale',
+    title: 'バトルロワイアル',
+    desc: '概要・名簿・自作オリバト「UNLIMITED DARK」「魔法使いは虚構の楽園に踊る」',
+    href: '/DLB/br/',
+    color: 'mint',
+  },
+  {
+    badge: 'Game',
+    title: '魔術士オーフェン',
+    desc: 'PS2版ゲーム攻略。ボス・戦闘指南・隠し要素。',
+    href: '/DLB/orphen/',
+    color: 'sky',
+  },
+  {
+    badge: 'Hard-Boiled',
+    title: '大藪春彦作品',
+    desc: '作品レビュー・生還者考察（ネタバレあり）',
+    href: '/DLB/o-yabu/',
+    color: 'lavender',
+  },
+  {
+    badge: 'About',
+    title: 'プロフィール',
+    desc: '管理人ゆうやみについて。',
+    href: '/DLB/profile/',
+    color: 'peach',
+  },
+] as const;
+
+// 関連サイトの定義
+const networkLinks = [
+  { label: 'ゆうやみポータル', href: 'https://u83-portal.web.app/' },
+  { label: 'OBRN', href: 'https://obrn-d99b4.firebaseapp.com/' },
+  { label: 'Cradle 2 Grave', href: 'https://u83ism.github.io/C2G/' },
+  { label: '21世紀パワーボム', href: 'https://u83ism.github.io/21cpb/' },
+] as const;
+---
+
+<Layout title="HOME">
+  <div class="container">
+    <main>
+      <section class="section">
+        <h2 class="section-title">Contents</h2>
+        <div class="card-grid">
+          {cards.map((card) => (
+            <a class={`card card--${card.color}`} href={card.href}>
+              <div class="card-badge">{card.badge}</div>
+              <div class="card-title">{card.title}</div>
+              <div class="card-desc">{card.desc}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">お知らせ</h2>
+        <div class="notice">
+          <div class="notice-icon" aria-hidden="true">📢</div>
+          <div>
+            <div class="notice-date">2021.03.21</div>
+            <div class="notice-text">
+              さくらインターネットからGitHub Pagesへ移転しました。掲示板・CGI系は廃止しています。連絡は X（<a href="https://twitter.com/u83unlimited">@u83unlimited</a>）またはメールにてどうぞ。
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <div class="widget widget--mint">
+        <div class="widget-header">Updates</div>
+        <ul class="update-list">
+          <li>
+            <span class="update-date">2021.03.21</span>
+            <span class="update-text">GitHub Pages移転</span>
+          </li>
+          <li>
+            <span class="update-date">2013.xx.xx</span>
+            <span class="update-text">雑記更新</span>
+          </li>
+          <li>
+            <span class="update-date">2012.xx.xx</span>
+            <span class="update-text">プロフィール更新</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="widget widget--sky">
+        <div class="widget-header">Network</div>
+        <ul class="link-list">
+          {networkLinks.map(({ label, href }) => (
+            <li><a href={href} target="_blank" rel="noopener noreferrer">{label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</Layout>
+
+<style>
+  /* ===== レイアウト ===== */
+  .container {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 44px 24px;
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 44px;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: 1fr;
+      padding: 24px 16px;
+    }
+  }
+
+  /* ===== セクション ===== */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== コンテンツカード ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  /* カード上端のカラーバー */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .card--mint { --c-light: var(--mint); --c-deep: var(--mint-deep); }
+  .card--sky { --c-light: var(--sky); --c-deep: var(--sky-deep); }
+  .card--lavender { --c-light: var(--lavender); --c-deep: var(--lavender-deep); }
+  .card--peach { --c-light: var(--peach); --c-deep: var(--peach-deep); }
+
+  .card--mint::before { background: var(--mint); }
+  .card--sky::before { background: var(--sky); }
+  .card--lavender::before { background: var(--lavender); }
+  .card--peach::before { background: var(--peach); }
+
+  .card-badge {
+    display: inline-block;
+    background: var(--c-light);
+    color: var(--c-deep);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== お知らせ ===== */
+  .notice {
+    background: var(--yellow);
+    border: 1px solid var(--yellow-deep);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .notice-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .notice-date {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--yellow-deep);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .notice-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .notice-text a {
+    color: var(--yellow-deep);
+  }
+
+  /* ===== サイドバー ===== */
+  .widget {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .widget-header {
+    padding: 12px 18px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .widget--mint .widget-header { background: var(--mint); color: var(--mint-deep); }
+  .widget--sky .widget-header { background: var(--sky); color: var(--sky-deep); }
+
+  .update-list {
+    list-style: none;
+  }
+
+  .update-list li {
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+
+  .update-list li:last-child {
+    border-bottom: none;
+  }
+
+  .update-date {
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--mint-deep);
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  .update-text {
+    color: var(--text-muted);
+  }
+
+  .link-list {
+    list-style: none;
+  }
+
+  .link-list li {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .link-list li:last-child {
+    border-bottom: none;
+  }
+
+  .link-list a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: background 0.1s;
+  }
+
+  .link-list a::before {
+    content: '→';
+    color: var(--sky-deep);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .link-list a:hover {
+    background: var(--sky);
+    color: var(--sky-deep);
+  }
+</style>
