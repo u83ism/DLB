@@ -2,6 +2,8 @@
 // UNLIMITED DARK ルールページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const commonRules = [
   '対象となったクラスの生徒全員でお互いに殺し合う。',
   '水や食料、殺し合いのための武器などが入ったデイパックを支給する。',
@@ -30,11 +32,11 @@ const uniqueRules = [
 <Layout title="ルール（UNLIMITED DARK）" description="オリジナルバトルロワイアル「UNLIMITED DARK」のプログラムルール説明。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">ルール</span>
     </nav>

@@ -2,28 +2,30 @@
 // 魔法使いは虚構の楽園に踊る トップページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // データページ一覧
 const dataPages = [
-  { title: '生徒＆支給品募集', href: '/DLB/mkro/bosyu/' },
-  { title: '御挨拶', href: '/DLB/mkro/first/' },
-  { title: '世界設定', href: '/DLB/mkro/world/' },
-  { title: '仮生徒名簿', href: '/DLB/mkro/data/' },
-  { title: '特殊用語辞典', href: '/DLB/mkro/dic/' },
-] as const;
+  { title: '生徒＆支給品募集', href: `${base}mkro/bosyu/` },
+  { title: '御挨拶', href: `${base}mkro/first/` },
+  { title: '世界設定', href: `${base}mkro/world/` },
+  { title: '仮生徒名簿', href: `${base}mkro/data/` },
+  { title: '特殊用語辞典', href: `${base}mkro/dic/` },
+];
 
 // プロローグ一覧（執筆途中）
 const prologue = [
-  { title: 'プロローグ1「約束の地」', href: '/DLB/mkro/p1/' },
-  { title: 'プロローグ2「夜食」', href: '/DLB/mkro/p2/' },
-  { title: 'プロローグ3（未題）', href: '/DLB/mkro/p3/' },
-  { title: 'プロローグ4「BLADE ARTS」', href: '/DLB/mkro/p4/' },
-] as const;
+  { title: 'プロローグ1「約束の地」', href: `${base}mkro/p1/` },
+  { title: 'プロローグ2「夜食」', href: `${base}mkro/p2/` },
+  { title: 'プロローグ3（未題）', href: `${base}mkro/p3/` },
+  { title: 'プロローグ4「BLADE ARTS」', href: `${base}mkro/p4/` },
+];
 ---
 
 <Layout title="魔法使いは虚構の楽園に踊る" description="100人の魔法使いによるバトルロワイアル小説「魔法使いは虚構の楽園に踊る」（魔虚楽踊）。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">魔虚楽踊</span>
     </nav>
@@ -47,8 +49,8 @@ const prologue = [
       <section class="section">
         <h2 class="section-heading">登場生徒詳細</h2>
         <nav class="data-nav" aria-label="登場生徒詳細">
-          <a href="/DLB/mkro/ndm/" class="data-card">男子登場生徒詳細</a>
-          <a href="/DLB/mkro/ndf/" class="data-card">女子登場生徒詳細</a>
+          <a href={`${base}mkro/ndm/`} class="data-card">男子登場生徒詳細</a>
+          <a href={`${base}mkro/ndf/`} class="data-card">女子登場生徒詳細</a>
         </nav>
       </section>
 

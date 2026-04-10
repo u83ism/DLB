@@ -2,6 +2,8 @@
 // 魔虚楽踊 仮生徒名簿ページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 男子生徒一覧（自作）
 const malesSelf = [
   ['上村　一樹', '高畑　浩介'],
@@ -58,9 +60,9 @@ const femalesTosho = ['灰鳥　ミコト', '須永　麗美', '菅原　美咲'
 <Layout title="仮生徒名簿（魔虚楽踊）" description="魔虚楽踊 登場予定の仮生徒名簿。自作生徒79名・投稿生徒12名の計91名。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">仮生徒名簿</span>
     </nav>
@@ -85,40 +87,40 @@ const femalesTosho = ['灰鳥　ミコト', '須永　麗美', '菅原　美咲'
         <tbody>
           {malesSelf.map((row, i) => (
             <tr>
-              <td><a href={`/DLB/mkro/ndm/#${i * 2 + 1}`}>{row[0]}</a></td>
-              <td>{row[1] ? <a href={`/DLB/mkro/ndm/#${i * 2 + 2}`}>{row[1]}</a> : ''}</td>
-              <td><a href={`/DLB/mkro/ndf/#${i * 2 + 1}`}>{femalesSelf[i][0]}</a></td>
-              <td><a href={`/DLB/mkro/ndf/#${i * 2 + 2}`}>{femalesSelf[i][1]}</a></td>
+              <td><a href={`${base}mkro/ndm/#${i * 2 + 1}`}>{row[0]}</a></td>
+              <td>{row[1] ? <a href={`${base}mkro/ndm/#${i * 2 + 2}`}>{row[1]}</a> : ''}</td>
+              <td><a href={`${base}mkro/ndf/#${i * 2 + 1}`}>{femalesSelf[i][0]}</a></td>
+              <td><a href={`${base}mkro/ndf/#${i * 2 + 2}`}>{femalesSelf[i][1]}</a></td>
             </tr>
           ))}
           <tr>
             <td colspan="4"></td>
           </tr>
           <tr class="tosho-row">
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t1">{malesTosho[0]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t2">{malesTosho[1]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t1">{femalesTosho[0]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t2">{femalesTosho[1]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t1`}>{malesTosho[0]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t2`}>{malesTosho[1]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t1`}>{femalesTosho[0]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t2`}>{femalesTosho[1]}</a></td>
           </tr>
           <tr class="tosho-row">
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t4">{malesTosho[2]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t3">{malesTosho[3]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t3">{femalesTosho[2]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t4">{femalesTosho[3]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t4`}>{malesTosho[2]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t3`}>{malesTosho[3]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t3`}>{femalesTosho[2]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t4`}>{femalesTosho[3]}</a></td>
           </tr>
           <tr class="tosho-row">
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t5">{malesTosho[4]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndm/#t6">{malesTosho[5]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t4">{femalesTosho[4]}</a></td>
-            <td class="tosho"><a href="/DLB/mkro/ndf/#t5">{femalesTosho[5]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t5`}>{malesTosho[4]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndm/#t6`}>{malesTosho[5]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t4`}>{femalesTosho[4]}</a></td>
+            <td class="tosho"><a href={`${base}mkro/ndf/#t5`}>{femalesTosho[5]}</a></td>
           </tr>
         </tbody>
       </table>
 
       <nav class="back-nav">
-        <a href="/DLB/mkro/" class="back-btn">← 魔虚楽踊 TOP</a>
-        <a href="/DLB/mkro/ndm/" class="back-btn">男子詳細</a>
-        <a href="/DLB/mkro/ndf/" class="back-btn">女子詳細</a>
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
+        <a href={`${base}mkro/ndm/`} class="back-btn">男子詳細</a>
+        <a href={`${base}mkro/ndf/`} class="back-btn">女子詳細</a>
       </nav>
     </main>
   </div>

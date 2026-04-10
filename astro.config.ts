@@ -6,4 +6,6 @@ export default defineConfig({
   base: '/DLB',
   site: 'https://u83ism.github.io',
   output: 'static',
+  // trailingSlash: 'always' により import.meta.env.BASE_URL = '/DLB/' となる
+  trailingSlash: 'always',
 });

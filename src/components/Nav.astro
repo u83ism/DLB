@@ -7,19 +7,22 @@ interface Props {
 
 const { currentPath } = Astro.props;
 
+// ベースURLを取得する（trailingSlash: 'always' により末尾スラッシュあり）
+const base = import.meta.env.BASE_URL;
+
 // ナビゲーションリンクの定義
 const navLinks = [
-  { href: '/DLB/', label: 'HOME' },
-  { href: '/DLB/profile/', label: 'プロフィール' },
-  { href: '/DLB/br/', label: 'バトルロワイアル' },
-  { href: '/DLB/orphen/', label: '魔術士オーフェン' },
-  { href: '/DLB/o-yabu/', label: '大藪春彦' },
-  { href: '/DLB/history/', label: 'サイトの歴史' },
-] as const;
+  { href: base, label: 'HOME' },
+  { href: `${base}profile/`, label: 'プロフィール' },
+  { href: `${base}br/`, label: 'バトルロワイアル' },
+  { href: `${base}orphen/`, label: '魔術士オーフェン' },
+  { href: `${base}o-yabu/`, label: '大藪春彦' },
+  { href: `${base}history/`, label: 'サイトの歴史' },
+];
 
 // パスが一致するかどうかを判定する
 const isActive = (href: string): boolean => {
-  if (href === '/DLB/') return currentPath === '/DLB/' || currentPath === '/DLB';
+  if (href === base) return currentPath === base || currentPath === base.slice(0, -1);
   return currentPath.startsWith(href);
 };
 ---

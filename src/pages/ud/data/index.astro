@@ -2,6 +2,8 @@
 // UNLIMITED DARK クラス名簿ページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 type Student = {
   readonly num: number;
   readonly male: string;
@@ -27,11 +29,11 @@ const students: readonly Student[] = [
 <Layout title="クラス名簿（UNLIMITED DARK）" description="UNLIMITED DARK 私立関西追手陵中学校3年8組 22名のクラス名簿。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">クラス名簿</span>
     </nav>

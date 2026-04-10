@@ -1,14 +1,16 @@
 ---
 // 大藪春彦 概要ページ（作品傾向・定番推薦）
 import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="大藪春彦 概要" description="大藪春彦の作品傾向・ジャンル解説・定番推薦作品。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/o-yabu/">大藪春彦</a>
+      <a href={`${base}o-yabu/`}>大藪春彦</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">概要</span>
     </nav>

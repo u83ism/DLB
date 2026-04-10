@@ -1,14 +1,16 @@
 ---
 // 魔虚楽踊 プロローグ3（未題・断章）
 import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="プロローグ3（魔虚楽踊）" description="魔虚楽踊 プロローグ第3節（執筆途中）。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">プロローグ3</span>
     </nav>
@@ -25,8 +27,8 @@ import Layout from '@/layouts/Layout.astro';
       </div>
 
       <nav class="ep-nav" aria-label="エピソード移動">
-        <a href="/DLB/mkro/p2/" class="ep-btn ep-prev">← プロローグ2</a>
-        <a href="/DLB/mkro/p4/" class="ep-btn ep-next">プロローグ4 →</a>
+        <a href={`${base}mkro/p2/`} class="ep-btn ep-prev">← プロローグ2</a>
+        <a href={`${base}mkro/p4/`} class="ep-btn ep-next">プロローグ4 →</a>
       </nav>
     </main>
   </div>

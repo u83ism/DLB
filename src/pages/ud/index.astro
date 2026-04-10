@@ -2,33 +2,35 @@
 // UNLIMITED DARK トップページ（目次）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 本編の各話構成
 const chapter1 = [
-  { ep: 1, title: '1話', href: '/DLB/ud/1/' },
-  { ep: 2, title: '2話', href: '/DLB/ud/2/' },
-  { ep: 3, title: '3話', href: '/DLB/ud/3/' },
-  { ep: 4, title: '4話', href: '/DLB/ud/4/' },
-  { ep: 5, title: '5話', href: '/DLB/ud/5/' },
-  { ep: 6, title: '6話', href: '/DLB/ud/6/' },
-  { ep: 7, title: '7話', href: '/DLB/ud/7/' },
-  { ep: 8, title: '8話', href: '/DLB/ud/8/' },
-  { ep: 9, title: '9話', href: '/DLB/ud/9/' },
-  { ep: 10, title: '10話', href: '/DLB/ud/10/' },
-  { ep: 11, title: '11話', href: '/DLB/ud/11/' },
-] as const;
+  { ep: 1, title: '1話', href: `${base}ud/1/` },
+  { ep: 2, title: '2話', href: `${base}ud/2/` },
+  { ep: 3, title: '3話', href: `${base}ud/3/` },
+  { ep: 4, title: '4話', href: `${base}ud/4/` },
+  { ep: 5, title: '5話', href: `${base}ud/5/` },
+  { ep: 6, title: '6話', href: `${base}ud/6/` },
+  { ep: 7, title: '7話', href: `${base}ud/7/` },
+  { ep: 8, title: '8話', href: `${base}ud/8/` },
+  { ep: 9, title: '9話', href: `${base}ud/9/` },
+  { ep: 10, title: '10話', href: `${base}ud/10/` },
+  { ep: 11, title: '11話', href: `${base}ud/11/` },
+];
 
 // 番外編
 const extras = [
-  { title: 'XX話（番外）', href: '/DLB/ud/xx/' },
-] as const;
+  { title: 'XX話（番外）', href: `${base}ud/xx/` },
+];
 ---
 
 <Layout title="UNLIMITED DARK" description="オリジナルバトルロワイアル小説「UNLIMITED DARK」。私立関西追手陵中学校3年8組・22名が挑むプログラム。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">UNLIMITED DARK</span>
     </nav>
@@ -42,11 +44,11 @@ const extras = [
       <section class="section">
         <h2 class="section-heading">各種データ</h2>
         <nav class="data-nav" aria-label="データページ一覧">
-          <a href="/DLB/ud/rule/" class="data-card">ルール</a>
-          <a href="/DLB/ud/data/" class="data-card">クラス名簿</a>
-          <a href="/DLB/ud/netadata/" class="data-card">ネタバレ名簿</a>
-          <a href="/DLB/ud/others/" class="data-card">その他の人物紹介</a>
-          <a href="/DLB/ud/map/" class="data-card">マップ</a>
+          <a href={`${base}ud/rule/`} class="data-card">ルール</a>
+          <a href={`${base}ud/data/`} class="data-card">クラス名簿</a>
+          <a href={`${base}ud/netadata/`} class="data-card">ネタバレ名簿</a>
+          <a href={`${base}ud/others/`} class="data-card">その他の人物紹介</a>
+          <a href={`${base}ud/map/`} class="data-card">マップ</a>
         </nav>
       </section>
 

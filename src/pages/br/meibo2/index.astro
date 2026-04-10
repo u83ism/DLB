@@ -2,6 +2,8 @@
 // バトルロワイアル BR2生徒名簿ページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 鹿之砦中学校3年B組 生徒名簿データ（男子19名・女子23名）
 type StudentEntry = {
   readonly male: string | null;
@@ -38,9 +40,9 @@ const students: readonly StudentEntry[] = [
 <Layout title="生徒名簿（BR2）" description="映画「バトルロワイアル2」鹿之砦中学校3年B組42名の生徒名簿。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">映画「BR2」生徒名簿</span>
     </nav>

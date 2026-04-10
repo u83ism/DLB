@@ -1,16 +1,18 @@
 ---
 // UNLIMITED DARK その他の人物紹介
 import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="その他の人物紹介（UNLIMITED DARK）" description="UNLIMITED DARK に登場する生徒以外の人物紹介。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">その他の人物紹介</span>
     </nav>
@@ -21,14 +23,14 @@ import Layout from '@/layouts/Layout.astro';
       <section class="character">
         <h2 class="char-name">冬月 和彦（ふゆつき・かずひこ）</h2>
         <p>
-          <a href="/DLB/ud/netadata/#m9" class="char-link">冬月直樹（男子9番）</a>の父親。34歳。中3の時にプログラムに巻き込まれ8人を殺して優勝。その後、2年ほど放浪したり自暴自棄に暴れまわっていたところを、同じような経歴を辿っていた幸子と出会って改心する。今ではかなり丸くなり、その頃の面影はほとんど残っていない。現在は反政府組織が運営する会社で働いている。
+          <a href={`${base}ud/netadata/#m9`} class="char-link">冬月直樹（男子9番）</a>の父親。34歳。中3の時にプログラムに巻き込まれ8人を殺して優勝。その後、2年ほど放浪したり自暴自棄に暴れまわっていたところを、同じような経歴を辿っていた幸子と出会って改心する。今ではかなり丸くなり、その頃の面影はほとんど残っていない。現在は反政府組織が運営する会社で働いている。
         </p>
       </section>
 
       <section class="character">
         <h2 class="char-name">冬月 幸子（ふゆつき・さちこ）</h2>
         <p>
-          <a href="/DLB/ud/netadata/#m9" class="char-link">冬月直樹（男子9番）</a>の母親。32歳。中3の時にプログラムに巻き込まれ優勝。その後転校したが、新しい学校に馴染めず、不登校になって街をいつもぶらついていた所、当時17歳だった冬月和彦と知り合いつき合う。その後直樹を生み、自らも反政府活動に従事し始める。英語が得意で、和彦と同じく反政府組織が運営する会社で働いている。
+          <a href={`${base}ud/netadata/#m9`} class="char-link">冬月直樹（男子9番）</a>の母親。32歳。中3の時にプログラムに巻き込まれ優勝。その後転校したが、新しい学校に馴染めず、不登校になって街をいつもぶらついていた所、当時17歳だった冬月和彦と知り合いつき合う。その後直樹を生み、自らも反政府活動に従事し始める。英語が得意で、和彦と同じく反政府組織が運営する会社で働いている。
         </p>
       </section>
 

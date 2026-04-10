@@ -2,6 +2,8 @@
 // 魔虚楽踊 特殊用語辞典ページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 用語データ
 const placeTerms = [
   {
@@ -139,9 +141,9 @@ function splitDesc(desc: string): { before: string[]; after: string[] } {
 <Layout title="特殊用語辞典（魔虚楽踊）" description="魔虚楽踊の特殊用語辞典。地名・魔法系用語・クラブ・その他の解説。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">特殊用語辞典</span>
     </nav>
@@ -176,7 +178,7 @@ function splitDesc(desc: string): { before: string[]; after: string[] } {
                 {hasPyramid && (
                   <div class="pyramid-wrap">
                     <p class="pyramid-label">＜魔法難易度ピラミッド＞</p>
-                    <img src="/DLB/mkro/difficult.gif" alt="魔法難易度ピラミッド図" />
+                    <img src={`${base}mkro/difficult.gif`} alt="魔法難易度ピラミッド図" />
                   </div>
                 )}
                 {parts.after.map((line) => <p>{line}</p>)}
@@ -213,7 +215,7 @@ function splitDesc(desc: string): { before: string[]; after: string[] } {
       </section>
 
       <nav class="back-nav">
-        <a href="/DLB/mkro/" class="back-btn">← 魔虚楽踊 TOP</a>
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
       </nav>
     </main>
   </div>

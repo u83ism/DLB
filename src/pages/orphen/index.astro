@@ -2,14 +2,16 @@
 // 魔術士オーフェン セクショントップ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // コンテンツリストの定義
 const contents = [
-  { href: '/DLB/orphen/about/', title: '概要', desc: '魔術士オーフェン小説シリーズの紹介と既刊リスト' },
-  { href: '/DLB/orphen/aboutg/', title: 'PS2版オーフェン概要', desc: 'Sorcerous Stabber ORPHEN（PS2）のゲーム概要・プレイ感想' },
-  { href: '/DLB/orphen/boss/', title: 'ボス攻略', desc: '各ボスのHP・属性・攻略法' },
-  { href: '/DLB/orphen/battle/', title: '戦闘指南', desc: '戦闘システムの解説・立ち回りのコツ' },
-  { href: '/DLB/orphen/secret/', title: '隠し要素＆小ネタ', desc: '隠し部屋パスワード・特典・版権曲情報' },
-] as const;
+  { href: `${base}orphen/about/`, title: '概要', desc: '魔術士オーフェン小説シリーズの紹介と既刊リスト' },
+  { href: `${base}orphen/aboutg/`, title: 'PS2版オーフェン概要', desc: 'Sorcerous Stabber ORPHEN（PS2）のゲーム概要・プレイ感想' },
+  { href: `${base}orphen/boss/`, title: 'ボス攻略', desc: '各ボスのHP・属性・攻略法' },
+  { href: `${base}orphen/battle/`, title: '戦闘指南', desc: '戦闘システムの解説・立ち回りのコツ' },
+  { href: `${base}orphen/secret/`, title: '隠し要素＆小ネタ', desc: '隠し部屋パスワード・特典・版権曲情報' },
+];
 ---
 
 <Layout title="魔術士オーフェン" description="魔術士オーフェン PS2版ゲーム攻略。ボス・戦闘指南・隠し要素。">

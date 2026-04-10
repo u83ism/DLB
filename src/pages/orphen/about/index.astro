@@ -2,6 +2,8 @@
 // 魔術士オーフェン 概要ページ（小説シリーズ）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 既刊リストのデータ定義
 type Volume = { readonly vol: string; readonly title: string; };
 
@@ -53,9 +55,9 @@ const mawari: readonly Volume[] = [
 <Layout title="魔術士オーフェン 概要" description="魔術士オーフェン小説シリーズの概要と既刊リスト。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/orphen/">魔術士オーフェン</a>
+      <a href={`${base}orphen/`}>魔術士オーフェン</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">概要</span>
     </nav>

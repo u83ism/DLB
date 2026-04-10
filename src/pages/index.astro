@@ -2,37 +2,40 @@
 // トップページ
 import Layout from '@/layouts/Layout.astro';
 
+// ベースURLを取得する
+const base = import.meta.env.BASE_URL;
+
 // コンテンツカードの定義
 const cards = [
   {
     badge: 'Battle Royale',
     title: 'バトルロワイアル',
     desc: '概要・名簿・自作オリバト「UNLIMITED DARK」「魔法使いは虚構の楽園に踊る」',
-    href: '/DLB/br/',
+    href: `${base}br/`,
     color: 'mint',
   },
   {
     badge: 'Game',
     title: '魔術士オーフェン',
     desc: 'PS2版ゲーム攻略。ボス・戦闘指南・隠し要素。',
-    href: '/DLB/orphen/',
+    href: `${base}orphen/`,
     color: 'sky',
   },
   {
     badge: 'Hard-Boiled',
     title: '大藪春彦作品',
     desc: '作品レビュー・生還者考察（ネタバレあり）',
-    href: '/DLB/o-yabu/',
+    href: `${base}o-yabu/`,
     color: 'lavender',
   },
   {
     badge: 'About',
     title: 'プロフィール',
     desc: '管理人ゆうやみについて。',
-    href: '/DLB/profile/',
+    href: `${base}profile/`,
     color: 'peach',
   },
-] as const;
+];
 
 // 関連サイトの定義
 const networkLinks = [

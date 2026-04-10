@@ -2,17 +2,19 @@
 // 大藪春彦コーナー インデックスページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const navCards = [
-  { href: '/DLB/o-yabu/about/', label: '概要', desc: '大藪春彦の作品傾向・定番推薦作品' },
-  { href: '/DLB/o-yabu/review/', label: '作品レビュー', desc: 'S〜Eランクの個人的評価一覧' },
-  { href: '/DLB/o-yabu/survivor/', label: '生還者を探せ！', desc: '主人公の生死追跡（生存10・死亡17・不明4）' },
-] as const;
+  { href: `${base}o-yabu/about/`, label: '概要', desc: '大藪春彦の作品傾向・定番推薦作品' },
+  { href: `${base}o-yabu/review/`, label: '作品レビュー', desc: 'S〜Eランクの個人的評価一覧' },
+  { href: `${base}o-yabu/survivor/`, label: '生還者を探せ！', desc: '主人公の生死追跡（生存10・死亡17・不明4）' },
+];
 ---
 
 <Layout title="大藪春彦コーナー" description="ハードボイルド作家・大藪春彦の作品紹介コーナー。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">大藪春彦</span>
     </nav>

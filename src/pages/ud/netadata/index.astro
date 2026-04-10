@@ -2,6 +2,8 @@
 // UNLIMITED DARK ネタバレ名簿（全24名の詳細データ）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 男子生徒データ（m1〜m12）
 const males = [
   {
@@ -230,11 +232,11 @@ const females = [
 <Layout title="ネタバレ名簿（UNLIMITED DARK）" description="UNLIMITED DARK 全登場生徒のネタバレ込み詳細データ。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">ネタバレ名簿</span>
     </nav>
@@ -306,7 +308,7 @@ const females = [
       </section>
 
       <nav class="back-nav">
-        <a href="/DLB/ud/" class="back-btn">← UNLIMITED DARK TOP</a>
+        <a href={`${base}ud/`} class="back-btn">← UNLIMITED DARK TOP</a>
       </nav>
     </main>
   </div>

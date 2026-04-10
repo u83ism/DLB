@@ -2,6 +2,8 @@
 // 魔法使いは虚構の楽園に踊る - 男子登場生徒詳細
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 登場生徒データ
 const profiles = [
   { anchor: '1', name: '上村　一樹（うえむら・かずき）', origin: '地上/日本', enroll: '？？？', note: `バスケクラブ「王（ワン）バスケットボールクラブ」に所属する。背が高く、顔も良いため女性にモテる。かつては性格がやや軽く、不良連中と仲が良かったが、今は恋人である大塚彩の存在が影響し距離を置いている。また髪も元々茶髪に染めていたのを黒に戻した。大塚彩とは今年に入って一樹が一目惚れ→告白という流れを経て付き合っている。ちなみに学年全体にこの2人のベタ惚れぶりが知れ渡っており、微笑ましく見られている。勉強があまり出来ないのでテスト前などは彼女と一緒に勉強する姿がよく見かけられる。バスケクラブに入っていることもあり、体育や戦闘関係教科の成績は良い。` },
@@ -50,9 +52,9 @@ const profiles = [
 <Layout title="男子登場生徒詳細（魔虚楽踊）" description="魔虚楽踊 登場予定の男子生徒の詳細プロフィール一覧。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">男子登場生徒詳細</span>
     </nav>
@@ -79,8 +81,8 @@ const profiles = [
       </div>
 
       <nav class="back-nav">
-        <a href="/DLB/mkro/" class="back-btn">← 魔虚楽踊 TOP</a>
-        <a href="/DLB/mkro/data/" class="back-btn">仮生徒名簿</a>
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
+        <a href={`${base}mkro/data/`} class="back-btn">仮生徒名簿</a>
       </nav>
     </main>
   </div>

@@ -2,6 +2,8 @@
 // UNLIMITED DARK マップページ（会場エリア図・禁止エリア発動タイミング）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 禁止エリア発動タイミング表データ
 const zones = [
   { stage: '第1段階', area: '公園エリア', trigger: '残り20人' },
@@ -15,11 +17,11 @@ const zones = [
 <Layout title="マップ（UNLIMITED DARK）" description="UNLIMITED DARK の会場マップと禁止エリア発動タイミング。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/br/">バトルロワイアル</a>
+      <a href={`${base}br/`}>バトルロワイアル</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/ud/">UNLIMITED DARK</a>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">マップ</span>
     </nav>
@@ -28,7 +30,7 @@ const zones = [
       <h1 class="page-title">会場マップ</h1>
 
       <div class="map-wrap">
-        <img src="/DLB/ud/udmap.gif" alt="UNLIMITED DARK 会場マップ（500×500）" width="500" height="500" class="map-img" />
+        <img src={`${base}ud/udmap.gif`} alt="UNLIMITED DARK 会場マップ（500×500）" width="500" height="500" class="map-img" />
       </div>
 
       <section class="section">
@@ -54,7 +56,7 @@ const zones = [
       </section>
 
       <nav class="back-nav">
-        <a href="/DLB/ud/" class="back-btn">← UNLIMITED DARK TOP</a>
+        <a href={`${base}ud/`} class="back-btn">← UNLIMITED DARK TOP</a>
       </nav>
     </main>
   </div>

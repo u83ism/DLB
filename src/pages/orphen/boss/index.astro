@@ -2,6 +2,8 @@
 // 魔術士オーフェン PS2 ボス攻略ページ
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // 属性防御の数値を評価テキストに変換（1=最強, 5=最弱）
 const ratingLabel = (n: number): string => {
   const labels = ['', '最強', '強', '普通', '弱', '最弱'] as const;
@@ -231,9 +233,9 @@ const bosses: readonly BossEntry[] = [
 <Layout title="ボス攻略（オーフェン）" description="魔術士オーフェン PS2版 ボス攻略。各ボスのHP・属性・攻略法。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/orphen/">魔術士オーフェン</a>
+      <a href={`${base}orphen/`}>魔術士オーフェン</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">ボス攻略</span>
     </nav>

@@ -2,6 +2,8 @@
 // 大藪春彦 生還者追跡ページ（主人公の生死調査）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 type SurvivorEntry = {
   readonly work: string;
   readonly hero: string;
@@ -159,9 +161,9 @@ const unknown: readonly SurvivorEntry[] = [
 <Layout title="生還者を探せ！（大藪春彦）" description="大藪春彦作品の主人公が最後まで生き残ったかどうか追跡。生存10・死亡17・不明4。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/o-yabu/">大藪春彦</a>
+      <a href={`${base}o-yabu/`}>大藪春彦</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">生還者を探せ！</span>
     </nav>

@@ -1,14 +1,16 @@
 ---
 // 魔虚楽踊 プロローグ1「約束の地」
 import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="プロローグ1「約束の地」（魔虚楽踊）" description="魔虚楽踊 プロローグ第1節「約束の地」。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/mkro/">魔虚楽踊</a>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">プロローグ1</span>
     </nav>
@@ -45,8 +47,8 @@ import Layout from '@/layouts/Layout.astro';
       </div>
 
       <nav class="ep-nav" aria-label="エピソード移動">
-        <a href="/DLB/mkro/" class="ep-btn ep-prev">← 魔虚楽踊 TOP</a>
-        <a href="/DLB/mkro/p2/" class="ep-btn ep-next">プロローグ2 →</a>
+        <a href={`${base}mkro/`} class="ep-btn ep-prev">← 魔虚楽踊 TOP</a>
+        <a href={`${base}mkro/p2/`} class="ep-btn ep-next">プロローグ2 →</a>
       </nav>
     </main>
   </div>

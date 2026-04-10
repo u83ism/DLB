@@ -2,6 +2,8 @@
 // 大藪春彦 作品レビューページ（S〜Eランク）
 import Layout from '@/layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 type ReviewEntry = {
   readonly id: string;
   readonly title: string;
@@ -240,9 +242,9 @@ const ranks: readonly RankSection[] = [
 <Layout title="大藪春彦 作品レビュー" description="大藪春彦作品のS〜Eランク個人レビュー一覧。">
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/DLB/">HOME</a>
+      <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <a href="/DLB/o-yabu/">大藪春彦</a>
+      <a href={`${base}o-yabu/`}>大藪春彦</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">作品レビュー</span>
     </nav>
