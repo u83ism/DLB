@@ -1,6 +1,8 @@
 ---
 // トップページ
 import Layout from '@/layouts/Layout.astro';
+import { manualUpdates } from '@/data/updates';
+import { buildUpdates, formatUpdateDate } from '@/lib/buildUpdates';
 
 // ベースURLを取得する
 const base = import.meta.env.BASE_URL;
@@ -37,18 +39,29 @@ const cards = [
   },
 ];
 
-// 関連サイトの定義
-const networkLinks = [
-  { label: 'ゆうやみポータル', href: 'https://u83-portal.web.app/' },
-  { label: 'OBRN', href: 'https://obrn-d99b4.firebaseapp.com/' },
-  { label: 'Cradle 2 Grave', href: 'https://u83ism.github.io/C2G/' },
-  { label: '21世紀パワーボム', href: 'https://u83ism.github.io/21cpb/' },
-] as const;
+// 更新履歴を構築（手動エントリ + 将来的にコンテンツコレクションから自動集計）
+const recentUpdates = buildUpdates(manualUpdates);
 ---
 
 <Layout title="HOME">
   <div class="container">
     <main>
+      <section class="section">
+        <h2 class="section-title">更新履歴</h2>
+        <table class="update-table">
+          {recentUpdates.map((entry) => (
+            <tr>
+              <td class="update-date">{formatUpdateDate(entry.date)}</td>
+              <td>
+                <ul class="update-items">
+                  {entry.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </table>
+      </section>
+
       <section class="section">
         <h2 class="section-title">Contents</h2>
         <div class="card-grid">
@@ -61,66 +74,21 @@ const networkLinks = [
           ))}
         </div>
       </section>
-
-      <section class="section">
-        <h2 class="section-title">お知らせ</h2>
-        <div class="notice">
-          <div class="notice-icon" aria-hidden="true">📢</div>
-          <div>
-            <div class="notice-date">2021.03.21</div>
-            <div class="notice-text">
-              さくらインターネットからGitHub Pagesへ移転しました。掲示板・CGI系は廃止しています。連絡は X（<a href="https://twitter.com/u83unlimited">@u83unlimited</a>）またはメールにてどうぞ。
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <aside>
-      <div class="widget widget--mint">
-        <div class="widget-header">Updates</div>
-        <ul class="update-list">
-          <li>
-            <span class="update-date">2021.03.21</span>
-            <span class="update-text">GitHub Pages移転</span>
-          </li>
-          <li>
-            <span class="update-date">2013.xx.xx</span>
-            <span class="update-text">雑記更新</span>
-          </li>
-          <li>
-            <span class="update-date">2012.xx.xx</span>
-            <span class="update-text">プロフィール更新</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="widget widget--sky">
-        <div class="widget-header">Network</div>
-        <ul class="link-list">
-          {networkLinks.map(({ label, href }) => (
-            <li><a href={href} target="_blank" rel="noopener noreferrer">{label}</a></li>
-          ))}
-        </ul>
-      </div>
-    </aside>
   </div>
 </Layout>
 
 <style>
   /* ===== レイアウト ===== */
   .container {
-    max-width: 1020px;
+    max-width: 760px;
     margin: 0 auto;
     padding: 44px 24px;
-    display: grid;
-    grid-template-columns: 1fr 230px;
-    gap: 44px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .container {
-      grid-template-columns: 1fr;
       padding: 24px 16px;
     }
   }
@@ -228,120 +196,46 @@ const networkLinks = [
     line-height: 1.6;
   }
 
-  /* ===== お知らせ ===== */
-  .notice {
-    background: var(--yellow);
-    border: 1px solid var(--yellow-deep);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+  /* ===== 更新履歴テーブル ===== */
+  .update-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
   }
 
-  .notice-icon {
-    font-size: 1.4rem;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .notice-date {
-    font-size: 0.68rem;
-    font-weight: 800;
-    color: var(--yellow-deep);
-    letter-spacing: 0.1em;
-    margin-bottom: 6px;
-  }
-
-  .notice-text {
-    font-size: 0.88rem;
-    color: var(--text);
-    line-height: 1.8;
-  }
-
-  .notice-text a {
-    color: var(--yellow-deep);
-  }
-
-  /* ===== サイドバー ===== */
-  .widget {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .widget-header {
-    padding: 12px 18px;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .widget--mint .widget-header { background: var(--mint); color: var(--mint-deep); }
-  .widget--sky .widget-header { background: var(--sky); color: var(--sky-deep); }
-
-  .update-list {
-    list-style: none;
-  }
-
-  .update-list li {
-    padding: 10px 18px;
+  .update-table tr {
     border-bottom: 1px solid var(--border);
-    font-size: 0.8rem;
   }
 
-  .update-list li:last-child {
+  .update-table tr:last-child {
     border-bottom: none;
+  }
+
+  .update-table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: top;
   }
 
   .update-date {
-    font-size: 0.62rem;
+    white-space: nowrap;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--mint-deep);
-    display: block;
-    margin-bottom: 2px;
     letter-spacing: 0.06em;
+    padding-right: 32px;
+    width: 1%;
   }
 
-  .update-text {
-    color: var(--text-muted);
-  }
-
-  .link-list {
+  .update-items {
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .link-list li {
-    border-bottom: 1px solid var(--border);
+  .update-items li {
+    color: var(--text-muted);
+    line-height: 1.7;
   }
 
-  .link-list li:last-child {
-    border-bottom: none;
-  }
-
-  .link-list a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 0.82rem;
-    transition: background 0.1s;
-  }
-
-  .link-list a::before {
-    content: '→';
-    color: var(--sky-deep);
-    font-size: 0.72rem;
-    font-weight: 800;
-  }
-
-  .link-list a:hover {
-    background: var(--sky);
-    color: var(--sky-deep);
-  }
 </style>

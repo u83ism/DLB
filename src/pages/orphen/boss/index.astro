@@ -1,14 +1,9 @@
 ---
 // 魔術士オーフェン PS2 ボス攻略ページ
 import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
 
 const base = import.meta.env.BASE_URL;
-
-// 属性防御の数値を評価テキストに変換（1=最強, 5=最弱）
-const ratingLabel = (n: number): string => {
-  const labels = ['', '最強', '強', '普通', '弱', '最弱'] as const;
-  return labels[n] ?? String(n);
-};
 
 // ボスデータの型定義
 type Defense = {
@@ -231,6 +226,7 @@ const bosses: readonly BossEntry[] = [
 ---
 
 <Layout title="ボス攻略（オーフェン）" description="魔術士オーフェン PS2版 ボス攻略。各ボスのHP・属性・攻略法。">
+  <TableOfContents slot="sidebar" headings={bosses.map(b => ({ slug: b.id, text: b.name }))} />
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
       <a href={base}>HOME</a>
@@ -247,12 +243,6 @@ const bosses: readonly BossEntry[] = [
         各種ボスについての攻略です。ボス攻略の基本は「クリスタル1個になったらスタートボタン→戦闘を最初からやり直す」。このゲームは回復アイテムは戦闘中使えませんが、やり直しで体力全快して再戦可能です。<br />
         <strong>属性防御の欄は1（最強）→5（最弱）。</strong>
       </p>
-
-      <nav class="jump-nav" aria-label="ボス一覧">
-        {bosses.map((b) => (
-          <a href={`#${b.id}`}>{b.name}</a>
-        ))}
-      </nav>
 
       {bosses.map((boss) => (
         <section class="boss-section" id={boss.id}>
@@ -283,7 +273,7 @@ const bosses: readonly BossEntry[] = [
                       <th>属性防御</th>
                       <td class="defense">
                         {(Object.entries(enemy.defense) as [string, number][]).map(([attr, val]) => (
-                          <span class={`def-badge def-${val}`}>{attr}{val}</span>
+                          <span class={`def-badge def-${attr}`}>{attr}{val}</span>
                         ))}
                       </td>
                     </tr>
@@ -350,33 +340,6 @@ const bosses: readonly BossEntry[] = [
     color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: 24px;
-  }
-
-  /* ジャンプナビ */
-  .jump-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 40px;
-    padding: 16px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-  }
-
-  .jump-nav a {
-    font-size: 0.78rem;
-    color: var(--sky-deep);
-    text-decoration: none;
-    padding: 3px 10px;
-    background: var(--sky);
-    border-radius: 99px;
-    font-weight: 600;
-    transition: background 0.1s;
-  }
-
-  .jump-nav a:hover {
-    background: color-mix(in srgb, var(--sky) 60%, var(--sky-deep));
   }
 
   /* ボスセクション */
@@ -462,12 +425,13 @@ const bosses: readonly BossEntry[] = [
     color: var(--text-muted);
   }
 
-  /* 属性防御値によって色を変える */
-  .def-1 { background: var(--mint); color: var(--mint-deep); }
-  .def-2 { background: var(--sky); color: var(--sky-deep); }
-  .def-3 { background: var(--border); color: var(--text-muted); }
-  .def-4 { background: var(--peach); color: var(--peach-deep); }
-  .def-5 { background: var(--lavender); color: var(--lavender-deep); }
+  /* 属性ごとに色を固定（ゲームのカラーパレットに合わせる） */
+  .def-物理 { background: #e0e0e0; color: #555555; }
+  .def-絶対 { background: #b8e8c8; color: #1a6b3a; }
+  .def-暗黒 { background: var(--lavender); color: var(--lavender-deep); }
+  .def-風   { background: #c8f0d0; color: #2d8c50; }
+  .def-火炎 { background: #ffd0d0; color: #c0392b; }
+  .def-光電 { background: var(--sky); color: var(--sky-deep); }
 
   .guide {
     font-size: 0.9rem;

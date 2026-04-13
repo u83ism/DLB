@@ -1,0 +1,192 @@
+---
+// プロフィールページ専用レイアウト
+// Markdownページのフロントマターを受け取ってプロフィールテーブルを描画する
+import Layout from './Layout.astro';
+
+interface Contact {
+  readonly x?: string;
+  readonly email?: string;
+}
+
+interface ProfileFrontmatter {
+  readonly title: string;
+  readonly description?: string;
+  readonly note?: string;
+  readonly handle: string;
+  readonly gender: string;
+  readonly location: string;
+  readonly hobbies: string;
+  readonly favoriteWrestlers: string;
+  readonly contact: Contact;
+}
+
+interface Props {
+  readonly frontmatter: ProfileFrontmatter;
+}
+
+const { frontmatter: fm } = Astro.props;
+---
+
+<Layout title={fm.title} description={fm.description}>
+  <div class="container">
+    <main>
+      <h1 class="page-title">{fm.title}</h1>
+
+      {fm.note && <p class="note">※{fm.note}</p>}
+
+      <table class="profile-table">
+        <tbody>
+          <tr>
+            <th>ハンドル</th>
+            <td>{fm.handle}</td>
+          </tr>
+          <tr>
+            <th>性別</th>
+            <td>{fm.gender}</td>
+          </tr>
+          <tr>
+            <th>出身地/在住地</th>
+            <td>{fm.location}</td>
+          </tr>
+          <tr>
+            <th>趣味</th>
+            <td>{fm.hobbies}</td>
+          </tr>
+          <tr>
+            <th>好きなレスラー</th>
+            <td>{fm.favoriteWrestlers}</td>
+          </tr>
+          <tr>
+            <th>連絡先</th>
+            <td>
+              {fm.contact.x && (
+                <span>X: <a href={fm.contact.x} target="_blank" rel="noopener noreferrer">@{fm.contact.x.split('/').at(-1)}</a><br /></span>
+              )}
+              {fm.contact.email && (
+                <span>メール: <a href={`mailto:${fm.contact.email}`}>{fm.contact.email}</a></span>
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Markdownの本文（好きなライター等の複雑なセクション）を描画する -->
+      <div class="prose">
+        <slot />
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--peach);
+    color: var(--text);
+  }
+
+  .note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  /* プロフィールテーブル（データ用途のため<table>を維持） */
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+  }
+
+  .profile-table th,
+  .profile-table td {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .profile-table th {
+    background: var(--peach);
+    color: var(--peach-deep);
+    font-weight: 700;
+    white-space: nowrap;
+    width: 22%;
+    text-align: right;
+  }
+
+  .profile-table td a {
+    color: var(--peach-deep);
+  }
+
+  @media (max-width: 500px) {
+    .profile-table th {
+      width: auto;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .profile-table th,
+    .profile-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .profile-table tr + tr th {
+      border-top: 2px solid var(--border);
+    }
+  }
+
+  /* Markdownの本文スタイル */
+  .prose {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .prose h2 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .prose h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .prose p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+  }
+
+  .prose strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+</style>

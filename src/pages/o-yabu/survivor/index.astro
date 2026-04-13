@@ -1,6 +1,7 @@
 ---
 // 大藪春彦 生還者追跡ページ（主人公の生死調査）
 import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -156,9 +157,17 @@ const unknown: readonly SurvivorEntry[] = [
     detail: '映画館の売り上げ金を奪うが、仲間割れを起こす。そこへ映画館の内通者が捕まって吐いた情報により、隠れ家を知った警察が襲ってくる。絶望的ながら銃撃戦を挑む。',
   },
 ] as const;
+
+// サイドメニュー用の見出し（全配列定義後に導出）
+const tocHeadings = [
+  { slug: 'survive', text: `生存（${survived.length}人）` },
+  { slug: 'dead', text: `死亡（${dead.length}人）` },
+  { slug: 'unknown', text: `不明（${unknown.length}人）` },
+];
 ---
 
 <Layout title="生還者を探せ！（大藪春彦）" description="大藪春彦作品の主人公が最後まで生き残ったかどうか追跡。生存10・死亡17・不明4。">
+  <TableOfContents slot="sidebar" headings={tocHeadings} />
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
       <a href={base}>HOME</a>
@@ -193,12 +202,6 @@ const unknown: readonly SurvivorEntry[] = [
           ／31人中
         </p>
       </section>
-
-      <nav class="jump-nav" aria-label="セクション一覧">
-        <a href="#survive">生存（{survived.length}人）</a>
-        <a href="#dead">死亡（{dead.length}人）</a>
-        <a href="#unknown">不明（{unknown.length}人）</a>
-      </nav>
 
       <section id="survive">
         <h2 class="section-heading survive-heading">生存（{survived.length}人）</h2>
@@ -353,28 +356,6 @@ const unknown: readonly SurvivorEntry[] = [
   .survive { color: #1a6fb5; }
   .dead { color: #c0392b; }
   .unknown { color: #1e8449; }
-
-  /* ジャンプナビ */
-  .jump-nav {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-  }
-
-  .jump-nav a {
-    font-size: 0.84rem;
-    font-weight: 700;
-    color: var(--lavender-deep);
-    text-decoration: none;
-    padding: 6px 14px;
-    border: 1px solid var(--lavender-deep);
-    border-radius: 20px;
-  }
-
-  .jump-nav a:hover {
-    background: var(--lavender);
-  }
 
   /* セクション */
   section + section {

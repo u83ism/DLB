@@ -22,6 +22,9 @@
 - CSSリセット・ベーススタイル（Flexbox/Gridベース、レスポンシブ対応）✅
 - GitHub Actions でのビルド・GitHub Pagesデプロイ設定 ✅
 - トップページ（index.astro）作成 ✅
+  - NETWORKブロック廃止。ゆうやみポータルへのリンクはヘッダーメタ行末に移動
+  - お知らせセクション廃止 → 更新履歴テーブルに統合（C2G方式）
+  - `src/data/updates.ts`（手動エントリ）+ `src/lib/buildUpdates.ts`（集計ロジック）を導入
 
 ### 廃止する要素
 - リンク集（撤廃）
@@ -36,8 +39,9 @@
 ### 移行対象と方針
 
 #### プロフィール (`profile.htm`) ✅
-- テーブルレイアウト → CSSで再現
-- 内容を現状に更新（2014年時点のまま）
+- `src/pages/profile/index.md` + `src/layouts/ProfileLayout.astro` でMarkdown化
+- フロントマターに構造データ（ハンドル・性別等）、Markdown本文に「好きなライター」を記述
+- 内容を現状に更新（2026年3月時点）
 
 #### サイトの歴史 (`history.htm`) ✅
 - そのままAstroページに移植

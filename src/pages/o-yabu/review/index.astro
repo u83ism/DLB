@@ -1,6 +1,7 @@
 ---
 // 大藪春彦 作品レビューページ（S〜Eランク）
 import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -240,6 +241,7 @@ const ranks: readonly RankSection[] = [
 ---
 
 <Layout title="大藪春彦 作品レビュー" description="大藪春彦作品のS〜Eランク個人レビュー一覧。">
+  <TableOfContents slot="sidebar" headings={ranks.map(r => ({ slug: r.rank, text: r.label }))} />
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
       <a href={base}>HOME</a>
@@ -255,12 +257,6 @@ const ranks: readonly RankSection[] = [
       <p class="intro">
         大薮春彦氏の著作は約120タイトルにものぼります。流石に多いので全部は無理ですが、読んだやつをどんどんレビューしていきます。ランクに関しては、やはり賛否両論分かれると思いますが、あくまでも私的な意見なので……文句等は勘弁して下さい。
       </p>
-
-      <nav class="jump-nav" aria-label="ランク一覧">
-        {ranks.map((r) => (
-          <a href={`#${r.rank}`} class={r.color}>{r.label}</a>
-        ))}
-      </nav>
 
       {ranks.map((r) => (
         <section class="rank-section" id={r.rank}>
@@ -328,26 +324,6 @@ const ranks: readonly RankSection[] = [
     line-height: 1.8;
     color: var(--text-muted);
     margin-bottom: 28px;
-  }
-
-  /* ジャンプナビ */
-  .jump-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 40px;
-    padding: 16px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-  }
-
-  .jump-nav a {
-    font-size: 0.82rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 4px;
-    text-decoration: none;
   }
 
   /* ランクセクション */
