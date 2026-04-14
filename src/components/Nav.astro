@@ -28,15 +28,31 @@ const isActive = (href: string): boolean => {
 };
 ---
 
-<nav aria-label="グローバルナビゲーション">
-  {navLinks.map(({ href, label, external }) => (
-    external
-      ? <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
-      : <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
-  ))}
-</nav>
+<details class="nav-details">
+  <summary class="nav-summary">メニュー</summary>
+  <nav aria-label="グローバルナビゲーション">
+    {navLinks.map(({ href, label, external }) => (
+      external
+        ? <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+        : <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+</details>
 
 <style>
+  /* ===== デスクトップ: summary非表示・navを常時表示 ===== */
+  @media (min-width: 601px) {
+    .nav-summary {
+      display: none;
+    }
+
+    /* UA stylesheetによるdetails内非表示を上書き */
+    .nav-details > nav {
+      display: flex;
+    }
+  }
+
+  /* ===== 共通ナビスタイル ===== */
   nav {
     background: var(--white);
     border-bottom: 2px solid var(--mint);
@@ -71,14 +87,53 @@ const isActive = (href: string): boolean => {
     font-weight: 700;
   }
 
+  /* ===== モバイル: detailsトグル ===== */
   @media (max-width: 600px) {
+    .nav-details {
+      background: var(--white);
+      border-bottom: 2px solid var(--mint);
+    }
+
+    .nav-summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--mint-deep);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .nav-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-summary::after {
+      content: '▾';
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .nav-details[open] .nav-summary::after {
+      content: '▴';
+    }
+
     nav {
-      padding: 0 8px;
+      flex-direction: column;
+      border-bottom: none;
+      padding: 0;
+      overflow-x: visible;
     }
 
     nav a {
-      padding: 10px 12px;
-      font-size: 0.78rem;
+      padding: 11px 16px;
+      font-size: 0.83rem;
+      border-bottom: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 0;
     }
   }
 </style>
