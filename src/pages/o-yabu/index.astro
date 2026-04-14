@@ -5,9 +5,9 @@ import Layout from '@/layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 
 const navCards = [
-  { href: `${base}o-yabu/about/`, label: '概要', desc: '大藪春彦の作品傾向・定番推薦作品' },
-  { href: `${base}o-yabu/review/`, label: '作品レビュー', desc: 'S〜Eランクの個人的評価一覧' },
-  { href: `${base}o-yabu/survivor/`, label: '生還者を探せ！', desc: '主人公の生死追跡（生存10・死亡17・不明4）' },
+  { href: `${base}o-yabu/about/`, label: '概要', desc: '大藪春彦作品傾向・定番推薦作品' },
+  { href: `${base}o-yabu/review/`, label: '作品レビュー', desc: '大藪春彦作品の個人的評価一覧' },
+  { href: `${base}o-yabu/survivor/`, label: '生還者を探せ！', desc: '主人公の生死を追跡' },
 ];
 ---
 
@@ -16,11 +16,11 @@ const navCards = [
     <nav class="breadcrumb" aria-label="パンくず">
       <a href={base}>HOME</a>
       <span aria-hidden="true">›</span>
-      <span aria-current="page">大藪春彦</span>
+      <span aria-current="page">大藪春彦作品</span>
     </nav>
 
     <main>
-      <h1 class="page-title">大藪春彦コーナー</h1>
+      <h1 class="page-title">大藪春彦作品</h1>
 
       <p class="intro">
         1960〜90年代にわたってハードボイルド小説の分野で活躍した作家・大薮春彦氏の作品について色々書いていくコーナーです。

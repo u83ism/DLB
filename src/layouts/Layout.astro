@@ -34,7 +34,7 @@ const currentPath = Astro.url.pathname;
     /* ===== サイドバーあり: PCのみグリッド ===== */
     .page-body.has-sidebar {
       display: grid;
-      grid-template-columns: 190px 1fr;
+      grid-template-columns: 260px 1fr;
       align-items: start;
     }
 
@@ -46,14 +46,18 @@ const currentPath = Astro.url.pathname;
       padding: 44px 16px 44px 24px;
     }
 
-    /* 900px以下ではサイドバーを非表示・グリッド解除 */
+    /* 900px以下ではグリッド解除・サイドバーを横スクロール帯として表示 */
     @media (max-width: 900px) {
       .page-body.has-sidebar {
         display: block;
       }
 
       .page-sidebar {
-        display: none;
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
       }
     }
   </style>

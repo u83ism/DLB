@@ -22,7 +22,7 @@ const historyEntries: readonly HistoryEntry[] = [
     meta: {
       siteName: 'Game&Moncolle FanCity\'2000（GMFC）',
       handle: '荒野の旅人',
-      genres: 'WA・モンコレ・オーフェン（途中追加）',
+      genres: 'ワイルドアームズ、モンスターコレクションTCG、魔術士オーフェン（途中追加）',
     },
     desc: '前年の夏頃からちょびちょびと作ってきたサイトを、正月のおめでたムードに乗せられた父親に勧められて急に公開。取り扱いジャンル、最初はWAとモンコレでしたが、1ヶ月ほどして魔術士オーフェンが追加。サイト名とのギャップに悩む日が始まりました。ちなみにサイト名の「2000」は年ごとに数字が変わっていく予定でした。',
   },
@@ -37,7 +37,7 @@ const historyEntries: readonly HistoryEntry[] = [
     meta: {
       siteName: 'Eternal City ～Eden of Mirage～（ECEM）',
       handle: '荒野の旅人',
-      genres: 'WA・モンコレ・オーフェン・GV（途中追加→削除）',
+      genres: 'ワイルドアームズ、モンスターコレクションTCG、魔術士オーフェン、ガンガンヴァーサス（途中追加→削除）',
     },
     desc: 'サイト名を多ジャンル対応用に変更しつつリニューアル。始まったばかりのガンガンヴァーサスが途中で加わりましたが、いきなりのSPカード乱発で萎えて2ヶ月程で廃止。その中でも大変アクセス数を増やすことになったのが、末期に作った「ORPHEN Remix」・「BATTLE ROYALE ETERNAL」。',
   },
@@ -52,7 +52,7 @@ const historyEntries: readonly HistoryEntry[] = [
     meta: {
       siteName: 'Mirrorball Satellite（鏡球衛星）',
       handle: '夕闇幻楼',
-      genres: 'WA・オーフェン・BR・RO（途中追加→削除）他',
+      genres: 'ワイルドアームズ、魔術士オーフェン、バトルロワイアル、ラグナロクオンライン（途中追加→削除）他',
       sub: 'BRN（途中追加）→OBRN',
     },
     desc: '復活。サイト名＆ハンドル変更。受験中に読んで感動したバトルロワイアルが追加。2002年7月に下位サイト「BRN（現OBRN）」設立。2003年5月中旬、ROから撤退。',
@@ -68,7 +68,7 @@ const historyEntries: readonly HistoryEntry[] = [
     meta: {
       siteName: "Don't Look Back（DLB）",
       handle: 'ゆうやみ',
-      genres: 'オーフェン・大藪春彦作品・BR・プロレス（→独立）他',
+      genres: '魔術士オーフェン・大藪春彦作品・バトルロワイアル・プロレス（→独立）他',
       sub: 'C2G・OBRN・21CPB（途中追加）',
     },
     desc: 'ゲーム系専門の「CRADLE 2 GRAVE」と、よろずサイトの「Don\'t Look Back」に分離して復活。受験中にWWEに目覚め、プロレス部門を追加。同年9月末に「21世紀パワーボム」（21CPB）として独立。2007年11月、「ORPHEN Remix」の運営を断念。',
@@ -76,22 +76,17 @@ const historyEntries: readonly HistoryEntry[] = [
   {
     period: '〈第4期/さくら鯖〉2008/3/? ～ 2021/3',
     isHighlight: true,
-    meta: {
-      siteName: "Don't Look Back（DLB）",
-      handle: 'ゆうやみ',
-      genres: 'オーフェン・大藪春彦・BR',
-    },
     desc: '諸事情により急遽inetd鯖を解約することになり、さくら鯖に移転。1週間足らずで移転完了。',
   },
   {
-    period: '〈第4期/GitHub Pages〉2021/3/21 ～ 現在',
+    period: '〈第4期/GitHub Pages〉2021/3/21 ～ 2026/4/13',
     isHighlight: true,
-    meta: {
-      siteName: "Don't Look Back（DLB）",
-      handle: 'ゆうやみ',
-      genres: 'オーフェン・大藪春彦・BR',
-    },
-    desc: 'さくらインターネットからGitHub Pagesへ移転。掲示板・CGI系は廃止。Astroでのリニューアルを進行中。',
+    desc: 'さくらインターネットからGitHub Pagesへ移転。掲示板・CGI系は廃止。',
+  },
+  {
+    period: '〈第4期/GitHub Pages〉2026/4/14 ～ 現在',
+    isHighlight: true,
+    desc: 'AIゴリ押しでフルリニューアル。',
   },
 ];
 ---
@@ -105,34 +100,39 @@ const historyEntries: readonly HistoryEntry[] = [
         当サイトの歴史です。実は長い間やってまして、サイトタイトル変更に管理人名変更、取り扱いジャンル変更までしたので、一度振り返ってみたいなと思って作成しました。
       </p>
 
-      <table class="history-table">
-        <thead>
-          <tr>
-            <th class="col-period">時期</th>
-            <th class="col-desc">概略</th>
-          </tr>
-        </thead>
-        <tbody>
-          {historyEntries.map((entry) => (
-            <tr class={entry.isHighlight ? 'highlight' : undefined}>
-              <td class="period">{entry.period}</td>
-              <td class="desc">
-                {entry.meta && (
-                  <p class="meta">
-                    サイト名：{entry.meta.siteName}<br />
-                    ハンドル：{entry.meta.handle}<br />
-                    取り扱いジャンル：{entry.meta.genres}
-                    {entry.meta.sub && (
-                      <><br />別管理/下位サイト：{entry.meta.sub}</>
-                    )}
-                  </p>
-                )}
-                <p>{entry.desc}</p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ol class="timeline">
+        {historyEntries.map((entry) => (
+          <li class={`timeline-item ${entry.isHighlight ? 'is-highlight' : 'is-pause'}`}>
+            <div class="timeline-marker" aria-hidden="true" />
+            <div class="timeline-body">
+              <p class="timeline-period">{entry.period}</p>
+              {entry.meta && (
+                <dl class="meta-list">
+                  <div class="meta-row">
+                    <dt>サイト名</dt>
+                    <dd>{entry.meta.siteName}</dd>
+                  </div>
+                  <div class="meta-row">
+                    <dt>ハンドル</dt>
+                    <dd>{entry.meta.handle}</dd>
+                  </div>
+                  <div class="meta-row">
+                    <dt>取り扱いジャンル</dt>
+                    <dd>{entry.meta.genres}</dd>
+                  </div>
+                  {entry.meta.sub && (
+                    <div class="meta-row">
+                      <dt>別管理/下位サイト</dt>
+                      <dd>{entry.meta.sub}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
+              <p class="timeline-desc">{entry.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </main>
   </div>
 </Layout>
@@ -162,86 +162,111 @@ const historyEntries: readonly HistoryEntry[] = [
   .lead {
     font-size: 0.9rem;
     color: var(--text-muted);
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     line-height: 1.8;
   }
 
-  /* 歴史テーブル（データ用途のため<table>を維持） */
-  .history-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.88rem;
+  /* タイムライン */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  /* 縦線 */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 2px;
+    background: var(--sky-deep);
+    opacity: 0.25;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 40px;
+    padding-bottom: 32px;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* ドットマーカー */
+  .timeline-marker {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--sky-deep);
+    background: var(--white);
+    box-sizing: border-box;
+  }
+
+  .is-highlight .timeline-marker {
+    background: var(--sky-deep);
+  }
+
+  .is-pause .timeline-marker {
+    opacity: 0.4;
+  }
+
+  .timeline-period {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--sky-deep);
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+
+  .is-pause .timeline-period {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* メタ情報 */
+  .meta-list {
+    background: var(--sky);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 0 0 10px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    font-size: 0.8rem;
     line-height: 1.7;
   }
 
-  .history-table thead tr {
-    background: var(--sky);
+  .meta-row {
+    display: contents;
+  }
+
+  .meta-list dt {
     color: var(--sky-deep);
-  }
-
-  .history-table th {
-    padding: 10px 16px;
-    font-weight: 800;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-align: left;
-    border: 1px solid var(--border);
-  }
-
-  .col-period { width: 25%; }
-  .col-desc { width: 75%; }
-
-  .history-table td {
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    vertical-align: top;
-  }
-
-  .history-table tr.highlight td {
-    background: color-mix(in srgb, var(--sky) 20%, var(--white));
-  }
-
-  .history-table .period {
     font-weight: 700;
-    font-size: 0.82rem;
-    white-space: pre-wrap;
-    color: var(--sky-deep);
+    white-space: nowrap;
   }
 
-  .meta {
-    background: var(--sky);
-    color: var(--sky-deep);
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-bottom: 10px;
+  .meta-list dd {
+    margin: 0;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .timeline-desc {
+    font-size: 0.88rem;
     line-height: 1.8;
+    margin: 0;
+    color: var(--text);
   }
 
-  .desc p + p {
-    margin-top: 8px;
-  }
-
-  @media (max-width: 500px) {
-    .history-table td,
-    .history-table th {
-      display: block;
-      width: 100%;
-    }
-
-    .history-table thead {
-      display: none;
-    }
-
-    .history-table .period {
-      background: var(--sky);
-      padding: 8px 12px;
-    }
-
-    .col-period,
-    .col-desc {
-      width: 100%;
-    }
+  .is-pause .timeline-desc {
+    color: var(--text-muted);
   }
 </style>

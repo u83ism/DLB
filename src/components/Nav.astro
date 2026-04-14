@@ -10,14 +10,15 @@ const { currentPath } = Astro.props;
 // ベースURLを取得する（trailingSlash: 'always' により末尾スラッシュあり）
 const base = import.meta.env.BASE_URL;
 
-// ナビゲーションリンクの定義
+// ナビゲーションリンクの定義（external: true の場合は別タブで開く）
 const navLinks = [
   { href: base, label: 'HOME' },
   { href: `${base}profile/`, label: 'プロフィール' },
   { href: `${base}br/`, label: 'バトルロワイアル' },
   { href: `${base}orphen/`, label: '魔術士オーフェン' },
-  { href: `${base}o-yabu/`, label: '大藪春彦' },
+  { href: `${base}o-yabu/`, label: '大藪春彦作品' },
   { href: `${base}history/`, label: 'サイトの歴史' },
+  { href: 'https://u83-portal.web.app/', label: '🔗 ゆうやみポータル', external: true },
 ];
 
 // パスが一致するかどうかを判定する
@@ -28,10 +29,10 @@ const isActive = (href: string): boolean => {
 ---
 
 <nav aria-label="グローバルナビゲーション">
-  {navLinks.map(({ href, label }) => (
-    <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>
-      {label}
-    </a>
+  {navLinks.map(({ href, label, external }) => (
+    external
+      ? <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+      : <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
   ))}
 </nav>
 
