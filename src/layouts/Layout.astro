@@ -9,12 +9,24 @@ import '@/styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  /** OGP画像のURL（絶対URL）。未指定の場合はog:imageを出力しない */
+  ogImage?: string;
 }
 
-const { title, description = 'よろず系個人サイト。バトルロワイアル・魔術士オーフェン・大藪春彦作品などを扱っています。' } = Astro.props;
+const {
+  title,
+  description = 'よろず系個人サイト。バトルロワイアル・魔術士オーフェン・大藪春彦作品などを扱っています。',
+  ogImage,
+} = Astro.props;
 
 // 現在のパスを取得する
 const currentPath = Astro.url.pathname;
+
+// ページの絶対URLを生成する
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+
+// <title>タグと og:title に使う文字列
+const pageTitle = title ? `${title} | Don't Look Back` : "Don't Look Back";
 ---
 
 <!doctype html>
@@ -23,8 +35,25 @@ const currentPath = Astro.url.pathname;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title ? `${title} | Don't Look Back` : "Don't Look Back"}</title>
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} type="image/vnd.microsoft.icon" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Don't Look Back" />
+    <meta property="og:locale" content="ja_JP" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
     <ClientRouter />
   </head>
   <style>
