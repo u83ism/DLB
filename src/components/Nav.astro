@@ -28,36 +28,47 @@ const isActive = (href: string): boolean => {
 };
 ---
 
-<details class="nav-details">
-  <summary class="nav-summary">メニュー</summary>
-  <nav aria-label="グローバルナビゲーション">
+<div class="nav-wrapper">
+  <!-- モバイル用トグルボタン -->
+  <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="メニューを開く">
+    <span class="nav-toggle-label">メニュー</span>
+    <span class="nav-toggle-icon" aria-hidden="true">▾</span>
+  </button>
+
+  <nav id="main-nav" aria-label="グローバルナビゲーション">
     {navLinks.map(({ href, label, external }) => (
       external
         ? <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
-        : <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
+        : <a href={href} class={isActive(href) ? 'active' : undefined} aria-current={isActive(href) ? 'page' : undefined} data-astro-prefetch>{label}</a>
     ))}
   </nav>
-</details>
+</div>
+
+<script>
+  // モバイル用ナビゲーショントグル
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.querySelector<HTMLElement>('#main-nav');
+  const icon = document.querySelector<HTMLElement>('.nav-toggle-icon');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('open');
+    if (icon) icon.textContent = !expanded ? '▴' : '▾';
+  });
+</script>
 
 <style>
-  /* ===== デスクトップ: summary非表示・navを常時表示 ===== */
-  @media (min-width: 601px) {
-    .nav-summary {
-      display: none;
-    }
-
-    /* UA stylesheetによるdetails内非表示を上書き */
-    .nav-details > nav {
-      display: flex;
-    }
+  /* ===== デフォルト（デスクトップ）: トグルボタン非表示・navを常時表示 ===== */
+  .nav-toggle {
+    display: none;
   }
 
-  /* ===== 共通ナビスタイル ===== */
   nav {
+    display: flex;
     background: var(--white);
     border-bottom: 2px solid var(--mint);
     padding: 0 40px;
-    display: flex;
     gap: 0;
     overflow-x: auto;
   }
@@ -87,45 +98,43 @@ const isActive = (href: string): boolean => {
     font-weight: 700;
   }
 
-  /* ===== モバイル: detailsトグル ===== */
+  /* ===== モバイル: トグルボタン表示・navは開閉 ===== */
   @media (max-width: 600px) {
-    .nav-details {
+    .nav-wrapper {
       background: var(--white);
       border-bottom: 2px solid var(--mint);
     }
 
-    .nav-summary {
-      list-style: none;
+    .nav-toggle {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
       padding: 11px 16px;
       font-size: 0.83rem;
       font-weight: 700;
       color: var(--mint-deep);
+      background: none;
+      border: none;
       cursor: pointer;
       user-select: none;
     }
 
-    .nav-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .nav-summary::after {
-      content: '▾';
+    .nav-toggle-icon {
       font-size: 1.8rem;
       line-height: 1;
     }
 
-    .nav-details[open] .nav-summary::after {
-      content: '▴';
-    }
-
     nav {
+      display: none;
       flex-direction: column;
       border-bottom: none;
       padding: 0;
       overflow-x: visible;
+    }
+
+    nav.open {
+      display: flex;
     }
 
     nav a {
