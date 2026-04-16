@@ -1,38 +1,9 @@
 ---
 // バトルロワイアル BR1生徒名簿ページ
 import Layout from '@/layouts/Layout.astro';
+import { br1Students } from '@/data/br-students';
 
 const base = import.meta.env.BASE_URL;
-
-// 城岩中学校3年B組 生徒名簿データ
-type Student = {
-  readonly male: string;
-  readonly female: string;
-};
-
-const students: readonly Student[] = [
-  { male: '赤松 義生（あかまつ・よしお）', female: '稲田 瑞穂（いなだ・みずほ）' },
-  { male: '飯島 敬太（いいじま・けいた）', female: '内海 幸枝（うつみ・ゆきえ）' },
-  { male: '大木 立道（おおき・たつみち）', female: '江藤 恵（えとう・めぐみ）' },
-  { male: '織田 敏憲（おだ・としのり）', female: '小川 さくら（おがわ・さくら）' },
-  { male: '川田 章吾（かわだ・しょうご）', female: '金井 泉（かない・いずみ）' },
-  { male: '桐山 和雄（きりやま・かずお）', female: '北野 雪子（きたの・ゆきこ）' },
-  { male: '国信 慶時（くにのぶ・よしとき）', female: '日下 友美子（くさか・ゆみこ）' },
-  { male: '倉元 洋二（くらもと・ようじ）', female: '琴弾 加代子（ことひき・かよこ）' },
-  { male: '黒長 博（くろなが・ひろし）', female: '榊 祐子（さかき・ゆうこ）' },
-  { male: '笹川 竜平（ささがわ・りゅうへい）', female: '清水 比呂乃（しみず・ひろの）' },
-  { male: '杉村 弘樹（すぎむら・ひろき）', female: '相馬 光子（そうま・みつこ）' },
-  { male: '瀬戸 豊（せと・ゆたか）', female: '谷沢 はるか（たにざわ・はるか）' },
-  { male: '滝口 優一郎（たきぐち・ゆういちろう）', female: '千草 貴子（ちぐさ・たかこ）' },
-  { male: '月岡 彰（つきおか・しょう）', female: '天堂 真弓（てんどう・まゆみ）' },
-  { male: '七原 秋也（ななはら・しゅうや）', female: '中川 典子（なかがわ・のりこ）' },
-  { male: '新井田 和志（にいだ・かずし）', female: '中川 有香（なかがわ・ゆか）' },
-  { male: '沼井 充（ぬまい・みつる）', female: '野田 聡美（のだ・さとみ）' },
-  { male: '旗上 忠勝（はたがみ・ただかつ）', female: '藤吉 文世（ふじよし・ふみよ）' },
-  { male: '三村 信史（みむら・しんじ）', female: '松井 知里（まつい・ちさと）' },
-  { male: '元渕 恭一（もとぶち・きょういち）', female: '南 佳織（みなみ・かおり）' },
-  { male: '山本 和彦（やまもと・かずひこ）', female: '矢作 好美（やはぎ・よしみ）' },
-];
 ---
 
 <Layout title="生徒名簿（BR）" description="「バトルロワイアル」城岩中学校3年B組42名の生徒名簿。">
@@ -58,7 +29,7 @@ const students: readonly Student[] = [
           </tr>
         </thead>
         <tbody>
-          {students.map((s, i) => (
+          {br1Students.map((s, i) => (
             <tr>
               <td class="male">{s.male}</td>
               <td class="num">{i + 1}番</td>
