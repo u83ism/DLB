@@ -3,6 +3,7 @@
 import Header from '@/components/Header.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css';
 
 interface Props {
@@ -24,6 +25,7 @@ const currentPath = Astro.url.pathname;
     <meta name="description" content={description} />
     <title>{title ? `${title} | Don't Look Back` : "Don't Look Back"}</title>
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} type="image/vnd.microsoft.icon" />
+    <ClientRouter />
   </head>
   <style>
     /* ===== サイドバーなし（デフォルト） ===== */
@@ -62,7 +64,9 @@ const currentPath = Astro.url.pathname;
     }
   </style>
   <body>
-    <Header />
+    <!-- ヘッダーは静的なのでページ遷移をまたいで保持する -->
+    <Header transition:persist />
+    <!-- ナビはページごとに正しいアクティブ状態を持つためそのまま差し替える -->
     <Nav currentPath={currentPath} />
     <!-- サイドバースロットがある場合はグリッドレイアウトに切り替える -->
     <div class:list={['page-body', { 'has-sidebar': Astro.slots.has('sidebar') }]}>

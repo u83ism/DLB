@@ -45,17 +45,27 @@ const isActive = (href: string): boolean => {
 </div>
 
 <script>
-  // モバイル用ナビゲーショントグル
-  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
-  const nav = document.querySelector<HTMLElement>('#main-nav');
-  const icon = document.querySelector<HTMLElement>('.nav-toggle-icon');
+  // モバイル用ナビゲーショントグルを初期化する
+  // astro:page-load はページ初回読み込み・ClientRouter によるナビゲーション後にも発火する
+  function initNavToggle(): void {
+    const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+    const nav = document.querySelector<HTMLElement>('#main-nav');
+    const icon = document.querySelector<HTMLElement>('.nav-toggle-icon');
 
-  toggle?.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    nav?.classList.toggle('open');
-    if (icon) icon.textContent = !expanded ? '▴' : '▾';
-  });
+    // ナビを閉じた状態にリセットする（別ページへ遷移した際の開きっぱなしを防ぐ）
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('open');
+    if (icon) icon.textContent = '▾';
+
+    toggle?.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+      if (icon) icon.textContent = !expanded ? '▴' : '▾';
+    });
+  }
+
+  document.addEventListener('astro:page-load', initNavToggle);
 </script>
 
 <style>
