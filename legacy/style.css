@@ -1,0 +1,157 @@
+*{
+	margin: 0px;
+	padding: 0px;
+
+}
+body {
+	background :url(gazou/kabe.jpg) no-repeat fixed 100% 100% ;
+	font-size: 100%;
+	line-height: 150%;
+	color: #333333;
+	margin: 0px;
+}
+a {
+ text-decoration:none ;
+}
+a:hover {
+ text-decoration:underline ;
+	color: #0000FF;
+}
+a:link {
+ color: #0000FF;
+} 
+a:visited {
+ color: #0000FF;
+} 
+a:active {
+ color: #0000FF;
+} 
+table { 
+  border-collapse: collapse;
+}
+td,th { 
+	padding: 5px; 
+}
+h1 {
+	font-size: 110%;
+	padding: 10px 10px 10px;
+	border-bottom: 1px solid #CCCCCC;
+	background: #CCFFFF;
+	font-weight: normal;
+}
+h2 {
+	font-size: 110%;
+	margin: 0px 20px 10px;
+	color: #333333;
+	border-bottom: 1px dashed #999999;
+	padding: 0px 0px 5px;
+	clear: both;
+}
+
+
+div#page {
+	text-align: left;
+}
+div#head {
+	padding: 10px 10px 5px 5px;
+	margin: 0px;
+}
+
+div#menu {
+	height: 2em;
+	padding: 0.5em 0px 0px;
+	background: #CCFFCC;
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+}
+div#menu ul{
+	margin: 0px;
+	padding: 0px;
+}
+div#menu li{
+	float: left;
+	padding: 0px;
+	margin-left: 10px;
+	list-style: none;
+}
+div#main {
+	margin: 0px;
+	border-left: 1px solid #CCCCCC;
+	padding: 20px 0px;
+	width: 75%;
+	float: left;
+}
+div#main p {
+	margin: 0px 0px 40px 40px;
+}
+div#main ul {
+	margin-left: 60px;
+	margin-bottom: 1em;
+	margin-right: 30px;
+}
+div#main100 {
+	margin: 0px;
+	padding: 20px 0px;
+	width: 100%;
+	float: left;
+}
+div#main100 p {
+	margin: 0px 0px 40px 60px;
+}
+div#main100 ul {
+	margin-left: 60px;
+	margin-bottom: 1em;
+	margin-right: 30px;
+}
+div#index {
+	margin: 0px;
+	padding: 20px 0px;
+	width: 75%;
+	float: left;
+}
+div#index p {
+	margin: 0px 0px 40px 40px;
+}
+div#index ul {
+	margin-left: 60px;
+	margin-bottom: 1em;
+	margin-right: 30px;
+}
+div#submenu {
+	width: 20%;
+	margin: 5px 0px 0px 5px;
+	padding: 10px 0px;
+	float: left;
+}
+div#submenu ul{
+	margin: 0px 0px 0px 5px;
+	padding-left: 2em;
+}
+div#submenu p{
+	margin: 0px 10px 10px;
+}
+div#link {
+	width: 20%;
+	margin: 5px 0px 0px 5px;
+	border-right: 1px solid #CCCCCC;
+	padding: 10px 0px;
+	float: left;
+}
+div#link ul{
+	margin: 0px 0px 0px 5px;
+	padding-left: 2em;
+}
+div#link p{
+	margin: 0px 10px 10px;
+}
+div#foot {
+	border-top: 1px solid #333333;
+	padding: 0px;
+	text-align: center;
+	clear: both;
+	margin: 0px;
+}
+div#foot p{
+	margin: 5px 0px;
+
+}

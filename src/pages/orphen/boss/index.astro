@@ -1,0 +1,223 @@
+---
+// 魔術士オーフェン PS2 ボス攻略ページ
+import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import { bosses } from '@/data/orphen-bosses';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="ボス攻略（オーフェン）" description="魔術士オーフェン PS2版 ボス攻略。各ボスのHP・属性・攻略法。">
+  <TableOfContents slot="sidebar" headings={bosses.map(b => ({ slug: b.id, text: b.name }))} />
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}orphen/`}>魔術士オーフェン</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">ボス攻略</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">ボス攻略</h1>
+
+      <p class="intro">
+        各種ボスについての攻略です。ボス攻略の基本は「クリスタル1個になったらスタートボタン→戦闘を最初からやり直す」。このゲームは回復アイテムは戦闘中使えませんが、やり直しで体力全快して再戦可能です。<br />
+        <strong>属性防御の欄は1（最強）→5（最弱）。</strong>
+      </p>
+
+      {bosses.map((boss) => (
+        <section class="boss-section" id={boss.id}>
+          <h2 class="boss-name">{boss.name}</h2>
+          <p class="boss-chapter">{boss.chapter}</p>
+
+          {boss.enemies.length > 0 && (
+            <div class="enemy-tables">
+              {boss.enemies.map((enemy) => (
+                <table class="enemy-table">
+                  <thead>
+                    <tr><th colspan="2">{enemy.name}</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>HP</th>
+                      <td>{enemy.hp}</td>
+                    </tr>
+                    <tr>
+                      <th>防御力</th>
+                      <td>{enemy.def}</td>
+                    </tr>
+                    <tr>
+                      <th>属性</th>
+                      <td>{enemy.attr}</td>
+                    </tr>
+                    <tr>
+                      <th>属性防御</th>
+                      <td class="defense">
+                        {(Object.entries(enemy.defense) as [string, number][]).map(([attr, val]) => (
+                          <span class={`def-badge def-${attr}`}>{attr}{val}</span>
+                        ))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>攻撃手段</th>
+                      <td>{enemy.attacks}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              ))}
+            </div>
+          )}
+
+          <p class="guide">{boss.guide}</p>
+        </section>
+      ))}
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .intro {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  /* ボスセクション */
+  .boss-section {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .boss-section:last-child {
+    border-bottom: none;
+  }
+
+  .boss-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--sky-deep);
+    margin-bottom: 4px;
+  }
+
+  .boss-chapter {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  /* 敵データテーブル */
+  .enemy-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .enemy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+
+  .enemy-table thead tr {
+    background: var(--sky);
+  }
+
+  .enemy-table thead th {
+    padding: 8px 14px;
+    color: var(--sky-deep);
+    font-weight: 800;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+
+  .enemy-table tbody th {
+    background: color-mix(in srgb, var(--sky) 20%, var(--white));
+    padding: 7px 14px;
+    font-weight: 700;
+    color: var(--sky-deep);
+    white-space: nowrap;
+    width: 100px;
+    border: 1px solid var(--border);
+    text-align: right;
+  }
+
+  .enemy-table tbody td {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    line-height: 1.6;
+  }
+
+  /* 属性防御バッジ */
+  .defense {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .def-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--border);
+    color: var(--text-muted);
+  }
+
+  /* 属性ごとに色を固定（ゲームのカラーパレットに合わせる） */
+  .def-物理 { background: #e0e0e0; color: #555555; }
+  .def-絶対 { background: #b8e8c8; color: #1a6b3a; }
+  .def-暗黒 { background: var(--lavender); color: var(--lavender-deep); }
+  .def-風   { background: #c8f0d0; color: #2d8c50; }
+  .def-火炎 { background: #ffd0d0; color: #c0392b; }
+  .def-光電 { background: var(--sky); color: var(--sky-deep); }
+
+  .guide {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+</style>

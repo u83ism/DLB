@@ -1,0 +1,117 @@
+---
+// 魔術士オーフェン セクショントップ
+import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// コンテンツリストの定義
+const contents = [
+  { href: `${base}orphen/about/`, title: '概要', desc: '魔術士オーフェン小説シリーズの紹介と既刊リスト' },
+  { href: `${base}orphen/aboutg/`, title: 'PS2版オーフェン概要', desc: 'Sorcerous Stabber ORPHEN（PS2）のゲーム概要・プレイ感想' },
+  { href: `${base}orphen/boss/`, title: 'ボス攻略', desc: '各ボスのHP・属性・攻略法' },
+  { href: `${base}orphen/battle/`, title: '戦闘指南', desc: '戦闘システムの解説・立ち回りのコツ' },
+  { href: `${base}orphen/secret/`, title: '隠し要素＆小ネタ', desc: '隠し部屋パスワード・特典・版権曲情報' },
+];
+---
+
+<Layout title="魔術士オーフェン" description="魔術士オーフェン PS2版ゲーム攻略。ボス・戦闘指南・隠し要素。">
+  <div class="container">
+    <main>
+      <h1 class="page-title">魔術士オーフェン</h1>
+
+      <section class="section">
+        <h2 class="section-title">コンテンツ一覧</h2>
+        <nav class="content-nav" aria-label="魔術士オーフェン コンテンツ">
+          {contents.map((c) => (
+            <a class="nav-card" href={c.href}>
+              <div class="nav-card-title">{c.title}</div>
+              <div class="nav-card-desc">{c.desc}</div>
+            </a>
+          ))}
+        </nav>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .content-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .nav-card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--sky);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-card-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .nav-card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+</style>

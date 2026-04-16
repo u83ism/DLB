@@ -1,0 +1,120 @@
+---
+// UNLIMITED DARK ネタバレ名簿（全24名の詳細データ）
+import Layout from '@/layouts/Layout.astro';
+import { males, females } from '@/data/ud-characters';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="ネタバレ名簿（UNLIMITED DARK）" description="UNLIMITED DARK 全登場生徒のネタバレ込み詳細データ。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}br/`}>バトルロワイアル</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}ud/`}>UNLIMITED DARK</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">ネタバレ名簿</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">ネタバレ名簿</h1>
+      <p class="page-desc">ネタバレを含みます。本編未読の方はご注意ください。</p>
+
+      <section class="section">
+        <h2 class="section-heading">男子生徒</h2>
+        {males.map((s) => (
+          <div class="student-card" id={`m${s.num}`}>
+            <div class="card-header">
+              <span class="badge male">男子{s.num}番</span>
+              <span class="student-name" set:html={s.name} />
+            </div>
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <th>支給品</th>
+                  <td set:html={s.supply} />
+                  <th>所持品</th>
+                  <td set:html={s.holding} />
+                </tr>
+                <tr>
+                  <th>殺害者</th>
+                  <td set:html={s.killer} />
+                  <th>死因</th>
+                  <td set:html={s.cause} />
+                </tr>
+              </tbody>
+            </table>
+            {s.note && (
+              <p class="note" set:html={s.note} />
+            )}
+          </div>
+        ))}
+      </section>
+
+      <section class="section">
+        <h2 class="section-heading">女子生徒</h2>
+        {females.map((s) => (
+          <div class="student-card" id={`f${s.num}`}>
+            <div class="card-header">
+              <span class="badge female">女子{s.num}番</span>
+              <span class="student-name" set:html={s.name} />
+            </div>
+            <table class="data-table">
+              <tbody>
+                <tr>
+                  <th>支給品</th>
+                  <td set:html={s.supply} />
+                  <th>所持品</th>
+                  <td set:html={s.holding} />
+                </tr>
+                <tr>
+                  <th>殺害者</th>
+                  <td set:html={s.killer} />
+                  <th>死因</th>
+                  <td set:html={s.cause} />
+                </tr>
+              </tbody>
+            </table>
+            {s.note && (
+              <p class="note" set:html={s.note} />
+            )}
+          </div>
+        ))}
+      </section>
+
+      <nav class="back-nav">
+        <a href={`${base}ud/`} class="back-btn">← UNLIMITED DARK TOP</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 860px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--sky-deep); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--sky); color: var(--text); }
+  .page-desc { font-size: 0.84rem; color: var(--sky-deep); font-weight: 700; margin-bottom: 32px; }
+  .section { margin-bottom: 48px; }
+  .section-heading { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 16px; padding: 8px 0 8px 16px; border-left: 4px solid var(--sky-deep); }
+  .student-card { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .card-header { background: var(--sky); padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
+  .badge.male { background: #2244cc; color: #fff; }
+  .badge.female { background: #cc2222; color: #fff; }
+  .student-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  .data-table th { width: 12%; background: var(--bg); font-weight: 700; padding: 8px 10px; border: 1px solid var(--border); color: var(--sky-deep); white-space: nowrap; }
+  .data-table td { width: 38%; padding: 8px 10px; border: 1px solid var(--border); }
+  @media (max-width: 600px) { .data-table th { width: 18%; } }
+  .note { font-size: 0.84rem; line-height: 1.8; padding: 10px 16px; margin: 0; background: var(--white); border-top: 1px solid var(--border); }
+  :global(.note .m) { color: #2244cc; font-weight: 600; }
+  :global(.note .f) { color: #cc2222; font-weight: 600; }
+  .back-nav { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--sky-deep); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--sky-deep); text-decoration: none; }
+  .back-btn:hover { background: var(--sky); }
+</style>

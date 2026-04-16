@@ -1,0 +1,51 @@
+---
+// 魔虚楽踊 プロローグ3（未題・断章）
+import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="プロローグ3（魔虚楽踊）" description="魔虚楽踊 プロローグ第3節（執筆途中）。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">プロローグ3</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">プロローグ3</h1>
+      <p class="chapter-label">（執筆途中）</p>
+
+      <div class="story">
+        <p>　緑の芝生の上をボールが転がる。そこへ1人の男が駆けてきた。</p>
+        <p>　ウィザーズ・フットボール、学生リーグ戦第4節。ファーイーストFC対ユーロピアン・オナー。伝統の一戦である。真っ二つに分けるセンターラインが目の前に見えた。そこに躍り出たのはファーイーストのエースストライカー、矢野祐樹。相手のセンターバックが胸を強打されつつ弾いたボール……</p>
+
+        <p class="wip-note">※ この節は執筆途中で終わっています。</p>
+      </div>
+
+      <nav class="ep-nav" aria-label="エピソード移動">
+        <a href={`${base}mkro/p2/`} class="ep-btn ep-prev">← プロローグ2</a>
+        <a href={`${base}mkro/p4/`} class="ep-btn ep-next">プロローグ4 →</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .chapter-label { font-size: 0.82rem; color: var(--accent); font-weight: 700; margin-bottom: 32px; }
+  .story { font-size: 0.92rem; line-height: 2; }
+  .story p { margin-bottom: 1.6em; }
+  .wip-note { color: var(--text-muted); font-style: italic; }
+  .ep-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); gap: 12px; }
+  .ep-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .ep-btn:hover { background: var(--bg); }
+</style>

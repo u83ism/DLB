@@ -1,0 +1,174 @@
+---
+// バトルロワイアルセクション トップ
+import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// サイドメニュー用の見出し定義
+const headings = [
+  { slug: 'contents', text: 'コンテンツ一覧' },
+  { slug: 'oribato', text: 'オリバト' },
+  { slug: 'links', text: '関連リンク' },
+] as const;
+---
+
+<Layout title="バトルロワイアル" description="バトルロワイアルの概要・名簿・自作オリバト情報。">
+  <TableOfContents slot="sidebar" headings={headings} />
+  <div class="container">
+    <main>
+      <h1 class="page-title">バトルロワイアル</h1>
+
+      <section class="section">
+        <h2 id="contents" class="section-title">コンテンツ一覧</h2>
+        <nav class="content-nav" aria-label="バトルロワイアル コンテンツ一覧">
+          <a class="nav-card" href={`${base}br/about/`}>
+            <div class="nav-card-title">概要</div>
+            <div class="nav-card-desc">作品の成立経緯・あらすじ</div>
+          </a>
+          <a class="nav-card" href={`${base}br/meibo/`}>
+            <div class="nav-card-title">「バトルロワイアル」生徒名簿</div>
+            <div class="nav-card-desc">城岩中学校3年B組・42名</div>
+          </a>
+          <a class="nav-card" href={`${base}br/meibo2/`}>
+            <div class="nav-card-title">映画「BR2」生徒名簿</div>
+            <div class="nav-card-desc">鹿之砦中学校3年B組・42名</div>
+          </a>
+        </nav>
+      </section>
+
+      <section class="section">
+        <h2 id="oribato" class="section-title">オリバト</h2>
+        <nav class="content-nav" aria-label="オリバト一覧">
+          <a class="nav-card nav-card--ud" href={`${base}ud/`}>
+            <div class="nav-card-title">UNLIMITED DARK</div>
+            <div class="nav-card-desc">第1作</div>
+          </a>
+          <a class="nav-card nav-card--mkro" href={`${base}mkro/`}>
+            <div class="nav-card-title">魔法使いは虚構の楽園に踊る</div>
+            <div class="nav-card-desc">100人の魔法使いによるバトルロワイアル</div>
+          </a>
+        </nav>
+      </section>
+
+      <section class="section">
+        <h2 id="links" class="section-title">関連リンク</h2>
+        <ul class="link-list">
+          <li>
+            <a href="https://obrn-d99b4.firebaseapp.com/" target="_blank" rel="noopener noreferrer">
+              OBRN（オリバトリンク集・DB）
+            </a>
+            — 管理人が別途運営するオリジナルバトルロワイアルのリンク集
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--mint);
+    color: var(--text);
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .content-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .nav-card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--mint);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .nav-card--ud { border-top-color: var(--sky); }
+  .nav-card--mkro { border-top-color: var(--lavender); }
+
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-card-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .nav-card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .link-list li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .link-list a {
+    color: var(--mint-deep);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .link-list a:hover {
+    text-decoration: underline;
+  }
+</style>

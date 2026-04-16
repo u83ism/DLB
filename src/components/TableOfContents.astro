@@ -1,0 +1,74 @@
+---
+// ページ内目次コンポーネント（PC幅のみサイドバーとして表示）
+
+export interface TocEntry {
+  readonly slug: string;  // アンカーID（#なし）
+  readonly text: string;  // 表示テキスト
+  readonly depth?: number; // 見出しレベル（デフォルト: 2 = h2）
+}
+
+interface Props {
+  readonly headings: readonly TocEntry[];
+}
+
+const { headings } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <nav class="toc">
+    <div class="toc-label">目次</div>
+    <ol>
+      {headings.map((h) => (
+        <li class={`toc-h${h.depth ?? 2}`}>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .toc {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+
+  .toc-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+
+  .toc a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    display: block;
+  }
+
+  .toc a:hover {
+    color: var(--mint-deep);
+  }
+
+
+  /* 見出しレベルごとのインデント */
+  .toc-h2 { padding-left: 0; }
+  .toc-h3 { padding-left: 1rem; font-size: 0.75rem; }
+  .toc-h4 { padding-left: 2rem; font-size: 0.72rem; }
+</style>

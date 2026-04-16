@@ -1,0 +1,68 @@
+---
+// 魔法使いは虚構の楽園に踊る - 男子登場生徒詳細
+import Layout from '@/layouts/Layout.astro';
+import { maleProfiles } from '@/data/mkro-characters';
+
+const base = import.meta.env.BASE_URL;
+
+const profiles = maleProfiles;
+---
+
+<Layout title="男子登場生徒詳細（魔虚楽踊）" description="魔虚楽踊 登場予定の男子生徒の詳細プロフィール一覧。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">男子登場生徒詳細</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">男子登場生徒詳細</h1>
+
+      <div class="profiles">
+        {profiles.map((p) => (
+          <div class="profile-card" id={p.anchor}>
+            <div class="card-header">
+              <span class="student-name">{p.name}</span>
+              <span class="meta">出身: {p.origin}　編入: {p.enroll}</span>
+            </div>
+            {p.note && (
+              <div class="note">
+                {p.note.split('\n').filter((l: string) => l.trim()).map((line: string) => (
+                  <p>{line}</p>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <nav class="back-nav">
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
+        <a href={`${base}mkro/data/`} class="back-btn">仮生徒名簿</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 860px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 32px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .profiles { display: flex; flex-direction: column; gap: 16px; }
+  .profile-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .card-header { background: var(--bg); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid var(--border); }
+  .student-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .meta { font-size: 0.78rem; color: var(--text-muted); }
+  .note { padding: 12px 16px; font-size: 0.88rem; line-height: 1.9; }
+  .note p { margin: 0 0 0.5em 0; }
+  .note p:last-child { margin-bottom: 0; }
+  .back-nav { display: flex; gap: 10px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .back-btn:hover { background: var(--bg); }
+</style>

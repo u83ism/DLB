@@ -1,0 +1,48 @@
+---
+// 魔虚楽踊 御挨拶ページ
+import Layout from '@/layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="御挨拶（魔虚楽踊）" description="「魔法使いは虚構の楽園に踊る」作者からのご挨拶。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">御挨拶</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">はじめに</h1>
+
+      <div class="content">
+        <p>　どうもこんにちは。「魔法使いは虚構の楽園に踊る」こと「魔虚楽踊」作者のゆうやみです。「100人の魔法使いによるバトルロワイアル」という、頭の悪そうなキャッチフレーズが売りのこのオリバト。既に構想・準備に丸7年かかってまだ執筆に入っていないという致命的な状況ですorz</p>
+        <p>　このアイデアは最初は単なる思いつきでした。しかし登場キャラクターや本筋シナリオを数年練りこむにつれて、いつの日だったかある衝動が湧き上がりました。それは「感動」です。自分で作った物で感動というのも変な話かもしれませんが、泣きそうになっていました。「遅くても書かなきゃいけない」と思った瞬間でした。またオリバトやパロバトなどという次元を越えた、誰も見たことがない物語になるんじゃないか？と直感しました。</p>
+        <p>　この物語が終わったら、自分はどうしているのでしょう。どうなっているのでしょう。また他人は？ネットという直接は見えない世界の人々はどんな反応を見せてくれるのでしょうか？今から楽しみです。</p>
+        <p>　これを読んでいる皆様は熱烈に応援するのも良し、イタい奴として生暖かくウォッチするのもよし。とにかく、「不器用で愚かで、変に祭り好きな馬鹿が、ここにいる」。それだけは確かです。</p>
+        <p>　願わくば、完結した時に皆で楽しく騒げたらいいなと思っています。</p>
+      </div>
+
+      <nav class="back-nav">
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 32px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .content { font-size: 0.92rem; line-height: 2; }
+  .content p { margin-bottom: 1.4em; }
+  .back-nav { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .back-btn:hover { background: var(--bg); }
+</style>

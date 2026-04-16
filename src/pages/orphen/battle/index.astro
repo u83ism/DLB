@@ -1,0 +1,137 @@
+---
+// 魔術士オーフェン PS2 戦闘指南ページ
+import Layout from '@/layouts/Layout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// 戦闘指南の各セクション定義
+const sections = [
+  {
+    id: 'basic',
+    title: '基本的な考え方',
+    body: 'このゲームの戦闘はかなり独特です。全キャラが基本的に最初の位置から一切動けないというのも一つ。唯一動くとすれば、降魔の剣による移動攻撃ですが、それも攻撃が終われば初期位置に戻りますしね。雑魚戦は、5体以上を敵に回して敵がどんどん移動まくる乱戦なこと。これが多数の敵の動きを読まざるを得ないことに繋がり、かなり緊張感があります。いつ防御して、どれだけ、何の魔術を溜めるか、そしていつ発動させるか……邪魔されずに発動できるのか——これがキーポイントとなります。',
+  },
+  {
+    id: 'magic',
+    title: '魔術について',
+    body: '通常戦闘においては直撃魔術一択。理由は2点。少々溜めるだけで結構な範囲を巻き込めること、最大威力時の精霊召還が全体攻撃な上に威力も高くかなり使えること。ダメージを与えると敵の攻撃モーションが全てキャンセルされるため、乱戦時に敵をまとめて攻撃できるのはかなり大きいです。降魔の剣はボス専用とまではいきませんが、雑魚戦では空振ることすらあるので使いにくいです。弾系・防御系は乱戦時には使う暇が無いですね。',
+  },
+  {
+    id: 'motion',
+    title: '敵のモーションとキャンセルについて',
+    body: '敵の位置、動きを把握し、的確なタイミングで魔術を放つことがこのゲームにおける戦闘の醍醐味です。例えばナイフフィッシュは出てくる回数・一度に出る数が多く、攻撃スピードが早いので要注意。攻撃前にモーションが入るので、それを見て防御するなりしましょう。行動キャンセルについて——こちらは攻撃を受けると魔術を溜めているなどの行動が強制キャンセルされます。これは敵も同じで、攻撃してくるモーションの最中にダメージを与えるとキャンセルすることができます。まとめて行動キャンセルしてやれば戦況が大きく変わるので極めて重要です。',
+  },
+  {
+    id: 'attribute',
+    title: '属性・地形効果・連携攻撃について',
+    body: '属性に関しては一部にかなり効き難い敵がいますので、序盤を中心に魔法の切り替えは必要になるかと思いますが、地形効果・連携攻撃については特に気にする必要はありません。後半は、成長させた魔術でゴリ押ししても結構いけてしまうからです。',
+  },
+  {
+    id: 'element',
+    title: 'エレメント・配置物について',
+    body: '配置物はそれほど気にする必要も無いかと思いますが、エレメントはかなり重要ですね。特に後半の敵は雑魚とはいえかなりダメージを与えてきますので、回復のエレメントはタイミング良く使いたいところです。その他のエレメントでも、破壊すれば即座に全体攻撃——攻撃しようとしていてもキャンセルかけられるというのが素晴らしいですね。',
+  },
+  {
+    id: 'guard',
+    title: '防御について',
+    body: '防御は非常に優秀で、投げ技や吸血などの一部の技を除く、ほとんどの技をガードすることができます。乱戦時やボス戦は防御の合間に攻撃した方が良いですね。本当にメチャクチャお世話になります。戦闘開始時や乱戦時やボス戦などでどうするべきか迷ったら、まずはガードで様子をみるぐらいのつもりで。',
+  },
+  {
+    id: 'allies',
+    title: '仲間について',
+    body: '特にマー編・ゼイアス編の後半では敵も強くなり、数が出てくることが結構あると思います。あまりにも敵が強くて辛いという場合は、いっそのこと仲間に全部押し付けてしまいましょう。防御無視攻撃持ちの敵には通用しませんが、ずっとガードして仲間が倒してくれるのを待っていればOK。倒されても次の戦闘時にはしっかり復活していますし。余談ですが、仲間でもクリーオウはレキと遊んでいるだけで戦闘には参加しません。流石お荷物。',
+  },
+] as const;
+---
+
+<Layout title="戦闘指南（オーフェン）" description="魔術士オーフェン PS2版 戦闘システムの解説と立ち回りのコツ。">
+  <TableOfContents slot="sidebar" headings={sections.map(s => ({ slug: s.id, text: s.title }))} />
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}orphen/`}>魔術士オーフェン</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">戦闘指南</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">戦闘指南</h1>
+
+      {sections.map((s) => (
+        <section class="guide-section" id={s.id}>
+          <h2 class="section-heading">{s.title}</h2>
+          <p>{s.body}</p>
+        </section>
+      ))}
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-deep);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--sky);
+    color: var(--text);
+  }
+
+  .guide-section {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .guide-section:last-child {
+    border-bottom: none;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+    padding: 8px 0 8px 16px;
+    border-left: 4px solid var(--sky-deep);
+  }
+
+  .guide-section p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+</style>

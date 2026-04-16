@@ -1,0 +1,241 @@
+---
+// トップページ
+import Layout from '@/layouts/Layout.astro';
+import { manualUpdates } from '@/data/updates';
+import { buildUpdates, formatUpdateDate } from '@/lib/buildUpdates';
+
+// ベースURLを取得する
+const base = import.meta.env.BASE_URL;
+
+// コンテンツカードの定義
+const cards = [
+  {
+    badge: 'Battle Royale',
+    title: 'バトルロワイアル',
+    desc: '概要、名簿、自作オリバト「UNLIMITED DARK」「魔法使いは虚構の楽園に踊る」',
+    href: `${base}br/`,
+    color: 'mint',
+  },
+  {
+    badge: 'Game',
+    title: '魔術士オーフェン',
+    desc: 'PS2版ゲーム攻略。ボス、戦闘指南、隠し要素等',
+    href: `${base}orphen/`,
+    color: 'sky',
+  },
+  {
+    badge: 'Hard-Boiled',
+    title: '大藪春彦作品',
+    desc: '作品レビュー、生還者考察（ネタバレあり）',
+    href: `${base}o-yabu/`,
+    color: 'lavender',
+  },
+  {
+    badge: 'About',
+    title: 'プロフィール',
+    desc: '管理人について',
+    href: `${base}profile/`,
+    color: 'peach',
+  },
+];
+
+// 更新履歴を構築（手動エントリ + 将来的にコンテンツコレクションから自動集計）
+const recentUpdates = buildUpdates(manualUpdates);
+---
+
+<Layout title="">
+  <div class="container">
+    <main>
+      <section class="section">
+        <h2 class="section-title">更新履歴</h2>
+        <table class="update-table">
+          {recentUpdates.map((entry) => (
+            <tr>
+              <td class="update-date">{formatUpdateDate(entry.date)}</td>
+              <td>
+                <ul class="update-items">
+                  {entry.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </table>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Contents</h2>
+        <div class="card-grid">
+          {cards.map((card) => (
+            <a class={`card card--${card.color}`} href={card.href}>
+              <div class="card-badge">{card.badge}</div>
+              <div class="card-title">{card.title}</div>
+              <div class="card-desc">{card.desc}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+  </div>
+</Layout>
+
+<style>
+  /* ===== レイアウト ===== */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 44px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 24px 16px;
+    }
+  }
+
+  /* ===== セクション ===== */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== コンテンツカード ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  /* カード上端のカラーバー */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .card--mint { --c-light: var(--mint); --c-deep: var(--mint-deep); }
+  .card--sky { --c-light: var(--sky); --c-deep: var(--sky-deep); }
+  .card--lavender { --c-light: var(--lavender); --c-deep: var(--lavender-deep); }
+  .card--peach { --c-light: var(--peach); --c-deep: var(--peach-deep); }
+
+  .card--mint::before { background: var(--mint); }
+  .card--sky::before { background: var(--sky); }
+  .card--lavender::before { background: var(--lavender); }
+  .card--peach::before { background: var(--peach); }
+
+  .card-badge {
+    display: inline-block;
+    background: var(--c-light);
+    color: var(--c-deep);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== 更新履歴テーブル ===== */
+  .update-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .update-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .update-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .update-table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: top;
+  }
+
+  .update-date {
+    white-space: nowrap;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--mint-deep);
+    letter-spacing: 0.06em;
+    padding-right: 32px;
+    width: 1%;
+  }
+
+  .update-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .update-items li {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+</style>

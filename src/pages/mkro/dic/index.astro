@@ -1,0 +1,112 @@
+---
+// 魔虚楽踊 特殊用語辞典ページ
+import Layout from '@/layouts/Layout.astro';
+import { placeTerms, magicTerms, clubTerms, otherTerms } from '@/data/mkro-terms';
+import { splitDesc } from '@/lib/text';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="特殊用語辞典（魔虚楽踊）" description="魔虚楽踊の特殊用語辞典。地名・魔法系用語・クラブ・その他の解説。">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href={base}>HOME</a>
+      <span aria-hidden="true">›</span>
+      <a href={`${base}mkro/`}>魔虚楽踊</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">特殊用語辞典</span>
+    </nav>
+
+    <main>
+      <h1 class="page-title">特殊用語辞典</h1>
+
+      <section>
+        <h2 class="section-title">地名系</h2>
+        {placeTerms.map((t) => (
+          <div class="term-entry" id={t.anchor}>
+            <h3 class="term-name">{t.term}</h3>
+            <div class="term-desc">
+              {t.desc.split('\n').filter((l) => l.trim()).map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2 class="section-title">魔法系</h2>
+        {magicTerms.map((t) => {
+          const hasPyramid = 'hasPyramid' in t && t.hasPyramid;
+          const parts = hasPyramid ? splitDesc(t.desc) : { before: t.desc.split('\n').filter((l) => l.trim()), after: [] };
+          return (
+            <div class="term-entry" id={t.anchor}>
+              <h3 class="term-name">{t.term}</h3>
+              <div class="term-desc">
+                {parts.before.map((line) => <p>{line}</p>)}
+                {hasPyramid && (
+                  <div class="pyramid-wrap">
+                    <p class="pyramid-label">＜魔法難易度ピラミッド＞</p>
+                    <img src={`${base}mkro/difficult.gif`} alt="魔法難易度ピラミッド図" />
+                  </div>
+                )}
+                {parts.after.map((line) => <p>{line}</p>)}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      <section>
+        <h2 class="section-title">クラブ系</h2>
+        {clubTerms.map((t) => (
+          <div class="term-entry" id={t.anchor}>
+            <h3 class="term-name">{t.term}</h3>
+            <div class="term-desc">
+              <p>{t.desc}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2 class="section-title">その他</h2>
+        {otherTerms.map((t) => (
+          <div class="term-entry" id={t.anchor}>
+            <h3 class="term-name">{t.term}</h3>
+            <div class="term-desc">
+              {t.desc.split('\n').filter((l) => l.trim()).map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <nav class="back-nav">
+        <a href={`${base}mkro/`} class="back-btn">← 魔虚楽踊 TOP</a>
+      </nav>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 900px; margin: 0 auto; padding: 44px 24px; }
+  @media (max-width: 600px) { .container { padding: 24px 16px; } }
+  .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .page-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); color: var(--text); }
+  .section-title { font-size: 1.15rem; font-weight: 800; margin-top: 40px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); color: var(--text); }
+  .term-entry { margin-bottom: 28px; padding: 16px; background: var(--bg); border-radius: var(--radius); border-left: 4px solid var(--accent); }
+  .term-name { font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: var(--accent); }
+  .term-desc { font-size: 0.88rem; line-height: 1.9; }
+  .term-desc p { margin: 0 0 0.8em; }
+  .term-desc p:last-child { margin-bottom: 0; }
+  .pyramid-wrap { text-align: center; margin: 16px 0; }
+  .pyramid-label { font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
+  .pyramid-wrap img { max-width: 100%; height: auto; }
+  .back-nav { display: flex; gap: 10px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .back-btn { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid var(--accent); border-radius: var(--radius); font-size: 0.84rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .back-btn:hover { background: var(--bg); }
+</style>

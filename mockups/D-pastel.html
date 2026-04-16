@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D: Pastel</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #fafafa;
+    --text: #2c2c2c;
+    --text-muted: #888;
+
+    /* パステルパレット */
+    --mint:        #b8f0d8;
+    --mint-deep:   #3dba7a;
+    --sky:         #b8e4f9;
+    --sky-deep:    #3a9fd6;
+    --lavender:    #dbbef9;
+    --lavender-deep:#9b59e8;
+    --peach:       #ffd6b8;
+    --peach-deep:  #e8834a;
+    --yellow:      #fff0a0;
+    --yellow-deep: #c8a800;
+
+    /* 使用アクセント */
+    --accent:      var(--mint-deep);
+    --accent-bg:   var(--mint);
+
+    --border: #e8e8e8;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ===== ヘッダー ===== */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .header-accent-bar {
+    width: 6px;
+    background: linear-gradient(to bottom, var(--mint-deep), var(--sky-deep), var(--lavender-deep));
+    margin-right: 28px;
+    flex-shrink: 0;
+  }
+
+  .header-body {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    padding: 20px 0;
+  }
+
+  .site-title {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .site-title em {
+    font-style: normal;
+    color: var(--mint-deep);
+  }
+  .header-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ===== ナビ ===== */
+  nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--mint);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  nav a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 12px 18px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  nav a:hover {
+    color: var(--mint-deep);
+    border-bottom-color: var(--mint);
+  }
+  nav a.active {
+    color: var(--mint-deep);
+    border-bottom-color: var(--mint-deep);
+    font-weight: 700;
+  }
+
+  /* ===== レイアウト ===== */
+  .container {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 44px 24px;
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 44px;
+  }
+
+  /* ===== セクション ===== */
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== コンテンツカード ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  /* カードごとに上端の色を変える */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--card-top, var(--mint));
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .card:nth-child(1) { --card-top: var(--mint);     --card-bg: var(--mint);     --card-color: var(--mint-deep); }
+  .card:nth-child(2) { --card-top: var(--sky);      --card-bg: var(--sky);      --card-color: var(--sky-deep); }
+  .card:nth-child(3) { --card-top: var(--peach);    --card-bg: var(--peach);    --card-color: var(--peach-deep); }
+  .card:nth-child(4) { --card-top: var(--lavender); --card-bg: var(--lavender); --card-color: var(--lavender-deep); }
+
+  .card-badge {
+    display: inline-block;
+    background: var(--card-bg, var(--mint));
+    color: var(--card-color, var(--mint-deep));
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== お知らせ ===== */
+  .notice {
+    background: var(--yellow);
+    border: 1px solid var(--yellow-deep);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .notice-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .notice-date {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--yellow-deep);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .notice-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  /* ===== サイドバー ===== */
+  .widget {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .widget-header {
+    padding: 12px 18px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--widget-bg, var(--mint));
+    color: var(--widget-color, var(--mint-deep));
+  }
+  .widget:nth-child(1) { --widget-bg: var(--mint);    --widget-color: var(--mint-deep); }
+  .widget:nth-child(2) { --widget-bg: var(--sky);     --widget-color: var(--sky-deep); }
+
+  .update-list { list-style: none; }
+  .update-list li {
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .update-list li:last-child { border-bottom: none; }
+  .update-date {
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--mint-deep);
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+  }
+  .update-text { color: var(--text-muted); }
+
+  .link-list { list-style: none; }
+  .link-list li {
+    border-bottom: 1px solid var(--border);
+  }
+  .link-list li:last-child { border-bottom: none; }
+  .link-list a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: background 0.1s;
+  }
+  .link-list a::before {
+    content: '→';
+    color: var(--sky-deep);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+  .link-list a:hover {
+    background: var(--sky);
+    color: var(--sky-deep);
+  }
+
+  /* ===== フッター ===== */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-accent-bar"></div>
+  <div class="header-body">
+    <div>
+      <div class="site-title">Don't Look <em>Back</em></div>
+    </div>
+    <div class="header-meta">
+      よろずサイト &nbsp;/&nbsp; 管理人：ゆうやみ &nbsp;/&nbsp; since 1999
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#" class="active">HOME</a>
+  <a href="#">プロフィール</a>
+  <a href="#">雑記</a>
+  <a href="#">バトルロワイアル</a>
+  <a href="#">魔術士オーフェン</a>
+  <a href="#">大藪春彦</a>
+  <a href="#">サイトの歴史</a>
+</nav>
+
+<div class="container">
+  <main>
+    <section class="section">
+      <h2 class="section-title">Contents</h2>
+      <div class="card-grid">
+        <a class="card" href="#">
+          <div class="card-badge">Battle Royale</div>
+          <div class="card-title">バトルロワイアル</div>
+          <div class="card-desc">概要・名簿・自作オリバト「UNLIMITED DARK」「魔法使いは虚構の楽園に踊る」</div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-badge">Game</div>
+          <div class="card-title">魔術士オーフェン</div>
+          <div class="card-desc">PS2版ゲーム攻略。ボス・戦闘指南・隠し要素。</div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-badge">Hard-Boiled</div>
+          <div class="card-title">大藪春彦作品</div>
+          <div class="card-desc">作品レビュー・生還者考察（ネタバレあり）</div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-badge">About</div>
+          <div class="card-title">プロフィール</div>
+          <div class="card-desc">管理人ゆうやみについて。</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">お知らせ</h2>
+      <div class="notice">
+        <div class="notice-icon">📢</div>
+        <div>
+          <div class="notice-date">2021.03.21</div>
+          <div class="notice-text">
+            さくらインターネットからGitHub Pagesへ移転しました。掲示板・CGI系は廃止しています。連絡は X（@u83unlimited）またはメールにてどうぞ。
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside>
+    <div class="widget">
+      <div class="widget-header">Updates</div>
+      <ul class="update-list">
+        <li>
+          <span class="update-date">2021.03.21</span>
+          <span class="update-text">GitHub Pages移転</span>
+        </li>
+        <li>
+          <span class="update-date">2013.xx.xx</span>
+          <span class="update-text">雑記更新</span>
+        </li>
+        <li>
+          <span class="update-date">2012.xx.xx</span>
+          <span class="update-text">プロフィール更新</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="widget">
+      <div class="widget-header">Network</div>
+      <ul class="link-list">
+        <li><a href="#">ゆうやみポータル</a></li>
+        <li><a href="#">OBRN</a></li>
+        <li><a href="#">Cradle 2 Grave</a></li>
+        <li><a href="#">21世紀パワーボム</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  &copy; 1999–2026 ゆうやみ &nbsp;/&nbsp; Don't Look Back
+</footer>
+
+</body>
+</html>
