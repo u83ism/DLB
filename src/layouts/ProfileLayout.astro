@@ -16,7 +16,6 @@ interface ProfileFrontmatter {
   readonly gender: string;
   readonly location: string;
   readonly hobbies: string;
-  readonly favoriteWrestlers: string;
   readonly contact: Contact;
 }
 
@@ -34,41 +33,35 @@ const { frontmatter: fm } = Astro.props;
 
       {fm.note && <p class="note">※{fm.note}</p>}
 
-      <table class="profile-table">
-        <tbody>
-          <tr>
-            <th>ハンドル</th>
-            <td>{fm.handle}</td>
-          </tr>
-          <tr>
-            <th>性別</th>
-            <td>{fm.gender}</td>
-          </tr>
-          <tr>
-            <th>出身地/在住地</th>
-            <td>{fm.location}</td>
-          </tr>
-          <tr>
-            <th>趣味</th>
-            <td>{fm.hobbies}</td>
-          </tr>
-          <tr>
-            <th>好きなレスラー</th>
-            <td>{fm.favoriteWrestlers}</td>
-          </tr>
-          <tr>
-            <th>連絡先</th>
-            <td>
-              {fm.contact.x && (
-                <span>X: <a href={fm.contact.x} target="_blank" rel="noopener noreferrer">@{fm.contact.x.split('/').at(-1)}</a><br /></span>
-              )}
-              {fm.contact.email && (
-                <span>メール: <a href={`mailto:${fm.contact.email}`}>{fm.contact.email}</a></span>
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <dl class="profile-list">
+        <div class="profile-item">
+          <dt>ハンドル</dt>
+          <dd>{fm.handle}</dd>
+        </div>
+        <div class="profile-item">
+          <dt>性別</dt>
+          <dd>{fm.gender}</dd>
+        </div>
+        <div class="profile-item">
+          <dt>出身地/在住地</dt>
+          <dd>{fm.location}</dd>
+        </div>
+        <div class="profile-item">
+          <dt>趣味</dt>
+          <dd>{fm.hobbies}</dd>
+        </div>
+        <div class="profile-item">
+          <dt>連絡先</dt>
+          <dd>
+            {fm.contact.x && (
+              <span>X: <a href={fm.contact.x} target="_blank" rel="noopener noreferrer">@{fm.contact.x.split('/').at(-1)}</a><br /></span>
+            )}
+            {fm.contact.email && (
+              <span>メール: <a href={`mailto:${fm.contact.email}`}>{fm.contact.email}</a></span>
+            )}
+          </dd>
+        </div>
+      </dl>
 
       <!-- Markdownの本文（好きなライター等の複雑なセクション）を描画する -->
       <div class="prose">
@@ -106,50 +99,50 @@ const { frontmatter: fm } = Astro.props;
     margin-bottom: 16px;
   }
 
-  /* プロフィールテーブル（データ用途のため<table>を維持） */
-  .profile-table {
-    width: 100%;
-    border-collapse: collapse;
+  /* プロフィールリスト（テーブル風グリッドレイアウト） */
+  .profile-list {
     font-size: 0.9rem;
-    margin-bottom: 40px;
+    margin: 0 0 40px;
   }
 
-  .profile-table th,
-  .profile-table td {
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    vertical-align: top;
+  .profile-item {
+    display: grid;
+    grid-template-columns: 22% 1fr;
+    border-bottom: 1px solid var(--border);
     line-height: 1.7;
   }
 
-  .profile-table th {
-    background: var(--peach);
-    color: var(--peach-deep);
-    font-weight: 700;
-    white-space: nowrap;
-    width: 22%;
-    text-align: right;
+  .profile-item:first-child {
+    border-top: 1px solid var(--border);
   }
 
-  .profile-table td a {
+  .profile-item dt {
+    padding: 12px 16px;
+    font-weight: 700;
+    color: var(--peach-deep);
+    background: var(--peach);
+    text-align: right;
+    display: block;
+  }
+
+  .profile-item dd {
+    padding: 12px 16px;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .profile-item dd a {
     color: var(--peach-deep);
   }
 
   @media (max-width: 500px) {
-    .profile-table th {
-      width: auto;
+    .profile-item {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-item dt {
       text-align: left;
-      white-space: normal;
-    }
-
-    .profile-table th,
-    .profile-table td {
-      display: block;
-      width: 100%;
-    }
-
-    .profile-table tr + tr th {
-      border-top: 2px solid var(--border);
+      border-bottom: none;
     }
   }
 
