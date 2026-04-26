@@ -9,7 +9,7 @@ import '@/styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  /** OGP画像のURL（絶対URL）。未指定の場合はog:imageを出力しない */
+  /** OGP画像のURL（絶対URL）。未指定の場合はデフォルト画像を使用 */
   ogImage?: string;
 }
 
@@ -27,6 +27,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 
 // <title>タグと og:title に使う文字列
 const pageTitle = title ? `${title} | Don't Look Back` : "Don't Look Back";
+
+// OGP画像: ページ固有の画像がなければデフォルト画像を使用
+const resolvedOgImage = ogImage ?? new URL('ogp.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -37,7 +40,7 @@ const pageTitle = title ? `${title} | Don't Look Back` : "Don't Look Back";
     <meta name="description" content={description} />
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} type="image/vnd.microsoft.icon" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -46,13 +49,13 @@ const pageTitle = title ? `${title} | Don't Look Back` : "Don't Look Back";
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Don't Look Back" />
     <meta property="og:locale" content="ja_JP" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={resolvedOgImage} />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={resolvedOgImage} />
 
     <ClientRouter />
   </head>
