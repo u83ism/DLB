@@ -29,7 +29,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const pageTitle = title ? `${title} | Don't Look Back` : "Don't Look Back";
 
 // OGP画像: ページ固有の画像がなければデフォルト画像を使用
-const resolvedOgImage = ogImage ?? new URL('ogp.png', Astro.site).href;
+// BASE_URL（例: /DLB/）を含めないと GitHub Pages のサブパスで画像が見つからない
+const resolvedOgImage = ogImage ?? new URL(`${import.meta.env.BASE_URL}ogp.png`, Astro.site).href;
 ---
 
 <!doctype html>
