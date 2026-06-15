@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://u83ism.github.io/DLB/sitemap-index.xml
+Sitemap: https://dont-look-back-u83.pages.dev/sitemap-index.xml
