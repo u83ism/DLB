@@ -7,13 +7,10 @@ export default defineConfig({
   // ホバー時にページを事前取得してページ遷移を高速化（data-astro-prefetch属性付きリンクのみ対象）
   prefetch: true,
 
-  // GitHub Pagesのリポジトリ名をbaseとして設定
-  base: '/DLB',
-
-  site: 'https://u83ism.github.io',
+  // Cloudflare PagesのURL（独自ドメイン取得後は差し替える）
+  site: 'https://dont-look-back-u83.pages.dev',
   output: 'static',
 
-  // trailingSlash: 'always' により import.meta.env.BASE_URL = '/DLB/' となる
   trailingSlash: 'always',
 
   integrations: [sitemap()],
